@@ -1,7 +1,7 @@
 # Imperium Maledictum - Community Edition
 
-![All Downloads](https://img.shields.io/github/downloads/Havoclivekiller/ImpMal-rTIM/total?style=for-the-badge)
-![Latest Downloads](https://img.shields.io/github/downloads/Havoclivekiller/ImpMal-rTIM/latest/total?style=for-the-badge)
+![All Downloads](https://img.shields.io/github/downloads/Havoclivekiller/ImpMal-Community/total?style=for-the-badge)
+![Latest Downloads](https://img.shields.io/github/downloads/Havoclivekiller/ImpMal-Community/latest/total?style=for-the-badge)
 
 Welcome to Imperium Maledictum - Community Edition. Here's a set of house rules and changes to Imperium Maledictum, made by the community. If you wish for you house rule to be added, please make a PR.
 
