@@ -1,0 +1,10 @@
+{
+  "includes": [
+    "./assets/**",
+    "./languages/**",
+    "./settings/**",
+    "./styles/**",
+    "./module.json",
+    "./README.md"
+  ]
+}

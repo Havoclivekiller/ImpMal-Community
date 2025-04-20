@@ -1,0 +1,36 @@
+{
+  "id": "impmal-community",
+  "title": "Imperium Maledictum - Community Edition",
+  "version": "1.0.0",
+  "manifest": "REPLACED BY BUILD",
+  "url": "REPLACED BY BUILD",
+  "download": "REPLACED BY BUILD",
+  "compatibility": {
+    "minimum": "12",
+    "verified": "12"
+  },
+  "relationships": {
+    "systems": [
+      {
+        "id": "impmal",
+        "type": "system",
+        "compatibility": {}
+      }
+    ]
+  },
+  "esmodules": [ "settings/settings.js" ],
+  "styles": [],
+  "languages": [
+    {
+      "lang": "en",
+      "name": "English",
+      "path": "languages/en.json",
+      "flags": {}
+    }
+  ],
+  "packFolders": [
+  ],
+  "packs": [],
+  "documentTypes": {}
+}
+
