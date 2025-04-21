@@ -11,6 +11,23 @@ Hooks.on('init', () => {
         let imgPath = game.settings.get("impmal-community", "changeConditionImagesPath").replace(/^\/|\/$/g, "");
 
         //TODO: Check if file exists
+        //Actions
+        if (true) {
+            game.impmal.config.actions.aim.effect.img = imgPath + "/aim.webp";
+        }
+        if (true) {
+            game.impmal.config.actions.charge.effect.img = imgPath + "/charge.webp";
+        }
+        if (true) {
+            game.impmal.config.actions.defend.effect.img = imgPath + "/defend.webp";
+        }
+        if (true) {
+            game.impmal.config.actions.dodge.effect.img = imgPath + "/dodge.webp";
+        }
+        if (true) {
+            game.impmal.config.actions.help.effect.img = imgPath + "/help.webp";
+        }
+
         //Status Icons
         if (true) {
             let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionAblaze");
