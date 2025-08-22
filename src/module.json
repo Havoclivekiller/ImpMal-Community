@@ -1,13 +1,13 @@
 {
   "id": "impmal-community",
   "title": "Imperium Maledictum - Community Edition",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "manifest": "REPLACED BY BUILD",
   "url": "REPLACED BY BUILD",
   "download": "REPLACED BY BUILD",
   "compatibility": {
-    "minimum": "12",
-    "verified": "12"
+    "minimum": "13",
+    "verified": "13"
   },
   "relationships": {
     "systems": [
