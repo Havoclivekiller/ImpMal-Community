@@ -7,6 +7,11 @@ Hooks.on('init', () => {
         };
     }
 
+    if (game.settings.get("impmal-community", "alternativeMasterCrafted") === true) {
+        ProtectionModel.prototype.computeOwned = new_computeArmourProtectionModel;
+        StandardCombatModel.prototype.computeArmour = new_computeArmourStandardCombatModel;
+    }
+
     if (game.settings.get("impmal-community", "changeConditionImages") === true) {
         let imgPath = game.settings.get("impmal-community", "changeConditionImagesPath").replace(/^\/|\/$/g, "");
 
@@ -336,4 +341,56 @@ function registerSettings() {
         filePicker: "folder",
         default: "modules/impmal-community/assets/conditions"
     });
+
+    game.settings.register("impmal-community", "alternativeMasterCrafted", {
+        name: "Alternative Master Crafted",
+        hint: "Reduces the amount of Armour Master Crafted quality gives to Armour from +2 to +1.",
+        scope: "world",
+        config: true,
+        default: false,
+        requiresReload: true,
+        type: Boolean
+    });
+}
+function new_computeArmourProtectionModel() {
+    // Must put this in OwnerDerived, as normal preparation applies double
+    // See https://github.com/foundryvtt/foundryvtt/issues/7987
+
+    this._applyModifications();
+
+    if (this.traits.has("mastercrafted")) {
+        this.armour += 1;
+    }
+
+}
+
+function new_computeArmourStandardCombatModel(items) {
+    // Must put this in OwnerDerived, as normal preparation applies double
+    // See https://github.com/foundryvtt/foundryvtt/issues/7987
+
+    for (let loc in this.hitLocations) {
+        this.hitLocations[loc].armour += this.armourModifier; // TODO: Add active effect to source list (so it's displayed in the hit loc section)
+
+        // Don't like this but whatever
+        this.parent.parent.appliedEffects.forEach(e => {
+            e.changes.forEach(c => {
+                if ([`system.combat.hitLocations.${loc}.armour`, `system.combat.armourModifier`].includes(c.key)) {
+                    this.hitLocations[loc].sources.push({ name: e.name, value: c.value });
+                }
+            });
+        });
+    }
+
+    let protectionItems = items.protection.filter(i => i.system.isEquipped);
+    for (let item of protectionItems) {
+        for (let loc of item.system.locations.list) {
+            if (this.hitLocations[loc]) {
+                let armourDamage = (item.system.damage[loc] || 0);
+                this.hitLocations[loc].damage += armourDamage;
+                this.hitLocations[loc].armour += (item.system.armour - armourDamage + (item.system.traits.has("mastercrafted") ? 1 : 0));
+                this.hitLocations[loc].items.push(item);
+            }
+        }
+    }
+
 }
