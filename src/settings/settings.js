@@ -344,7 +344,7 @@ function registerSettings() {
 
     game.settings.register("impmal-community", "alternativeMasterCrafted", {
         name: "Alternative Master Crafted",
-        hint: "Reduces the amount of Armour Master Crafted quality gives to Armour from +2 to +1.",
+        hint: "Reduces the amount of Armour Master Crafted quality gives to Armour from +2 to +1, except for Power armour.",
         scope: "world",
         config: true,
         default: false,
@@ -360,6 +360,8 @@ function new_computeArmourProtectionModel() {
 
     if (this.traits.has("mastercrafted")) {
         this.armour += 1;
+        if (this.category == "power")
+            this.armour += 1;
     }
 
 }
@@ -383,11 +385,16 @@ function new_computeArmourStandardCombatModel(items) {
 
     let protectionItems = items.protection.filter(i => i.system.isEquipped);
     for (let item of protectionItems) {
+        let mastercraftedBonus = 0;
+        if (item.system.traits.has("mastercrafted")) {
+            mastercraftedBonus += 1;
+            if (item.system.category == "power") mastercraftedBonus += 1;
+        }
         for (let loc of item.system.locations.list) {
             if (this.hitLocations[loc]) {
                 let armourDamage = (item.system.damage[loc] || 0);
                 this.hitLocations[loc].damage += armourDamage;
-                this.hitLocations[loc].armour += (item.system.armour - armourDamage + (item.system.traits.has("mastercrafted") ? 1 : 0));
+                this.hitLocations[loc].armour += (item.system.armour - armourDamage + mastercraftedBonus);
                 this.hitLocations[loc].items.push(item);
             }
         }
