@@ -1,3 +1,7 @@
+const old_computeOwnedProtectionModel = ProtectionModel.prototype.computeOwned;
+const old_computeArmourStandardCombatModel = StandardCombatModel.prototype.computeArmour;
+// const old_applyDamageStandardActorModel = StandardActorModel.prototype.applyDamage; not used due to complexity
+
 Hooks.on('init', () => {
     registerSettings();
 
@@ -367,49 +371,29 @@ function registerSettings() {
     });
 }
 function new_computeArmourProtectionModel() {
-    // Must put this in OwnerDerived, as normal preparation applies double
-    // See https://github.com/foundryvtt/foundryvtt/issues/7987
 
-    this._applyModifications();
+    old_computeOwnedProtectionModel.call(this);
 
-    if (this.traits.has("mastercrafted")) {
-        this.armour += 1;
-        if (this.category == "power")
-            this.armour += 1;
+    //System method adds +2 Armour, so we need to remove that
+    if (this.traits.has("mastercrafted") && this.category != "power") {
+        this.armour -= 1;
     }
-
 }
 
 function new_computeArmourStandardCombatModel(items) {
-    // Must put this in OwnerDerived, as normal preparation applies double
-    // See https://github.com/foundryvtt/foundryvtt/issues/7987
 
-    for (let loc in this.hitLocations) {
-        this.hitLocations[loc].armour += this.armourModifier; // TODO: Add active effect to source list (so it's displayed in the hit loc section)
+    old_computeArmourStandardCombatModel.call(this, items);
 
-        // Don't like this but whatever
-        this.parent.parent.appliedEffects.forEach(e => {
-            e.changes.forEach(c => {
-                if ([`system.combat.hitLocations.${loc}.armour`, `system.combat.armourModifier`].includes(c.key)) {
-                    this.hitLocations[loc].sources.push({ name: e.name, value: c.value });
-                }
-            });
-        });
-    }
-
+    //System method goes through items to change Armour, we need to go too and change based on our rule
     let protectionItems = items.protection.filter(i => i.system.isEquipped);
     for (let item of protectionItems) {
         let mastercraftedBonus = 0;
-        if (item.system.traits.has("mastercrafted")) {
-            mastercraftedBonus += 1;
-            if (item.system.category == "power") mastercraftedBonus += 1;
+        if (item.system.traits.has("mastercrafted") && item.system.category != "power") {
+            mastercraftedBonus = -1;
         }
         for (let loc of item.system.locations.list) {
             if (this.hitLocations[loc]) {
-                let armourDamage = (item.system.damage[loc] || 0);
-                this.hitLocations[loc].damage += armourDamage;
-                this.hitLocations[loc].armour += (item.system.armour - armourDamage + mastercraftedBonus);
-                this.hitLocations[loc].items.push(item);
+                this.hitLocations[loc].armour += mastercraftedBonus;
             }
         }
     }
@@ -458,6 +442,8 @@ async function new_applyDamageStandardActorModel(value, { ignoreAP = false, loca
             }
             armourValue += armourRoll.total;
         }
+
+        ///This is our change to REND. If system method changes, we apply these changes
         let totalPen = 0;
         let penetrating = traits?.has("penetrating");
         if (penetrating) totalPen += Number(penetrating.value || 0);
@@ -467,6 +453,8 @@ async function new_applyDamageStandardActorModel(value, { ignoreAP = false, loca
             armourValue = Math.max(0, armourValue - totalPen);
             modifiers.push({ value: totalPen, label: game.i18n.localize("IMPMAL.Penetrating"), applied: true });
         }
+        //End of our changes to Rend having Penetrating
+
         modifiers.push({ value: -armourValue, label: game.i18n.localize("IMPMAL.Protection"), armour: true });
         if (traits?.has("ineffective")) {
             modifiers.push({ value: -armourValue, label: game.i18n.localize("IMPMAL.Ineffective"), armour: true });
