@@ -21,6 +21,7 @@ Hooks.on('init', () => {
     registerSettings();
     if (game.settings.get("impmal-community", "tokenRuler") === true) {
         CONFIG.Token.rulerClass = ImpMalTokenRuler;
+    }
 
     if (game.settings.get("impmal-community", "alternativeInitiative") === true) {
         CONFIG.Combat.initiative = {
