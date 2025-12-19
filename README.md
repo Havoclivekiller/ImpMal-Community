@@ -7,6 +7,7 @@ Welcome to Imperium Maledictum - Community Edition. Here's a set of house rules 
 
 ## Changes
 - Change Condition/Zone Images - Allow to replace images of conditions/status/zoneEffects (*.webp files). 
+- Token Movement Measurement - When you drag a token, the ruler will change color based on speed.
 
 ## House Rules
 - Alternative Initiative - Custom field to specify a custom initiative. Default is adding d10 to the initiative to make it more random.
