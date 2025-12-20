@@ -1,3 +1,5 @@
+import { IMPMAL_COMMUNITY } from "./constants";
+
 const old_applyDamageStandardActorModel = StandardActorModel.prototype.applyDamage;
 
 export function registerAlternativeRend() {
@@ -53,7 +55,7 @@ async function new_applyDamageStandardActorModel(value, { ignoreAP = false, loca
         let penetrating = traits?.has("penetrating");
         if (penetrating) totalPen += Number(penetrating.value || 0);
         let rendPenetrating = traits?.has("rend");
-        if (rendPenetrating) totalPen += Math.floor(Number(rendPenetrating.value || 0) / 2);
+        if (rendPenetrating) totalPen += Math.floor(Number(rendPenetrating.value || 0) / IMPMAL_COMMUNITY.rendDivider);
         if (totalPen > 0) {
             armourValue = Math.max(0, armourValue - totalPen);
             modifiers.push({ value: totalPen, label: game.i18n.localize("IMPMAL.Penetrating"), applied: true });

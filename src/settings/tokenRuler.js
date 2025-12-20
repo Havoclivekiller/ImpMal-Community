@@ -1,17 +1,4 @@
-const IMPMAL_COMMUNITY = {
-    speedValues: {
-        slow: 4,
-        normal: 8,
-        fast: 12,
-        swift: 16
-    },
-
-    tokenRulerColors: {
-        normal: 0x33BC4E,
-        double: 0xF1D836,
-        triple: 0xE72124
-    }
-};
+import { IMPMAL_COMMUNITY } from "./constants.js";
 
 export function registerTokenRuler() {
     CONFIG.Token.rulerClass = ImpMalTokenRuler;
