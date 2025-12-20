@@ -1,0 +1,48 @@
+<div>
+    <div class="form-group">
+        <label>Superiority Pool</label>
+        <div class="form-fields">
+            <label><input type="radio" name="pool" value="allied" {{#if (eq pool "allied")}}checked{{/if}}> Allied</label>
+            <label style="margin-left: 10px;"><input type="radio" name="pool" value="enemy" {{#if (eq pool "enemy")}}checked{{/if}}> Enemy</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Make it Count</label>
+        <div class="form-fields">
+            <select name="makeItCount">
+                <option value="0" {{#if (eq makeItCount "0")}}selected{{/if}}>None</option>
+                <option value="2" {{#if (eq makeItCount "2")}}selected{{/if}}>Adv (cost 2)</option>
+                <option value="3" {{#if (eq makeItCount "3")}}selected{{/if}}>Adv +1 SL (cost 3)</option>
+                <option value="4" {{#if (eq makeItCount "4")}}selected{{/if}}>Adv +2 SL (cost 4)</option>
+            </select>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Additional Action</label>
+        <div class="form-fields">
+            <input type="checkbox" name="additionalAction" {{#if additionalAction}}checked{{/if}}>
+            <span style="margin-left: 6px;">Costs 4</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Little Boost</label>
+        <div class="form-fields">
+            <input type="checkbox" name="littleBoost" {{#if littleBoost}}checked{{/if}}>
+            <span style="margin-left: 6px;">+1 SL, costs 1</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Flee from Harm</label>
+        <div class="form-fields">
+            <input type="checkbox" name="fleeFromHarm" {{#if fleeFromHarm}}checked{{/if}}>
+            <span style="margin-left: 6px;">Costs 2</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Break Down</label>
+        <div class="form-fields">
+            <input type="checkbox" name="breakDown" {{#if breakDown}}checked{{/if}}>
+            <span style="margin-left: 6px;">Costs 5</span>
+        </div>
+    </div>
+</div>

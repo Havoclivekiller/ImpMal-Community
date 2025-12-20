@@ -1,5 +1,6 @@
 {
   "IMPMAL.SuperiorityEnemy": "Enemy",
+  "IMPMAL.SuperiorityAllied": "Allied",
 
   "IMPMAL.alternativeInitiative.Name": "Alternative Initiative",
   "IMPMAL.alternativeInitiative.Hint": "Use alternative initiative from the formula below. Requires restart.",
@@ -17,6 +18,12 @@
   "IMPMAL.tokenRuler.Name": "Token Movement Measurement",
   "IMPMAL.tokenRuler.Hint": "When you drag a token, the ruler will change color based on speed.",
   "IMPMAL.activeSuperiority.Name": "Active Superiority",
-  "IMPMAL.activeSuperiority.Hint": "Split Superiority between Allied and Enemy, use a different version of rules."
+  "IMPMAL.activeSuperiority.Hint": "Split Superiority between Allied and Enemy, use a different version of rules.",
+
+  "IMPMAL.SuperioritySpend.Title": "Superiority Spend",
+
+  "IMPMAL.SuperiorityGain.Title": "Superiority Gain",
+  "IMPMAL.SuperiorityGain.Surprise.Name": "Surprise",
+  "IMPMAL.SuperiorityGain.Surprise.Tip": "Attacking a surprised target"
 
 }

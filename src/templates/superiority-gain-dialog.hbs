@@ -1,0 +1,65 @@
+<div>
+    <div class="form-group">
+        <label>Superiority Pool</label>
+        <div class="form-fields">
+            <label><input type="radio" name="pool" value="allied" {{#if (eq pool "allied")}}checked{{/if}}> Allied</label>
+            <label style="margin-left: 10px;"><input type="radio" name="pool" value="enemy" {{#if (eq pool "enemy")}}checked{{/if}}> Enemy</label>
+        </div>
+    </div>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperiorityGain.Surprise.Tip'}}">
+        <label>{{localize 'IMPMAL.SuperiorityGain.Surprise.Name'}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="surprise" {{#if surprise}}checked{{/if}}>
+            <span style="margin-left: 6px;">+1</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Size Up</label>
+        <div class="form-fields">
+            <input type="checkbox" name="sizeUp" {{#if sizeUp}}checked{{/if}}>
+            <span style="margin-left: 6px;">+2</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Size Up (+5 SL)</label>
+        <div class="form-fields">
+            <input type="checkbox" name="sizeUpPlus" {{#if sizeUpPlus}}checked{{/if}}>
+            <span style="margin-left: 6px;">+3</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Victory</label>
+        <div class="form-fields">
+            <input type="checkbox" name="victory" {{#if victory}}checked{{/if}}>
+            <span style="margin-left: 6px;">+1</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Greater Victory</label>
+        <div class="form-fields">
+            <input type="checkbox" name="greaterVictory" {{#if greaterVictory}}checked{{/if}}>
+            <span style="margin-left: 6px;">+2</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Winning</label>
+        <div class="form-fields">
+            <input type="checkbox" name="winning" {{#if winning}}checked{{/if}}>
+            <span style="margin-left: 6px;">+1</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Outmanoeuvre</label>
+        <div class="form-fields">
+            <input type="checkbox" name="outmanoeuvre" {{#if outmanoeuvre}}checked{{/if}}>
+            <span style="margin-left: 6px;">+1</span>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Wounded Pride</label>
+        <div class="form-fields">
+            <input type="checkbox" name="woundedPride" {{#if woundedPride}}checked{{/if}}>
+            <span style="margin-left: 6px;">+1</span>
+        </div>
+    </div>
+</div>
