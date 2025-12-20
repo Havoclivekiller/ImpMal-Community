@@ -1,48 +1,45 @@
 <div>
     <div class="form-group">
-        <label>Superiority Pool</label>
+        <label>{{localize 'IMPMAL.SuperioritySpend.Pool'}}</label>
         <div class="form-fields">
-            <label><input type="radio" name="pool" value="allied" {{#if (eq pool "allied")}}checked{{/if}}> Allied</label>
-            <label style="margin-left: 10px;"><input type="radio" name="pool" value="enemy" {{#if (eq pool "enemy")}}checked{{/if}}> Enemy</label>
+            <label><input type="radio" name="pool" value="allied" {{#if (eq pool "allied")}} checked{{/if}}> Allied</label>
+            <label style="margin-left: 10px;"><input type="radio" name="pool" value="enemy" {{#if (eq pool "enemy")}} checked{{/if}}> Enemy</label>
         </div>
     </div>
-    <div class="form-group">
-        <label>Make it Count</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.MakeCount.Tip'}}">
+        <label>{{localize 'IMPMAL.SuperioritySpend.MakeCount.Name'}}</label>
         <div class="form-fields">
             <select name="makeItCount">
-                <option value="0" {{#if (eq makeItCount "0")}}selected{{/if}}>None</option>
-                <option value="2" {{#if (eq makeItCount "2")}}selected{{/if}}>Adv (cost 2)</option>
-                <option value="3" {{#if (eq makeItCount "3")}}selected{{/if}}>Adv +1 SL (cost 3)</option>
-                <option value="4" {{#if (eq makeItCount "4")}}selected{{/if}}>Adv +2 SL (cost 4)</option>
+                <option value="0" {{#if (eq makeItCount "0")}} selected{{/if}}>{{localize 'IMPMAL.SuperioritySpend.MakeCount.0'}}</option>
+                <option value="2" {{#if (eq makeItCount "2")}} selected{{/if}}>{{localize 'IMPMAL.SuperioritySpend.MakeCount.2'}}</option>
+                <option value="3" {{#if (eq makeItCount "3")}} selected{{/if}}>{{localize 'IMPMAL.SuperioritySpend.MakeCount.3'}}</option>
+                <option value="4" {{#if (eq makeItCount "4")}} selected{{/if}}>{{localize 'IMPMAL.SuperioritySpend.MakeCount.4'}}</option>
+                <option value="5" {{#if (eq makeItCount "5")}} selected{{/if}}>{{localize 'IMPMAL.SuperioritySpend.MakeCount.5'}}</option>
             </select>
         </div>
     </div>
-    <div class="form-group">
-        <label>Additional Action</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.AdditionalAction.Tip'}}">
+        <label>{{localize 'IMPMAL.SuperioritySpend.AdditionalAction.Name'}}</label>
         <div class="form-fields">
-            <input type="checkbox" name="additionalAction" {{#if additionalAction}}checked{{/if}}>
-            <span style="margin-left: 6px;">Costs 4</span>
+            <input type="checkbox" name="additionalAction" {{#if additionalAction}} checked{{/if}}>
         </div>
     </div>
-    <div class="form-group">
-        <label>Little Boost</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.LittleBoost.Tip'}}">
+        <label>{{localize 'IMPMAL.SuperioritySpend.LittleBoost.Name'}}</label>
         <div class="form-fields">
-            <input type="checkbox" name="littleBoost" {{#if littleBoost}}checked{{/if}}>
-            <span style="margin-left: 6px;">+1 SL, costs 1</span>
+            <input type="checkbox" name="littleBoost" {{#if littleBoost}} checked{{/if}}>
         </div>
     </div>
-    <div class="form-group">
-        <label>Flee from Harm</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.FleeHarm.Tip'}}">
+        <label>{{localize 'IMPMAL.SuperioritySpend.FleeHarm.Name'}}</label>
         <div class="form-fields">
-            <input type="checkbox" name="fleeFromHarm" {{#if fleeFromHarm}}checked{{/if}}>
-            <span style="margin-left: 6px;">Costs 2</span>
+            <input type="checkbox" name="fleeFromHarm" {{#if fleeFromHarm}} checked{{/if}}>
         </div>
     </div>
-    <div class="form-group">
-        <label>Break Down</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.BreakDown.Tip'}}">
+        <label>{{localize 'IMPMAL.SuperioritySpend.BreakDown.Name'}}</label>
         <div class="form-fields">
-            <input type="checkbox" name="breakDown" {{#if breakDown}}checked{{/if}}>
-            <span style="margin-left: 6px;">Costs 5</span>
+            <input type="checkbox" name="breakDown" {{#if breakDown}} checked{{/if}}>
         </div>
     </div>
 </div>
