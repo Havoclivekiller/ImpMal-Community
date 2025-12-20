@@ -5,6 +5,8 @@
 
 Welcome to Imperium Maledictum - Community Edition. Here's a set of house rules and changes to Imperium Maledictum, made by the community. If you wish for you house rule to be added, please make a PR.
 
+Check out the [Wiki](https://github.com/Havoclivekiller/ImpMal-Community/wiki) for more info.
+
 ## Changes
 - Change Condition/Zone Images - Allow to replace images of conditions/status/zoneEffects (*.webp files). 
 - Token Movement Measurement - When you drag a token, the ruler will change color based on speed.
