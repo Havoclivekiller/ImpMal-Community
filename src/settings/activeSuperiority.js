@@ -143,6 +143,7 @@ class SuperioritySpendDialog extends WHFormApplication {
         context.littleBoost = this.data.littleBoost ?? false;
         context.fleeFromHarm = this.data.fleeFromHarm ?? false;
         context.breakDown = this.data.breakDown ?? false;
+        context.custom = this.data.custom ?? 0;
         return context;
     }
 
@@ -154,7 +155,7 @@ class SuperioritySpendDialog extends WHFormApplication {
         let data = formData.object;
         let pool = data.pool || "allied";
         let makeItCountCost = Number(data.makeItCount || 0);
-        let totalCost = makeItCountCost;
+        let totalCost = makeItCountCost + Number(data.custom || 0);
 
         if (data.additionalAction) {
             totalCost += 4;
@@ -185,9 +186,9 @@ class SuperioritySpendDialog extends WHFormApplication {
         return data;
     }
 
-    static async prompt({ pool, makeItCount, additionalAction, littleBoost, fleeFromHarm, breakDown } = {}) {
+    static async prompt({ pool, makeItCount, additionalAction, littleBoost, fleeFromHarm, breakDown, custom } = {}) {
         return new Promise((resolve) => {
-            new this({ pool, makeItCount, additionalAction, littleBoost, fleeFromHarm, breakDown }, { resolve }).render(true);
+            new this({ pool, makeItCount, additionalAction, littleBoost, fleeFromHarm, breakDown, custom }, { resolve }).render(true);
         });
     }
 }
@@ -236,13 +237,14 @@ class SuperiorityGainDialog extends WHFormApplication {
         context.winning = this.data.winning ?? false;
         context.outmanoeuvre = this.data.outmanoeuvre ?? false;
         context.woundedPride = this.data.woundedPride ?? false;
+        context.custom = this.data.custom ?? 0;
         return context;
     }
 
     static async submit(event, form, formData) {
         let data = formData.object;
         let pool = data.pool || "allied";
-        let totalGain = 0;
+        let totalGain = Number(data.custom || 0);
 
         if (data.surprise) {
             totalGain += 1;
@@ -281,9 +283,9 @@ class SuperiorityGainDialog extends WHFormApplication {
         return data;
     }
 
-    static async prompt({ pool, surprise, sizeUp, sizeUpPlus, victory, greaterVictory, winning, outmanoeuvre, woundedPride } = {}) {
+    static async prompt({ pool, surprise, sizeUp, sizeUpPlus, victory, greaterVictory, winning, outmanoeuvre, woundedPride, custom } = {}) {
         return new Promise((resolve) => {
-            new this({ pool, surprise, sizeUp, sizeUpPlus, victory, greaterVictory, winning, outmanoeuvre, woundedPride }, { resolve }).render(true);
+            new this({ pool, surprise, sizeUp, sizeUpPlus, victory, greaterVictory, winning, outmanoeuvre, woundedPride, custom }, { resolve }).render(true);
         });
     }
 }

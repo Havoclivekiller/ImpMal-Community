@@ -23,6 +23,8 @@
 
   "IMPMAL.SuperioritySpend.Pool": "Superiority Pool",
   "IMPMAL.SuperioritySpend.Title": "Superiority Spend",
+  "IMPMAL.SuperioritySpend.Custom.Name": "Custom",
+  "IMPMAL.SuperioritySpend.Custom.Tip": "Add whatever value you please",
   "IMPMAL.SuperioritySpend.MakeCount.Name": "Make it Count (Variable)",
   "IMPMAL.SuperioritySpend.MakeCount.Tip": "",
   "IMPMAL.SuperioritySpend.MakeCount.0": "None",
@@ -41,6 +43,8 @@
 
   "IMPMAL.SuperiorityGain.Pool": "Superiority Pool",
   "IMPMAL.SuperiorityGain.Title": "Superiority Gain",
+  "IMPMAL.SuperiorityGain.Custom.Name": "Custom",
+  "IMPMAL.SuperiorityGain.Custom.Tip": "Add whatever value you please",
   "IMPMAL.SuperiorityGain.Surprise.Name": "Surprise (+2)",
   "IMPMAL.SuperiorityGain.Surprise.Tip": "Attacking a surprised target",
   "IMPMAL.SuperiorityGain.SizeUp.Name": "Size Up (+2)",
