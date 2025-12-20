@@ -3,6 +3,7 @@ import { registerAlternativeMasterCrafted } from "./alternativeMasterCrafted.js"
 import { registerAlternativeRend } from "./alternativeRend.js";
 import { registerChangeConditionImages } from "./changeConditionImages.js";
 import { registerTokenRuler } from "./tokenRuler.js";
+import { registerActiveSuperiority } from "./activeSuperiority.js";
 
 Hooks.on('init', () => {
     registerSettings();
@@ -24,6 +25,10 @@ Hooks.on('init', () => {
 
     if (game.settings.get("impmal-community", "changeConditionImages") === true) {
         registerChangeConditionImages();
+    }
+
+    if (game.settings.get("impmal-community", "activeSuperiority") === true) {
+        registerActiveSuperiority();
     }
 });
 
@@ -116,6 +121,16 @@ function registerSettings() {
     game.settings.register("impmal-community", "tokenRuler", {
         name: game.i18n.localize("IMPMAL.tokenRuler.Name"),
         hint: game.i18n.localize("IMPMAL.tokenRuler.Hint"),
+        scope: "world",
+        config: true,
+        default: false,
+        requiresReload: true,
+        type: Boolean
+    });
+
+    game.settings.register("impmal-community", "activeSuperiority", {
+        name: game.i18n.localize("IMPMAL.activeSuperiority.Name"),
+        hint: game.i18n.localize("IMPMAL.activeSuperiority.Hint"),
         scope: "world",
         config: true,
         default: false,
