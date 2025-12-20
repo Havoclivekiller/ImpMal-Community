@@ -44,8 +44,8 @@ Hooks.on('renderChatMessage', (message, html, messageData) => {
 
 function registerSettings() {
     game.settings.register("impmal-community", "alternativeInitiative", {
-        name: "Alternative Initiative",
-        hint: "Use alternative initiative from the formula below. Requires restart.",
+        name: game.i18n.localize("IMPMAL.alternativeInitiative.Name"),
+        hint: game.i18n.localize("IMPMAL.alternativeInitiative.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -54,7 +54,7 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "alternativeInitiativeFormula", {
-        name: "Alternative Initiative Formula",
+        name: game.i18n.localize("IMPMAL.alternativeInitiativeFormula.Name"),
         scope: "world",
         config: true,
         default: "d10 + @combat.initiative + @skills.reflexes.total/100",
@@ -63,8 +63,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "computeDoublesAll", {
-        name: "Add Critical/Fumble on all tests",
-        hint: "Not all tests add Critical/Fumble on tests. This will add a tag below the result.",
+        name: game.i18n.localize("IMPMAL.computeDoublesAll.Name"),
+        hint: game.i18n.localize("IMPMAL.computeDoublesAll.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -73,8 +73,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "changeConditionImages", {
-        name: "Change Conditions/Effects images",
-        hint: "Will change (upon restart) the default condition images.",
+        name: game.i18n.localize("IMPMAL.changeConditionImages.Name"),
+        hint: game.i18n.localize("IMPMAL.changeConditionImages.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -83,8 +83,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "changeConditionImagesPath", {
-        name: "Path to custom Conditions/Effects images",
-        hint: "Change to your folder of images (need to be webp)",
+        name: game.i18n.localize("IMPMAL.changeConditionImagesPath.Name"),
+        hint: game.i18n.localize("IMPMAL.changeConditionImagesPath.Hint"),
         scope: "world",
         config: true,
         type: String,
@@ -94,8 +94,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "alternativeMasterCrafted", {
-        name: "Alternative Master Crafted",
-        hint: "Reduces the amount of Armour Master Crafted quality gives to Armour from +2 to +1, except for Power armour.",
+        name: game.i18n.localize("IMPMAL.alternativeMasterCrafted.Name"),
+        hint: game.i18n.localize("IMPMAL.alternativeMasterCrafted.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -104,8 +104,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "alternativeRend", {
-        name: "Boosted Rend",
-        hint: "The Rend trait gains Penetrating equal to 1/2 of Rend, rounded down.",
+        name: game.i18n.localize("IMPMAL.alternativeRend.Name"),
+        hint: game.i18n.localize("IMPMAL.alternativeRend.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -114,8 +114,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "tokenRuler", {
-        name: "Token Movement Measurement",
-        hint: "When you drag a token, the ruler will change color based on speed.",
+        name: game.i18n.localize("IMPMAL.tokenRuler.Name"),
+        hint: game.i18n.localize("IMPMAL.tokenRuler.Hint"),
         scope: "world",
         config: true,
         default: false,

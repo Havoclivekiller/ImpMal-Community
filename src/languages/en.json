@@ -1,3 +1,22 @@
 {
+  "IMPMAL.SuperiorityEnemy": "Enemy",
+
+  "IMPMAL.alternativeInitiative.Name": "Alternative Initiative",
+  "IMPMAL.alternativeInitiative.Hint": "Use alternative initiative from the formula below. Requires restart.",
+  "IMPMAL.alternativeInitiativeFormula.Name": "Alternative Initiative Formula",
+  "IMPMAL.computeDoublesAll.Name": "Add Critical/Fumble on all tests",
+  "IMPMAL.computeDoublesAll.Hint": "Not all tests add Critical/Fumble on tests. This will add a tag below the result.",
+  "IMPMAL.changeConditionImages.Name": "Change Conditions/Effects images",
+  "IMPMAL.changeConditionImages.Hint": "Will change (upon restart) the default condition images.",
+  "IMPMAL.changeConditionImagesPath.Name": "Path to custom Conditions/Effects images",
+  "IMPMAL.changeConditionImagesPath.Hint": "Change to your folder of images (need to be webp)",
+  "IMPMAL.alternativeMasterCrafted.Name": "Alternative Master Crafted",
+  "IMPMAL.alternativeMasterCrafted.Hint": "Reduces the amount of Armour Master Crafted quality gives to Armour from +2 to +1, except for Power armour.",
+  "IMPMAL.alternativeRend.Name": "Boosted Rend",
+  "IMPMAL.alternativeRend.Hint": "The Rend trait gains Penetrating equal to 1/2 of Rend, rounded down.",
+  "IMPMAL.tokenRuler.Name": "Token Movement Measurement",
+  "IMPMAL.tokenRuler.Hint": "When you drag a token, the ruler will change color based on speed.",
+  "IMPMAL.activeSuperiority.Name": "Active Superiority",
+  "IMPMAL.activeSuperiority.Hint": "Split Superiority between Allied and Enemy, use a different version of rules."
 
 }
