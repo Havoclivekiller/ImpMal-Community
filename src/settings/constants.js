@@ -7,9 +7,11 @@ export const IMPMAL_COMMUNITY = {
     },
 
     tokenRulerColors: {
-        normal: 0x33BC4E,
-        double: 0xF1D836,
-        triple: 0xE72124
+        normal: 0x008000,
+        double: 0xFFFF00,
+        triple: 0xFF8C00,
+        quadruple: 0xFF0000,
+        beyond: 0x0000FF
     },
 
     rendDivider: 2, //Rend will be divided, rounded down, by this number
