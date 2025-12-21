@@ -21,11 +21,13 @@ class ImpMalTokenRuler extends foundry.canvas.placeables.tokens.TokenRuler {
         const speedValue = this.#getTokenSpeedValue();
         if (!speedValue) return style;
 
-        const { normal, double, triple } = IMPMAL_COMMUNITY.tokenRulerColors ?? {};
+        const { normal, double, triple, quadruple, beyond } = IMPMAL_COMMUNITY.tokenRulerColors ?? {};
         const increment = (waypoint.measurement?.cost ?? 0) / speedValue;
         if (increment <= 1) style.color = normal ?? style.color;
         else if (increment <= 2) style.color = double ?? style.color;
-        else style.color = triple ?? style.color;
+        else if (increment <= 3) style.color = triple ?? style.color;
+        else if (increment <= 4) style.color = quadruple ?? style.color;
+        else style.color = beyond ?? style.color;
         return style;
     }
 
