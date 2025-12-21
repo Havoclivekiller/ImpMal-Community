@@ -1,4 +1,4 @@
-import { IMPMAL_COMMUNITY } from "./constants";
+import { IMPMAL_COMMUNITY } from "./constants.js";
 
 const old_applyDamageStandardActorModel = StandardActorModel.prototype.applyDamage;
 
