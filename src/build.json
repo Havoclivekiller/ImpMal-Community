@@ -3,6 +3,7 @@
     "./assets/**",
     "./languages/**",
     "./settings/**",
+    "./templates/**",
     "./styles/**",
     "./module.json",
     "./README.md"

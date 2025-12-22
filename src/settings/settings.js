@@ -41,8 +41,11 @@ Hooks.on('renderChatMessage', (message, html, messageData) => {
 
         if (message.rolls[0])
             if ((message.rolls[0].total % 11 === 0) || message.rolls[0].total === 100) {
-                let toInsert = html[0].querySelector('.sl').textContent.includes('+') ? game.i18n.localize("IMPMAL.Critical") : game.i18n.localize("IMPMAL.Fumble");
-                html[0].querySelector('.tags').insertAdjacentHTML('beforeend', `<div>${toInsert}</div>`)
+                if (html[0].querySelector('.sl'))
+                    if (html[0].querySelector('.sl').textContent) {
+                        let toInsert = html[0].querySelector('.sl').textContent.includes('+') ? game.i18n.localize("IMPMAL.Critical") : game.i18n.localize("IMPMAL.Fumble");
+                        html[0].querySelector('.tags').insertAdjacentHTML('beforeend', `<div>${toInsert}</div>`)
+                    }
             }
     }
 });
