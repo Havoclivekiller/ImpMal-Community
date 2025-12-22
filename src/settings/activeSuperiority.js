@@ -4,6 +4,7 @@ export function registerActiveSuperiority() {
     registerActiveSuperiorityResource();
     registerActiveSuperioritySpendDialog();
     registerActiveSuperiorityGainDialog();
+    registerActiveSuperiorityCombatTrackerResources();
     registerActiveSuperiorityHooks();
     registerActiveSuperiorityTestDialogContext();
 }
@@ -64,6 +65,102 @@ function registerActiveSuperiorityGainDialog() {
         game.impmalCommunity = game.impmalCommunity || {};
         game.impmalCommunity.SuperiorityGainDialog = SuperiorityGainDialog;
         game.impmalCommunity.openSuperiorityGainDialog = (data = {}) => SuperiorityGainDialog.prompt(data);
+    });
+}
+
+function registerActiveSuperiorityCombatTrackerResources() {
+    Hooks.on("renderCombatTracker", async (app, html) => {
+        const root = html?.[0] ?? html;
+        if (!root?.querySelector) {
+            return;
+        }
+
+        const header = root.querySelector(".combat-tracker-header");
+        if (!header) {
+            return;
+        }
+
+        const existing = header.querySelector(".resources");
+        if (existing) {
+            existing.remove();
+        }
+
+        const resourceManager = game.impmal?.resources;
+        if (!resourceManager) {
+            return;
+        }
+
+        const isGM = game.user.isGM;
+        const alliedResource = resourceManager.resources?.superiority;
+        const enemyResource = resourceManager.resources?.superiorityEnemy;
+
+        const canShowAllied = alliedResource && (isGM || !alliedResource.hidden);
+        const canShowEnemy = enemyResource && (isGM || !enemyResource.hidden);
+
+        if (!canShowAllied && !canShowEnemy) {
+            return;
+        }
+
+        const templatePath = "modules/impmal-community/templates/active-superiority.hbs";
+        const rendered = await renderTemplate(templatePath, {
+            isGM,
+            title: game.i18n.localize("IMPMAL.Superiority"),
+            allied: canShowAllied
+                ? {
+                    key: alliedResource.key,
+                    label: game.i18n.localize("IMPMAL.SuperiorityAllied"),
+                    value: resourceManager.get(alliedResource.key)
+                }
+                : null,
+            enemy: canShowEnemy
+                ? {
+                    key: enemyResource.key,
+                    label: game.i18n.localize("IMPMAL.SuperiorityEnemy"),
+                    value: resourceManager.get(enemyResource.key)
+                }
+                : null
+        });
+        header.insertAdjacentHTML("beforeend", rendered);
+
+        const resourcesElement = header.querySelector(".resources");
+        if (!resourcesElement) {
+            return;
+        }
+
+        resourcesElement.querySelectorAll("button[data-delta]").forEach((button) => {
+            if (!isGM) {
+                button.disabled = true;
+                return;
+            }
+
+            button.addEventListener("click", (ev) => {
+                ev.preventDefault();
+                const key = button.dataset.key;
+                const delta = Number(button.dataset.delta || 0);
+                const current = Number(resourceManager.get(key) || 0);
+                const next = current + delta;
+                resourceManager.set(key, next);
+
+                const input = resourcesElement.querySelector(`input[data-key="${key}"]`);
+                if (input) {
+                    input.value = `${next}`;
+                }
+            });
+        });
+
+        resourcesElement.querySelectorAll(".resource input").forEach((input) => {
+            if (!isGM) {
+                input.disabled = true;
+            }
+
+            input.addEventListener("focusin", (ev) => {
+                ev.target.select();
+            });
+
+            input.addEventListener("change", (ev) => {
+                resourceManager.set(ev.target.dataset.key, ev.target.value);
+            });
+        });
     });
 }
 
