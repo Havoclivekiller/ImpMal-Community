@@ -104,7 +104,7 @@ function registerActiveSuperiorityCombatTrackerResources() {
         const templatePath = "modules/impmal-community/templates/active-superiority.hbs";
         const rendered = await renderTemplate(templatePath, {
             isGM,
-            title: game.i18n.localize("IMPMAL_COMMUNITY.Superiority"),
+            title: game.i18n.localize("IMPMAL.Superiority"),
             allied: canShowAllied
                 ? {
                     key: alliedResource.key,
@@ -174,12 +174,12 @@ function registerActiveSuperiorityHooks() {
     });
 
     Hooks.on("impmal:superiorityChanged", (value) => {
-        postSuperiorityMessage(game.i18n.localize("IMPMAL_COMMUNITY.SuperiorityAllied") + " " + game.i18n.localize("IMPMAL_COMMUNITY.Superiority"), value, lastSuperiority);
+        postSuperiorityMessage(game.i18n.localize("IMPMAL_COMMUNITY.SuperiorityAllied") + " " + game.i18n.localize("IMPMAL.Superiority"), value, lastSuperiority);
         lastSuperiority = value;
     });
 
     Hooks.on("impmal:superiorityEnemyChanged", (value) => {
-        postSuperiorityMessage(game.i18n.localize("IMPMAL_COMMUNITY.SuperiorityEnemy") + " " + game.i18n.localize("IMPMAL_COMMUNITY.Superiority"), value, lastSuperiorityEnemy);
+        postSuperiorityMessage(game.i18n.localize("IMPMAL_COMMUNITY.SuperiorityEnemy") + " " + game.i18n.localize("IMPMAL.Superiority"), value, lastSuperiorityEnemy);
         lastSuperiorityEnemy = value;
     });
 }
