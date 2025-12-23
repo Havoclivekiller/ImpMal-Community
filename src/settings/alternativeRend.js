@@ -58,13 +58,13 @@ async function new_applyDamageStandardActorModel(value, { ignoreAP = false, loca
         if (rendPenetrating) totalPen += Math.floor(Number(rendPenetrating.value || 0) / IMPMAL_COMMUNITY.rendDivider);
         if (totalPen > 0) {
             armourValue = Math.max(0, armourValue - totalPen);
-            modifiers.push({ value: totalPen, label: game.i18n.localize("IMPMAL.Penetrating"), applied: true });
+            modifiers.push({ value: totalPen, label: game.i18n.localize("IMPMAL_COMMUNITY.Penetrating"), applied: true });
         }
         // End of our changes to Rend having Penetrating
 
-        modifiers.push({ value: -armourValue, label: game.i18n.localize("IMPMAL.Protection"), armour: true });
+        modifiers.push({ value: -armourValue, label: game.i18n.localize("IMPMAL_COMMUNITY.Protection"), armour: true });
         if (traits?.has("ineffective")) {
-            modifiers.push({ value: -armourValue, label: game.i18n.localize("IMPMAL.Ineffective"), armour: true });
+            modifiers.push({ value: -armourValue, label: game.i18n.localize("IMPMAL_COMMUNITY.Ineffective"), armour: true });
         }
     }
 
@@ -95,7 +95,7 @@ async function new_applyDamageStandardActorModel(value, { ignoreAP = false, loca
     critical = args.critical;
     text = args.text;
     // A script might replace text
-    text = text || game.i18n.format("IMPMAL.WoundsTaken", { wounds: woundsGained, location: game.i18n.localize(locationData.label) });
+    text = text || game.i18n.format("IMPMAL_COMMUNITY.WoundsTaken", { wounds: woundsGained, location: game.i18n.localize(locationData.label) });
     let critFormula = ``;
     if (excess) {
         critFormula += " + " + excess;

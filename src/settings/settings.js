@@ -35,7 +35,7 @@ Hooks.on('init', () => {
 Hooks.on('renderChatMessage', (message, html, messageData) => {
     if (game.settings.get("impmal-community", "computeDoublesAll") === true) {
         if (message.content)
-            if (message.content.includes(game.i18n.localize("IMPMAL.Fumble")) || message.content.includes(game.i18n.localize("IMPMAL.Critical"))) {
+            if (message.content.includes(game.i18n.localize("IMPMAL_COMMUNITY.Fumble")) || message.content.includes(game.i18n.localize("IMPMAL_COMMUNITY.Critical"))) {
                 return true;
             }
 
@@ -43,7 +43,7 @@ Hooks.on('renderChatMessage', (message, html, messageData) => {
             if ((message.rolls[0].total % 11 === 0) || message.rolls[0].total === 100) {
                 if (html[0].querySelector('.sl'))
                     if (html[0].querySelector('.sl').textContent) {
-                        let toInsert = html[0].querySelector('.sl').textContent.includes('+') ? game.i18n.localize("IMPMAL.Critical") : game.i18n.localize("IMPMAL.Fumble");
+                        let toInsert = html[0].querySelector('.sl').textContent.includes('+') ? game.i18n.localize("IMPMAL_COMMUNITY.Critical") : game.i18n.localize("IMPMAL_COMMUNITY.Fumble");
                         html[0].querySelector('.tags').insertAdjacentHTML('beforeend', `<div>${toInsert}</div>`)
                     }
             }
@@ -52,8 +52,8 @@ Hooks.on('renderChatMessage', (message, html, messageData) => {
 
 function registerSettings() {
     game.settings.register("impmal-community", "alternativeInitiative", {
-        name: game.i18n.localize("IMPMAL.alternativeInitiative.Name"),
-        hint: game.i18n.localize("IMPMAL.alternativeInitiative.Hint"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.alternativeInitiative.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.alternativeInitiative.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -62,7 +62,7 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "alternativeInitiativeFormula", {
-        name: game.i18n.localize("IMPMAL.alternativeInitiativeFormula.Name"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.alternativeInitiativeFormula.Name"),
         scope: "world",
         config: true,
         default: "d10 + @combat.initiative + @skills.reflexes.total/100",
@@ -71,8 +71,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "computeDoublesAll", {
-        name: game.i18n.localize("IMPMAL.computeDoublesAll.Name"),
-        hint: game.i18n.localize("IMPMAL.computeDoublesAll.Hint"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.computeDoublesAll.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.computeDoublesAll.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -81,8 +81,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "changeConditionImages", {
-        name: game.i18n.localize("IMPMAL.changeConditionImages.Name"),
-        hint: game.i18n.localize("IMPMAL.changeConditionImages.Hint"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.changeConditionImages.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.changeConditionImages.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -91,8 +91,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "changeConditionImagesPath", {
-        name: game.i18n.localize("IMPMAL.changeConditionImagesPath.Name"),
-        hint: game.i18n.localize("IMPMAL.changeConditionImagesPath.Hint"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.changeConditionImagesPath.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.changeConditionImagesPath.Hint"),
         scope: "world",
         config: true,
         type: String,
@@ -102,8 +102,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "alternativeMasterCrafted", {
-        name: game.i18n.localize("IMPMAL.alternativeMasterCrafted.Name"),
-        hint: game.i18n.localize("IMPMAL.alternativeMasterCrafted.Hint"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.alternativeMasterCrafted.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.alternativeMasterCrafted.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -112,8 +112,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "alternativeRend", {
-        name: game.i18n.localize("IMPMAL.alternativeRend.Name"),
-        hint: game.i18n.localize("IMPMAL.alternativeRend.Hint"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.alternativeRend.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.alternativeRend.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -122,8 +122,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "tokenRuler", {
-        name: game.i18n.localize("IMPMAL.tokenRuler.Name"),
-        hint: game.i18n.localize("IMPMAL.tokenRuler.Hint"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.tokenRuler.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.tokenRuler.Hint"),
         scope: "world",
         config: true,
         default: false,
@@ -132,8 +132,8 @@ function registerSettings() {
     });
 
     game.settings.register("impmal-community", "activeSuperiority", {
-        name: game.i18n.localize("IMPMAL.activeSuperiority.Name"),
-        hint: game.i18n.localize("IMPMAL.activeSuperiority.Hint"),
+        name: game.i18n.localize("IMPMAL_COMMUNITY.activeSuperiority.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.activeSuperiority.Hint"),
         scope: "world",
         config: true,
         default: false,
