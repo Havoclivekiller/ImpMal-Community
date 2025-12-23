@@ -16,8 +16,7 @@ class ImpMalTokenRuler extends foundry.canvas.placeables.tokens.TokenRuler {
     }
 
     #getSpeedBasedStyle(waypoint, style) {
-        const plannedMovement = this.token._plannedMovement ?? {};
-        if (!(game.user?.id in plannedMovement)) return style;
+        if (waypoint.userId && (waypoint.userId !== game.user?.id)) return style;
         const speedValue = this.#getTokenSpeedValue();
         if (!speedValue) return style;
 
