@@ -1,57 +1,57 @@
 <div>
     <div class="form-group">
-        <label>{{localize 'IMPMAL.SuperioritySpend.Pool'}}</label>
+        <label>{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.Pool'}}</label>
         <div class="form-fields">
             <label><input type="radio" name="pool" value="allied" {{#if (eq pool "allied")}} checked{{/if}}> Allied</label>
             <label style="margin-left: 10px;"><input type="radio" name="pool" value="enemy" {{#if (eq pool "enemy")}} checked{{/if}}> Enemy</label>
         </div>
     </div>
-    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.MakeCount.Tip'}}">
-        <label>{{localize 'IMPMAL.SuperioritySpend.MakeCount.Name'}}</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.MakeCount.Tip'}}">
+        <label>{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.MakeCount.Name'}}</label>
         <div class="form-fields">
             <select name="makeItCount">
-                <option value="0" {{#if (eq makeItCount 0)}} selected{{/if}}>{{localize 'IMPMAL.SuperioritySpend.MakeCount.0'}}</option>
+                <option value="0" {{#if (eq makeItCount 0)}} selected{{/if}}>{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.MakeCount.0'}}</option>
                 <option value="{{spendCosts.makeItCount.adv0}}" {{#if (eq makeItCount spendCosts.makeItCount.adv0)}} selected{{/if}}>
-                    {{localize 'IMPMAL.SuperioritySpend.MakeCount.2'}} ({{spendCosts.makeItCount.adv0}})
+                    {{localize 'IMPMAL_COMMUNITY.SuperioritySpend.MakeCount.2'}} ({{spendCosts.makeItCount.adv0}})
                 </option>
                 <option value="{{spendCosts.makeItCount.adv1}}" {{#if (eq makeItCount spendCosts.makeItCount.adv1)}} selected{{/if}}>
-                    {{localize 'IMPMAL.SuperioritySpend.MakeCount.3'}} ({{spendCosts.makeItCount.adv1}})
+                    {{localize 'IMPMAL_COMMUNITY.SuperioritySpend.MakeCount.3'}} ({{spendCosts.makeItCount.adv1}})
                 </option>
                 <option value="{{spendCosts.makeItCount.adv2}}" {{#if (eq makeItCount spendCosts.makeItCount.adv2)}} selected{{/if}}>
-                    {{localize 'IMPMAL.SuperioritySpend.MakeCount.4'}} ({{spendCosts.makeItCount.adv2}})
+                    {{localize 'IMPMAL_COMMUNITY.SuperioritySpend.MakeCount.4'}} ({{spendCosts.makeItCount.adv2}})
                 </option>
                 <option value="{{spendCosts.makeItCount.adv3}}" {{#if (eq makeItCount spendCosts.makeItCount.adv3)}} selected{{/if}}>
-                    {{localize 'IMPMAL.SuperioritySpend.MakeCount.5'}} ({{spendCosts.makeItCount.adv3}})
+                    {{localize 'IMPMAL_COMMUNITY.SuperioritySpend.MakeCount.5'}} ({{spendCosts.makeItCount.adv3}})
                 </option>
             </select>
         </div>
     </div>
-    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.AdditionalAction.Tip'}}">
-        <label>{{localize 'IMPMAL.SuperioritySpend.AdditionalAction.Name'}} ({{spendCosts.additionalAction}})</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.AdditionalAction.Tip'}}">
+        <label>{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.AdditionalAction.Name'}} ({{spendCosts.additionalAction}})</label>
         <div class="form-fields">
             <input type="checkbox" name="additionalAction" {{#if additionalAction}} checked{{/if}}>
         </div>
     </div>
-    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.LittleBoost.Tip'}}">
-        <label>{{localize 'IMPMAL.SuperioritySpend.LittleBoost.Name'}} ({{spendCosts.littleBoost}})</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.LittleBoost.Tip'}}">
+        <label>{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.LittleBoost.Name'}} ({{spendCosts.littleBoost}})</label>
         <div class="form-fields">
             <input type="checkbox" name="littleBoost" {{#if littleBoost}} checked{{/if}}>
         </div>
     </div>
-    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.FleeHarm.Tip'}}">
-        <label>{{localize 'IMPMAL.SuperioritySpend.FleeHarm.Name'}} ({{spendCosts.fleeFromHarm}})</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.FleeHarm.Tip'}}">
+        <label>{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.FleeHarm.Name'}} ({{spendCosts.fleeFromHarm}})</label>
         <div class="form-fields">
             <input type="checkbox" name="fleeFromHarm" {{#if fleeFromHarm}} checked{{/if}}>
         </div>
     </div>
-    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.BreakDown.Tip'}}">
-        <label>{{localize 'IMPMAL.SuperioritySpend.BreakDown.Name'}} ({{spendCosts.breakDown}})</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.BreakDown.Tip'}}">
+        <label>{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.BreakDown.Name'}} ({{spendCosts.breakDown}})</label>
         <div class="form-fields">
             <input type="checkbox" name="breakDown" {{#if breakDown}} checked{{/if}}>
         </div>
     </div>
-    <div class="form-group" data-tooltip="{{localize 'IMPMAL.SuperioritySpend.Custom.Tip'}}">
-        <label>{{localize 'IMPMAL.SuperioritySpend.Custom.Name'}}</label>
+    <div class="form-group" data-tooltip="{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.Custom.Tip'}}">
+        <label>{{localize 'IMPMAL_COMMUNITY.SuperioritySpend.Custom.Name'}}</label>
         <div class="form-fields">
             <input type="number" name="custom" value="{{custom}}">
         </div>
