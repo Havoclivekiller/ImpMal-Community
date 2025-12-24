@@ -4,6 +4,7 @@ import { registerAlternativeRend } from "./alternativeRend.js";
 import { registerChangeConditionImages } from "./changeConditionImages.js";
 import { registerTokenRuler } from "./tokenRuler.js";
 import { registerActiveSuperiority } from "./activeSuperiority.js";
+import { registerPromptRoll } from "./promptRoll.js";
 
 Hooks.on('init', () => {
     registerSettings();
@@ -30,6 +31,8 @@ Hooks.on('init', () => {
     if (game.settings.get("impmal-community", "activeSuperiority") === true) {
         registerActiveSuperiority();
     }
+
+    registerPromptRoll();
 });
 
 Hooks.on('renderChatMessage', (message, html, messageData) => {

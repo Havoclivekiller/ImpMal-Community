@@ -1,0 +1,331 @@
+const MODULE_ID = "impmal-community";
+const SOCKET_NAME = `module.${MODULE_ID}`;
+
+class PromptRollDialog extends WHFormApplication {
+    static DEFAULT_OPTIONS = {
+        id: "impmal-community-prompt-roll",
+        classes: ["impmal", "warhammer", "prompt-roll"],
+        tag: "form",
+        form: {
+            handler: this.submit,
+            submitOnChange: false,
+            closeOnSubmit: true
+        },
+        window: {
+            title: "Roll Prompter",
+            contentClasses: ["standard-form"],
+            resizable: true
+        },
+        position: {
+            width: 700
+        }
+    };
+
+    static PARTS = {
+        form: {
+            template: "modules/impmal-community/templates/prompt-roll-dialog.hbs",
+            scrollable: [".prompt-roll-body"]
+        },
+        footer: {
+            template: "templates/generic/form-footer.hbs"
+        }
+    };
+
+    async _preparePartContext(partId, context) {
+        const partContext = await super._preparePartContext(partId, context);
+        if (partId === "footer") {
+            partContext.buttons = [{
+                type: "submit",
+                label: "Prompt Players"
+            }];
+        }
+        return partContext;
+    }
+
+    async _prepareContext(options) {
+        const context = await super._prepareContext(options);
+        const selectedSkill = this.selectedSkill || Object.keys(game.impmal.config.skills || {})[0] || "";
+        const selectedDifficulty = this.selectedDifficulty || "challenging";
+        const skills = this._getSkills(selectedSkill);
+        const difficulties = this._getDifficulties(selectedDifficulty);
+        const specialisations = await this._getSpecialisations(selectedSkill);
+
+        context.skills = skills;
+        context.difficulties = difficulties;
+        context.specialisations = specialisations;
+        context.selectedSkill = selectedSkill;
+        context.selectedDifficulty = selectedDifficulty;
+        context.promptAll = this.promptAll ?? true;
+        context.actors = this._getEligibleActors();
+        return context;
+    }
+
+    activateListeners(html) {
+        super.activateListeners(html);
+    }
+
+    async _onRender(options) {
+        await super._onRender(options);
+        const root = this._getRoot();
+        if (!root) {
+            return;
+        }
+        const promptAll = root.querySelector("[name='promptAll']");
+        if (promptAll) {
+            promptAll.onchange = this._onPromptAllChange.bind(this);
+        }
+        const skill = root.querySelector("[name='skill']");
+        if (skill) {
+            skill.onchange = this._onSkillChange.bind(this);
+        }
+        const difficulty = root.querySelector("[name='difficulty']");
+        if (difficulty) {
+            difficulty.onchange = this._onDifficultyChange.bind(this);
+        }
+    }
+
+    _getSkills(selectedSkill) {
+        return Object.entries(game.impmal.config.skills || {})
+            .map(([key, label]) => ({ key, label, selected: key === selectedSkill }))
+            .sort((a, b) => a.label.localeCompare(b.label));
+    }
+
+    _getDifficulties(selectedDifficulty) {
+        return Object.entries(game.impmal.config.difficulties || {}).map(([key, data]) => {
+            const label = game.i18n.localize(data.name);
+            const modifier = Number(data.modifier ?? 0);
+            const modifierLabel = modifier >= 0 ? `+${modifier}` : `${modifier}`;
+            return {
+                key,
+                label,
+                display: `${label} ${modifierLabel}`.trim(),
+                selected: key === selectedDifficulty
+            };
+        });
+    }
+
+    _getEligibleActors() {
+        const actors = this._getUserCharacters();
+        return actors
+            .map(({ actor, owners }) => ({
+                id: actor.id,
+                name: actor.name,
+                owners: owners.map(user => user.name).join(", "),
+                img: actor.img
+            }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    _getUserCharacters() {
+        const entries = new Map();
+        game.users
+            .filter(user => !user.isGM && user.character)
+            .forEach(user => {
+                const actor = user.character;
+                if (!entries.has(actor.id)) {
+                    entries.set(actor.id, { actor, owners: [user] });
+                }
+                else {
+                    entries.get(actor.id).owners.push(user);
+                }
+            });
+        return Array.from(entries.values());
+    }
+
+    async _getSpecialisations(skillKey) {
+        if (!skillKey) {
+            return [];
+        }
+        if (!this._allSpecialisations) {
+            this._allSpecialisations = await game.impmal.utility.getAllItems("specialisation");
+        }
+        return this._allSpecialisations
+            .filter(item => item.system.skill === skillKey)
+            .map(item => ({ id: item.id, name: item.name }))
+            .sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    async _onSkillChange(event) {
+        this.selectedSkill = event.target.value;
+        await this._updateSpecialisations();
+    }
+
+    _onDifficultyChange(event) {
+        this.selectedDifficulty = event.target.value;
+    }
+
+    _onPromptAllChange(event) {
+        this.promptAll = event.target.checked;
+        const list = this._getRoot()?.querySelector(".prompt-roll-targets");
+        if (list) {
+            list.classList.toggle("is-disabled", this.promptAll);
+        }
+    }
+
+    async _updateSpecialisations() {
+        const select = this._getRoot()?.querySelector("[name='specialisation']");
+        if (!select) {
+            return;
+        }
+
+        const specialisations = await this._getSpecialisations(this.selectedSkill);
+        select.innerHTML = "";
+
+        const empty = document.createElement("option");
+        empty.value = "";
+        empty.textContent = "(None)";
+        select.appendChild(empty);
+
+        for (const spec of specialisations) {
+            const option = document.createElement("option");
+            option.value = spec.name;
+            option.textContent = spec.name;
+            select.appendChild(option);
+        }
+        select.value = "";
+    }
+
+    _getRoot() {
+        if (this.element instanceof HTMLElement) {
+            return this.element;
+        }
+        if (this.element?.[0] instanceof HTMLElement) {
+            return this.element[0];
+        }
+        return null;
+    }
+
+    static async submit(event, form, formData) {
+        return this._onPromptPlayers(formData.object);
+    }
+
+    async _onPromptPlayers(formData) {
+        const data = this._normalizeFormData(formData);
+        if (!data.skill) {
+            return ui.notifications.warn("Select a skill first.");
+        }
+
+        const actors = await this._resolveTargetActors(data);
+        if (!actors.length) {
+            return ui.notifications.warn("No eligible actors selected.");
+        }
+
+        for (const actor of actors) {
+            const recipients = this._getRecipients(actor);
+            for (const user of recipients) {
+                const payload = {
+                    actorId: actor.id,
+                    userId: user.id,
+                    skill: data.skill,
+                    specialisation: data.specialisation,
+                    difficulty: data.difficulty,
+                    modifier: data.modifier,
+                    isPrivate: data.isPrivate,
+                    sl: data.sl
+                };
+
+                if (user.id === game.user.id) {
+                    await promptRollOnClient(payload);
+                }
+                else {
+                    game.socket.emit(SOCKET_NAME, { type: "promptRoll", payload });
+                }
+            }
+        }
+    }
+
+    _getRecipients(actor) {
+        return game.users.filter(user => user.active && !user.isGM && user.character?.id === actor.id);
+    }
+
+    _normalizeFormData(formData) {
+        const skill = formData.skill || "";
+        const specialisation = formData.specialisation || "";
+        const difficulty = formData.difficulty || "challenging";
+        const modifier = Number(formData.modifier || 0);
+        const sl = Number(formData.SL || 0);
+        const isPrivate = Boolean(formData.privateRoll);
+        const promptAll = Boolean(formData.promptAll);
+        const selectedActorIds = Array.isArray(formData.actors)
+            ? formData.actors
+            : (formData.actors ? [formData.actors] : []);
+
+        return {
+            skill,
+            specialisation,
+            difficulty,
+            modifier,
+            sl,
+            isPrivate,
+            promptAll,
+            selectedActorIds
+        };
+    }
+
+    async _resolveTargetActors(data) {
+        if (data.promptAll) {
+            return this._getUserCharacters().map(entry => entry.actor);
+        }
+
+        const actorIds = new Set(data.selectedActorIds);
+
+        return Array.from(actorIds)
+            .map(id => game.actors.get(id))
+            .filter(actor => actor);
+    }
+}
+
+async function promptRollOnClient(payload) {
+    if (payload.userId && payload.userId !== game.user.id) {
+        return;
+    }
+
+    const actor = game.actors.get(payload.actorId);
+    if (!actor) {
+        return;
+    }
+
+    const fields = {
+        difficulty: payload.difficulty,
+        modifier: payload.modifier,
+        SL: payload.sl
+    };
+
+    if (payload.isPrivate) {
+        fields.rollMode = "gmroll";
+    }
+
+    const testData = { key: payload.skill };
+    if (payload.specialisation) {
+        testData.name = payload.specialisation;
+    }
+
+    actor.setupSkillTest(testData, {
+        fields
+    });
+}
+
+export function registerPromptRoll() {
+    Hooks.on("ready", () => {
+        game.socket.on(SOCKET_NAME, (data) => {
+            if (!data || data.type !== "promptRoll") {
+                return;
+            }
+            promptRollOnClient(data.payload);
+        });
+    });
+
+    Hooks.on("chatMessage", (chatLog, messageText) => {
+        if (!messageText?.startsWith("/promptRoll")) {
+            return;
+        }
+
+        if (!game.user.isGM) {
+            ui.notifications.warn("Only the GM can use /promptRoll.");
+            return false;
+        }
+
+        new PromptRollDialog().render(true);
+        return false;
+    });
+}
