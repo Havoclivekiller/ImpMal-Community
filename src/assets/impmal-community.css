@@ -1,0 +1,146 @@
+.combat-sidebar .resources.superiority-resources {
+    flex-direction: column;
+    align-items: center;
+    gap: 0.4rem;
+}
+
+    .combat-sidebar .resources.superiority-resources .superiority-title {
+        background-color: var(--impmal-lightblue);
+        height: 2rem;
+        line-height: 2rem;
+        padding: 0 0.75rem;
+        text-align: center;
+        width: 100%;
+    }
+
+    .combat-sidebar .resources.superiority-resources .superiority-row {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .combat-sidebar .resources.superiority-resources .superiority-label {
+        display: flex;
+        gap: 0.5rem;
+        justify-content: center;
+        width: 100%;
+    }
+
+    .combat-sidebar .resources.superiority-resources .superiority-resource {
+        flex: 0 1 auto;
+        flex-direction: column;
+        gap: 0.25rem;
+    }
+
+    .combat-sidebar .resources.superiority-resources .superiority-controls {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.25rem;
+        width: 100%;
+    }
+
+        .combat-sidebar .resources.superiority-resources .superiority-controls input {
+            flex: 0 0 42px;
+            margin: 0;
+        }
+
+    .combat-sidebar .resources.superiority-resources .superiority-button {
+        flex: 0 0 26px;
+        padding: 0;
+        line-height: 1.4rem;
+    }
+
+.prompt-roll-targets.is-disabled {
+    opacity: 0.5;
+    pointer-events: none;
+}
+
+.prompt-roll-sections {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+}
+
+.prompt-roll-list {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 8px;
+}
+
+.prompt-roll-item {
+    cursor: pointer;
+}
+
+.prompt-roll-checkbox {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.prompt-roll-card {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: rgba(0, 0, 0, 0.15);
+    transition: border-color 0.15s ease, box-shadow 0.15s ease, transform 0.15s ease;
+}
+
+    .prompt-roll-card:hover {
+        border-color: rgba(255, 255, 255, 0.35);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.25) inset;
+        transform: translateY(-1px);
+    }
+
+.prompt-roll-checkbox:checked + .prompt-roll-card {
+    border-color: var(--impmal-lightblue, #4dc3ff);
+    box-shadow: 0 0 0 2px var(--impmal-lightblue, #4dc3ff) inset, 0 0 10px rgba(77, 195, 255, 0.25);
+    background: rgba(77, 195, 255, 0.12);
+}
+
+.prompt-roll-portrait {
+    max-width: 64px;
+    max-height: 64px;
+    object-fit: cover;
+    border-radius: 4px;
+    border: 1px solid rgba(0, 0, 0, 0.35);
+}
+
+.prompt-roll-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+}
+
+.prompt-roll-name {
+    font-weight: 600;
+    line-height: 1.2;
+}
+
+.prompt-roll-owners {
+    opacity: 0.7;
+    font-size: 0.75em;
+    line-height: 1.2;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.prompt-roll-footer {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+    justify-content: center;
+    margin-top: 12px;
+}
+
+    .prompt-roll-footer .dialog-button {
+        width: 100%;
+        padding: 10px 12px;
+        font-size: 1.05em;
+    }

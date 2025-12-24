@@ -1,0 +1,85 @@
+<section class="prompt-roll">
+    <div class="prompt-roll-body">
+        <div class="prompt-roll-sections">
+            <fieldset class="prompt-roll-options">
+                <legend>Roll Request</legend>
+                <div class="form-group">
+                    <label>Prompt All</label>
+                    <div class="form-fields">
+                        <input type="checkbox" name="promptAll" {{#if promptAll}}checked{{/if}}>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Skill</label>
+                    <div class="form-fields">
+                        <select name="skill">
+                            {{#each skills}}
+                                <option value="{{this.key}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Specialisation</label>
+                    <div class="form-fields">
+                        <select name="specialisation">
+                            <option value="">(None)</option>
+                            {{#each specialisations}}
+                                <option value="{{this.name}}">{{this.name}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Difficulty</label>
+                    <div class="form-fields">
+                        <select name="difficulty">
+                            {{#each difficulties}}
+                                <option value="{{this.key}}" {{#if this.selected}}selected{{/if}}>{{this.display}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Modifier</label>
+                    <div class="form-fields">
+                        <input type="number" name="modifier" value="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>SL Modifier</label>
+                    <div class="form-fields">
+                        <input type="number" name="SL" value="0">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Private Roll</label>
+                    <div class="form-fields">
+                        <input type="checkbox" name="privateRoll">
+                    </div>
+                </div>
+            </fieldset>
+
+            <fieldset class="prompt-roll-targets {{#if promptAll}}is-disabled{{/if}}">
+                <legend>Targets</legend>
+                <div class="prompt-roll-list">
+                    {{#each actors}}
+                        <label class="prompt-roll-item">
+                            <input class="prompt-roll-checkbox" type="checkbox" name="actors" value="{{this.id}}">
+                            <div class="prompt-roll-card">
+                                <img class="prompt-roll-portrait" src="{{this.img}}" alt="{{this.name}}">
+                                <div class="prompt-roll-meta">
+                                    <span class="prompt-roll-name">{{this.name}}</span>
+                                    {{#if this.owners}}
+                                        <small class="prompt-roll-owners">{{this.owners}}</small>
+                                    {{/if}}
+                                </div>
+                            </div>
+                        </label>
+                    {{/each}}
+                </div>
+            </fieldset>
+        </div>
+    </div>
+
+</section>

@@ -1,7 +1,7 @@
 {
   "id": "impmal-community",
   "title": "Imperium Maledictum - Community Edition",
-  "version": "1.4.6",
+  "version": "1.5.0",
   "manifest": "REPLACED BY BUILD",
   "url": "REPLACED BY BUILD",
   "download": "REPLACED BY BUILD",
@@ -20,8 +20,9 @@
   },
   "esmodules": [ "settings/settings.js" ],
   "styles": [
-    "assets/active-superiority.css"
+    "assets/impmal-community.css"
   ],
+  "socket": true,
   "languages": [
     {
       "lang": "en",
