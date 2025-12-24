@@ -7,6 +7,9 @@ Welcome to Imperium Maledictum - Community Edition. Here's a set of house rules 
 
 Check out the [Wiki](https://github.com/Havoclivekiller/ImpMal-Community/wiki) for more info.
 
+## Features
+- Roll Prompter - A dialog to prompt your players to make a specific test. Just use `/promptRoll`
+
 ## Changes
 - Change Condition/Zone Images - Allow to replace images of conditions/status/zoneEffects (*.webp files). 
 - Token Movement Measurement - When you drag a token, the ruler will change color based on speed.
