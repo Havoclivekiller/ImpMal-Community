@@ -44,12 +44,15 @@ class PromptRollDialog extends WHFormApplication {
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
+        const selectedCharacteristic = this.selectedCharacteristic || "";
         const selectedSkill = this.selectedSkill || Object.keys(game.impmal.config.skills || {})[0] || "";
         const selectedDifficulty = this.selectedDifficulty || "challenging";
+        const characteristics = this._getCharacteristics(selectedCharacteristic);
         const skills = this._getSkills(selectedSkill);
         const difficulties = this._getDifficulties(selectedDifficulty);
         const specialisations = await this._getSpecialisations(selectedSkill);
 
+        context.characteristics = characteristics;
         context.skills = skills;
         context.difficulties = difficulties;
         context.specialisations = specialisations;
@@ -82,6 +85,17 @@ class PromptRollDialog extends WHFormApplication {
         if (difficulty) {
             difficulty.onchange = this._onDifficultyChange.bind(this);
         }
+        const characteristic = root.querySelector("[name='characteristic']");
+        if (characteristic) {
+            characteristic.onchange = this._onCharacteristicChange.bind(this);
+        }
+        this._syncCharacteristicState();
+    }
+
+    _getCharacteristics(selectedCharacteristic) {
+        return Object.entries(game.impmal.config.characteristics || {})
+            .map(([key, label]) => ({ key, label, selected: key === selectedCharacteristic }))
+            .sort((a, b) => a.label.localeCompare(b.label));
     }
 
     _getSkills(selectedSkill) {
@@ -147,11 +161,24 @@ class PromptRollDialog extends WHFormApplication {
 
     async _onSkillChange(event) {
         this.selectedSkill = event.target.value;
+        if (this.selectedCharacteristic) {
+            this.selectedCharacteristic = "";
+            this._updateCharacteristicSelect("");
+            this._syncCharacteristicState();
+        }
         await this._updateSpecialisations();
     }
 
     _onDifficultyChange(event) {
         this.selectedDifficulty = event.target.value;
+    }
+
+    async _onCharacteristicChange(event) {
+        this.selectedCharacteristic = event.target.value;
+        this._syncCharacteristicState();
+        if (!this.selectedCharacteristic) {
+            await this._updateSpecialisations();
+        }
     }
 
     _onPromptAllChange(event) {
@@ -185,6 +212,38 @@ class PromptRollDialog extends WHFormApplication {
         select.value = "";
     }
 
+    _syncCharacteristicState() {
+        const root = this._getRoot();
+        if (!root) {
+            return;
+        }
+
+        const skill = root.querySelector("[name='skill']");
+        const specialisation = root.querySelector("[name='specialisation']");
+        const skillGroups = root.querySelectorAll(".prompt-roll-skill-group");
+        const hasCharacteristic = Boolean(this.selectedCharacteristic);
+
+        if (skill) {
+            skill.disabled = hasCharacteristic;
+        }
+        if (specialisation) {
+            specialisation.disabled = hasCharacteristic;
+            if (hasCharacteristic) {
+                specialisation.value = "";
+            }
+        }
+        skillGroups.forEach((group) => {
+            group.style.display = hasCharacteristic ? "none" : "";
+        });
+    }
+
+    _updateCharacteristicSelect(value) {
+        const select = this._getRoot()?.querySelector("[name='characteristic']");
+        if (select) {
+            select.value = value;
+        }
+    }
+
     _getRoot() {
         if (this.element instanceof HTMLElement) {
             return this.element;
@@ -201,8 +260,8 @@ class PromptRollDialog extends WHFormApplication {
 
     async _onPromptPlayers(formData) {
         const data = this._normalizeFormData(formData);
-        if (!data.skill) {
-            return ui.notifications.warn("Select a skill first.");
+        if (!data.characteristic && !data.skill) {
+            return ui.notifications.warn("Select a characteristic or skill first.");
         }
 
         const actors = await this._resolveTargetActors(data);
@@ -216,6 +275,7 @@ class PromptRollDialog extends WHFormApplication {
                 const payload = {
                     actorId: actor.id,
                     userId: user.id,
+                    characteristic: data.characteristic,
                     skill: data.skill,
                     specialisation: data.specialisation,
                     difficulty: data.difficulty,
@@ -240,6 +300,7 @@ class PromptRollDialog extends WHFormApplication {
     }
 
     _normalizeFormData(formData) {
+        const characteristic = formData.characteristic || "";
         const skill = formData.skill || "";
         const specialisation = formData.specialisation || "";
         const difficulty = formData.difficulty || "challenging";
@@ -252,9 +313,12 @@ class PromptRollDialog extends WHFormApplication {
             ? formData.actors
             : (formData.actors ? [formData.actors] : []);
 
+        const useCharacteristic = Boolean(characteristic);
+
         return {
-            skill,
-            specialisation,
+            characteristic: useCharacteristic ? characteristic : "",
+            skill: useCharacteristic ? "" : skill,
+            specialisation: useCharacteristic ? "" : specialisation,
             difficulty,
             modifier,
             sl,
@@ -302,6 +366,13 @@ async function promptRollOnClient(payload) {
     }
     else if (payload.state === "disadvantage") {
         fields.disadvantage = 1;
+    }
+
+    if (payload.characteristic) {
+        actor.setupCharacteristicTest(payload.characteristic, {
+            fields
+        });
+        return;
     }
 
     const testData = { key: payload.skill };

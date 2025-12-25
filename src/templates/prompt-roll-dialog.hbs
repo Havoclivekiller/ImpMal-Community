@@ -10,6 +10,17 @@
                     </div>
                 </div>
                 <div class="form-group">
+                    <label>Characteristic</label>
+                    <div class="form-fields">
+                        <select name="characteristic">
+                            <option value="">(None)</option>
+                            {{#each characteristics}}
+                            <option value="{{this.key}}" {{#if this.selected}} selected{{/if}}>{{this.label}}</option>
+                            {{/each}}
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group prompt-roll-skill-group">
                     <label>Skill</label>
                     <div class="form-fields">
                         <select name="skill">
@@ -19,7 +30,7 @@
                         </select>
                     </div>
                 </div>
-                <div class="form-group">
+                <div class="form-group prompt-roll-skill-group">
                     <label>Specialisation</label>
                     <div class="form-fields">
                         <select name="specialisation">
