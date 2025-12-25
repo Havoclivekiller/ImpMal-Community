@@ -218,20 +218,9 @@ class PromptRollDialog extends WHFormApplication {
             return;
         }
 
-        const skill = root.querySelector("[name='skill']");
-        const specialisation = root.querySelector("[name='specialisation']");
         const skillGroups = root.querySelectorAll(".prompt-roll-skill-group");
         const hasCharacteristic = Boolean(this.selectedCharacteristic);
 
-        if (skill) {
-            skill.disabled = hasCharacteristic;
-        }
-        if (specialisation) {
-            specialisation.disabled = hasCharacteristic;
-            if (hasCharacteristic) {
-                specialisation.value = "";
-            }
-        }
         skillGroups.forEach((group) => {
             group.style.display = hasCharacteristic ? "none" : "";
         });
