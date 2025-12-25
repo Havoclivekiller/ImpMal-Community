@@ -6,7 +6,7 @@
                 <div class="form-group">
                     <label>Prompt All</label>
                     <div class="form-fields">
-                        <input type="checkbox" name="promptAll" {{#if promptAll}}checked{{/if}}>
+                        <input type="checkbox" name="promptAll" {{#if promptAll}} checked{{/if}}>
                     </div>
                 </div>
                 <div class="form-group">
@@ -14,7 +14,7 @@
                     <div class="form-fields">
                         <select name="skill">
                             {{#each skills}}
-                                <option value="{{this.key}}" {{#if this.selected}}selected{{/if}}>{{this.label}}</option>
+                            <option value="{{this.key}}" {{#if this.selected}} selected{{/if}}>{{this.label}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -25,7 +25,7 @@
                         <select name="specialisation">
                             <option value="">(None)</option>
                             {{#each specialisations}}
-                                <option value="{{this.name}}">{{this.name}}</option>
+                            <option value="{{this.name}}">{{this.name}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -35,7 +35,7 @@
                     <div class="form-fields">
                         <select name="difficulty">
                             {{#each difficulties}}
-                                <option value="{{this.key}}" {{#if this.selected}}selected{{/if}}>{{this.display}}</option>
+                            <option value="{{this.key}}" {{#if this.selected}} selected{{/if}}>{{this.display}}</option>
                             {{/each}}
                         </select>
                     </div>
@@ -58,24 +58,42 @@
                         <input type="checkbox" name="privateRoll">
                     </div>
                 </div>
+                <div class="form-group">
+                    <div class="form-fields">
+                        <div class="prompt-roll-state">
+                            <label class="prompt-roll-state-option">
+                                <input type="radio" name="state" value="advantage">
+                                <span>Advantage</span>
+                            </label>
+                            <label class="prompt-roll-state-option">
+                                <input type="radio" name="state" value="normal" checked>
+                                <span>Normal</span>
+                            </label>
+                            <label class="prompt-roll-state-option">
+                                <input type="radio" name="state" value="disadvantage">
+                                <span>Disadvantage</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
             </fieldset>
 
             <fieldset class="prompt-roll-targets {{#if promptAll}}is-disabled{{/if}}">
                 <legend>Targets</legend>
                 <div class="prompt-roll-list">
                     {{#each actors}}
-                        <label class="prompt-roll-item">
-                            <input class="prompt-roll-checkbox" type="checkbox" name="actors" value="{{this.id}}">
-                            <div class="prompt-roll-card">
-                                <img class="prompt-roll-portrait" src="{{this.img}}" alt="{{this.name}}">
-                                <div class="prompt-roll-meta">
-                                    <span class="prompt-roll-name">{{this.name}}</span>
-                                    {{#if this.owners}}
-                                        <small class="prompt-roll-owners">{{this.owners}}</small>
-                                    {{/if}}
-                                </div>
+                    <label class="prompt-roll-item">
+                        <input class="prompt-roll-checkbox" type="checkbox" name="actors" value="{{this.id}}">
+                        <div class="prompt-roll-card">
+                            <img class="prompt-roll-portrait" src="{{this.img}}" alt="{{this.name}}">
+                            <div class="prompt-roll-meta">
+                                <span class="prompt-roll-name">{{this.name}}</span>
+                                {{#if this.owners}}
+                                <small class="prompt-roll-owners">{{this.owners}}</small>
+                                {{/if}}
                             </div>
-                        </label>
+                        </div>
+                    </label>
                     {{/each}}
                 </div>
             </fieldset>

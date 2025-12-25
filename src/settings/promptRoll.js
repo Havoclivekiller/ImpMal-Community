@@ -221,6 +221,7 @@ class PromptRollDialog extends WHFormApplication {
                     difficulty: data.difficulty,
                     modifier: data.modifier,
                     isPrivate: data.isPrivate,
+                    state: data.state,
                     sl: data.sl
                 };
 
@@ -245,6 +246,7 @@ class PromptRollDialog extends WHFormApplication {
         const modifier = Number(formData.modifier || 0);
         const sl = Number(formData.SL || 0);
         const isPrivate = Boolean(formData.privateRoll);
+        const state = formData.state || "normal";
         const promptAll = Boolean(formData.promptAll);
         const selectedActorIds = Array.isArray(formData.actors)
             ? formData.actors
@@ -257,6 +259,7 @@ class PromptRollDialog extends WHFormApplication {
             modifier,
             sl,
             isPrivate,
+            state,
             promptAll,
             selectedActorIds
         };
@@ -293,6 +296,12 @@ async function promptRollOnClient(payload) {
 
     if (payload.isPrivate) {
         fields.rollMode = "gmroll";
+    }
+    if (payload.state === "advantage") {
+        fields.advantage = 1;
+    }
+    else if (payload.state === "disadvantage") {
+        fields.disadvantage = 1;
     }
 
     const testData = { key: payload.skill };
