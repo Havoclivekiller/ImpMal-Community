@@ -18,6 +18,13 @@
   "IMPMAL_COMMUNITY.activeSuperiority.Name": "(House Rule) Active Superiority",
   "IMPMAL_COMMUNITY.activeSuperiority.Hint": "Split Superiority between Allied and Enemy, use a different version of rules. Requires restart.",
 
+  "IMPMAL_COMMUNITY.ActiveSuperiority.Label": "Active Superiority",
+  "IMPMAL_COMMUNITY.ActiveSuperiority.0": "None",
+  "IMPMAL_COMMUNITY.ActiveSuperiority.2": "Advantage - use 2 Superiority",
+  "IMPMAL_COMMUNITY.ActiveSuperiority.3": "Advantage +1 SL - use 3 Superiority",
+  "IMPMAL_COMMUNITY.ActiveSuperiority.4": "Advantage +2 SL - use 4 Superiority",
+  "IMPMAL_COMMUNITY.ActiveSuperiority.5": "Advantage +3 SL - use 5 Superiority",
+
   "IMPMAL_COMMUNITY.SuperiorityEnemy": "Enemy",
   "IMPMAL_COMMUNITY.SuperiorityAllied": "Allied",
 

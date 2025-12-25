@@ -1,0 +1,54 @@
+<div class="basic-fields">
+    <div class="form-group" {{#if tooltips.modifier}} data-tooltip-direction="LEFT" data-tooltip="{{tooltips.modifier}}"
+         {{/if}}>
+        <label>{{localize "IMPMAL.Modifier"}}</label>
+        <div class="form-fields">
+            <input type="number" value="{{fields.modifier}}" name="modifier">
+        </div>
+    </div>
+    <div class="form-group" {{#if tooltips.SL}} data-tooltip-direction="LEFT" data-tooltip="{{tooltips.SL}}" {{/if}}>
+        <label>{{localize "IMPMAL.SL"}}</label>
+        <div class="form-fields">
+            <input type="number" value="{{fields.SL}}" name="SL">
+        </div>
+    </div>
+    {{#if showActiveSuperiority}}
+    <div class="form-group">
+        <label>{{activeSuperiorityLabel}} {{localize "IMPMAL.Superiority"}}</label>
+        <div class="form-fields">
+            <select name="activeSuperiority">
+                {{#select fields.activeSuperiority}}
+                <option value="0">{{localize "IMPMAL_COMMUNITY.ActiveSuperiority.0"}}</option>
+                <option value="2">{{localize "IMPMAL_COMMUNITY.ActiveSuperiority.2"}}</option>
+                <option value="3">{{localize "IMPMAL_COMMUNITY.ActiveSuperiority.3"}}</option>
+                <option value="4">{{localize "IMPMAL_COMMUNITY.ActiveSuperiority.4"}}</option>
+                <option value="5">{{localize "IMPMAL_COMMUNITY.ActiveSuperiority.5"}}</option>
+                {{/select}}
+            </select>
+        </div>
+    </div>
+    {{/if}}
+    <div class="form-group" {{#if tooltips.difficulty}} data-tooltip-direction="LEFT" data-tooltip="{{tooltips.difficulty}}"
+         {{/if}}>
+        <label>{{localize "IMPMAL.Difficulty"}}</label>
+        <div class="form-fields">
+            <select name="difficulty">
+                {{#select fields.difficulty}}
+                {{#each (config "difficulties")}}
+                <option value="{{@key}}">
+                    {{this.name}} ({{numberFormat this.modifier sign=true}})
+                </option>
+                {{/each}}
+                {{/select}}
+            </select>
+        </div>
+    </div>
+    {{#if (gt data.actor.system.fate.value 0)}}
+    <div class="form-group">
+        <label>{{localize "IMPMAL.FateAdvantage"}}</label>
+        <div class="form-fields">
+            <input type="checkbox" name="fateAdvantage" {{checked fields.fateAdvantage}}>
+        </div>
+    </div>
+    {{/if}}
+</div>
