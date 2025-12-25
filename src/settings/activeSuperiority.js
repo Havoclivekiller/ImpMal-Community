@@ -80,8 +80,9 @@ function registerActiveSuperiorityTestDialogContext() {
             if (requested > 0) {
                 const pool = getActiveSuperiorityPool(this.actor);
                 const available = getSuperiorityValueSync(pool);
-                if (available < requested) {
-                    ui.notifications.error(`Not enough Superiority in ${getPoolLabel(pool)} pool (${available} available, ${requested} needed).`);
+                const cost = getActiveSuperiorityCost(this, requested);
+                if (available < cost) {
+                    ui.notifications.error(`Not enough Superiority in ${getPoolLabel(pool)} pool (${available} available, ${cost} needed).`);
                     ev.currentTarget.value = "0";
                     this.userEntry.activeSuperiority = 0;
                     this.render(true);
@@ -561,25 +562,26 @@ function overrideStaticSubmit(DialogClass) {
 }
 
 function spendActiveSuperiority(dialog) {
-    const spend = Number(dialog.fields.activeSuperiority || 0);
-    if (!spend) {
+    const requested = Number(dialog.fields.activeSuperiority || 0);
+    if (!requested) {
         return true;
     }
 
     const pool = getActiveSuperiorityPool(dialog.actor);
     const available = getSuperiorityValueSync(pool);
-    if (available < spend) {
-        ui.notifications.error(`Not enough Superiority in ${getPoolLabel(pool)} pool (${available} available, ${spend} needed).`);
+    const cost = getActiveSuperiorityCost(dialog, requested);
+    if (available < cost) {
+        ui.notifications.error(`Not enough Superiority in ${getPoolLabel(pool)} pool (${available} available, ${cost} needed).`);
         return false;
     }
 
     if (game.user.isGM) {
-        setSuperiorityValue(pool, available - spend);
-        postDialogMessage("Spent", pool, spend);
+        setSuperiorityValue(pool, available - cost);
+        postDialogMessage("Spent", pool, cost);
     } else {
         game.socket.emit(SOCKET_NAME, {
             type: "activeSuperioritySpend",
-            payload: { pool, spend }
+            payload: { pool, spend: cost }
         });
     }
     return true;
@@ -627,4 +629,13 @@ function getPoolLabel(pool) {
     return pool === "enemy"
         ? game.i18n.localize("IMPMAL_COMMUNITY.SuperiorityEnemy")
         : game.i18n.localize("IMPMAL_COMMUNITY.SuperiorityAllied");
+}
+
+function getActiveSuperiorityCost(dialog, requested) {
+    const discount = isActiveSuperiorityCheap(dialog) ? 1 : 0;
+    return Math.max(0, Number(requested || 0) - discount);
+}
+
+function isActiveSuperiorityCheap(dialog) {
+    return Boolean(dialog.flags.activeSuperiorityCheap);
 }
