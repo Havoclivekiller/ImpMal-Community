@@ -2,7 +2,7 @@ import { IMPMAL_COMMUNITY } from "./constants.js";
 
 const MODULE_ID = "impmal-community";
 const SOCKET_NAME = `module.${MODULE_ID}`;
-const FIELDS_TEMPLATE = "modules/impmal-community/templates/active-superiority-test-dialog.hbs";
+const ACTIVE_SUPERIORITY_TEMPLATE = "modules/impmal-community/templates/active-superiority-test-dialog.hbs";
 const DIALOG_CLASSES = [
     TestDialog,
     CharacteristicTestDialog,
@@ -27,9 +27,7 @@ function registerActiveSuperiorityTestDialogContext() {
     const originalDefaultFields = TestDialog.prototype._defaultFields;
     const originalOnFieldChange = TestDialog.prototype._onFieldChange;
     DIALOG_CLASSES.forEach((DialogClass) => {
-        if (DialogClass?.PARTS?.fields) {
-            DialogClass.PARTS.fields.template = FIELDS_TEMPLATE;
-        }
+        insertActiveSuperiorityPart(DialogClass);
     });
     DIALOG_CLASSES.forEach(overrideStaticSubmit);
 
@@ -60,9 +58,9 @@ function registerActiveSuperiorityTestDialogContext() {
             this.fields.SL = Number(this.fields.SL || 0) + bonusSl;
             this.fields.useSuperiority = true;
 
-            this.tooltips.add("advantage", 1, "Active Superiority");
+            this.tooltips.add("advantage", 1, game.i18n.localize("IMPMAL_COMMUNITY.ActiveSuperiority.Label"));
             if (bonusSl) {
-                this.tooltips.add("SL", bonusSl, "Active Superiority");
+                this.tooltips.add("SL", bonusSl, game.i18n.localize("IMPMAL_COMMUNITY.ActiveSuperiority.Label"));
             }
         } else {
             this.fields.useSuperiority = false;
@@ -80,7 +78,7 @@ function registerActiveSuperiorityTestDialogContext() {
             if (requested > 0) {
                 const pool = getActiveSuperiorityPool(this.actor);
                 const available = getSuperiorityValueSync(pool);
-                const cost = getActiveSuperiorityCost(this, requested);
+                const cost = getActiveSuperiorityCost(this.actor, requested);
                 if (available < cost) {
                     ui.notifications.error(`Not enough Superiority in ${getPoolLabel(pool)} pool (${available} available, ${cost} needed).`);
                     ev.currentTarget.value = "0";
@@ -93,6 +91,34 @@ function registerActiveSuperiorityTestDialogContext() {
 
         return originalOnFieldChange.call(this, ev);
     };
+}
+
+function insertActiveSuperiorityPart(DialogClass) {
+    if (!DialogClass?.PARTS || DialogClass.PARTS.activeSuperiority?.template === ACTIVE_SUPERIORITY_TEMPLATE) {
+        return;
+    }
+
+    const newParts = {};
+    let inserted = false;
+    for (const [key, value] of Object.entries(DialogClass.PARTS)) {
+        if (key === "state" && !inserted) {
+            newParts.activeSuperiority = {
+                template: ACTIVE_SUPERIORITY_TEMPLATE,
+                fields: true
+            };
+            inserted = true;
+        }
+        newParts[key] = value;
+    }
+
+    if (!inserted) {
+        newParts.activeSuperiority = {
+            template: ACTIVE_SUPERIORITY_TEMPLATE,
+            fields: true
+        };
+    }
+
+    DialogClass.PARTS = newParts;
 }
 
 function registerActiveSuperioritySettings() {
@@ -569,7 +595,7 @@ function spendActiveSuperiority(dialog) {
 
     const pool = getActiveSuperiorityPool(dialog.actor);
     const available = getSuperiorityValueSync(pool);
-    const cost = getActiveSuperiorityCost(dialog, requested);
+    const cost = getActiveSuperiorityCost(dialog.actor, requested);
     if (available < cost) {
         ui.notifications.error(`Not enough Superiority in ${getPoolLabel(pool)} pool (${available} available, ${cost} needed).`);
         return false;
@@ -631,11 +657,11 @@ function getPoolLabel(pool) {
         : game.i18n.localize("IMPMAL_COMMUNITY.SuperiorityAllied");
 }
 
-function getActiveSuperiorityCost(dialog, requested) {
-    const discount = isActiveSuperiorityCheap(dialog) ? 1 : 0;
+function getActiveSuperiorityCost(actor, requested) {
+    const discount = isActiveSuperiorityCheap(actor) ? 1 : 0;
     return Math.max(0, Number(requested || 0) - discount);
 }
 
-function isActiveSuperiorityCheap(dialog) {
-    return Boolean(dialog.flags.activeSuperiorityCheap);
+function isActiveSuperiorityCheap(actor) {
+    return Boolean(actor?.system?.activeSuperiorityCheap || actor?.flags?.["impmal-community"]?.activeSuperiorityCheap);
 }

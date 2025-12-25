@@ -2,24 +2,24 @@
     <div class="superiority-title divider">{{title}}</div>
     <div class="superiority-row">
         {{#if allied}}
-            <div class="resource superiority-resource">
-                <label class="superiority-label">{{allied.label}}</label>
-                <div class="superiority-controls">
-                    <button type="button" class="superiority-button" data-key="{{allied.key}}" data-delta="-1">-</button>
-                    <input data-key="{{allied.key}}" type="number" value="{{allied.value}}">
-                    <button type="button" class="superiority-button" data-key="{{allied.key}}" data-delta="1">+</button>
-                </div>
+        <div class="resource superiority-resource">
+            <label class="superiority-label">{{allied.label}}</label>
+            <div class="superiority-controls">
+                <button type="button" class="superiority-button" data-key="{{allied.key}}" data-delta="-1">-</button>
+                <input data-key="{{allied.key}}" type="number" value="{{allied.value}}">
+                <button type="button" class="superiority-button" data-key="{{allied.key}}" data-delta="1">+</button>
             </div>
+        </div>
         {{/if}}
         {{#if enemy}}
-            <div class="resource superiority-resource">
-                <label class="superiority-label">{{enemy.label}}</label>
-                <div class="superiority-controls">
-                    <button type="button" class="superiority-button" data-key="{{enemy.key}}" data-delta="-1">-</button>
-                    <input data-key="{{enemy.key}}" type="number" value="{{enemy.value}}">
-                    <button type="button" class="superiority-button" data-key="{{enemy.key}}" data-delta="1">+</button>
-                </div>
+        <div class="resource superiority-resource">
+            <label class="superiority-label">{{enemy.label}}</label>
+            <div class="superiority-controls">
+                <button type="button" class="superiority-button" data-key="{{enemy.key}}" data-delta="-1">-</button>
+                <input data-key="{{enemy.key}}" type="number" value="{{enemy.value}}">
+                <button type="button" class="superiority-button" data-key="{{enemy.key}}" data-delta="1">+</button>
             </div>
+        </div>
         {{/if}}
     </div>
 </div>

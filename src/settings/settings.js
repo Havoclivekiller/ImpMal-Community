@@ -5,6 +5,7 @@ import { registerChangeConditionImages } from "./changeConditionImages.js";
 import { registerTokenRuler } from "./tokenRuler.js";
 import { registerActiveSuperiority } from "./activeSuperiority.js";
 import { registerPromptRoll } from "./promptRoll.js";
+import { registerShootingMelee } from "./shootingMelee.js";
 
 Hooks.on('init', () => {
     registerSettings();
@@ -30,6 +31,10 @@ Hooks.on('init', () => {
 
     if (game.settings.get("impmal-community", "activeSuperiority") === true) {
         registerActiveSuperiority();
+    }
+
+    if (game.settings.get("impmal-community", "shootingIntoMelee") === true) {
+        registerShootingMelee();
     }
 
     registerPromptRoll();
@@ -137,6 +142,16 @@ function registerSettings() {
     game.settings.register("impmal-community", "activeSuperiority", {
         name: game.i18n.localize("IMPMAL_COMMUNITY.activeSuperiority.Name"),
         hint: game.i18n.localize("IMPMAL_COMMUNITY.activeSuperiority.Hint"),
+        scope: "world",
+        config: true,
+        default: false,
+        requiresReload: true,
+        type: Boolean
+    });
+
+    game.settings.register("impmal-community", "shootingIntoMelee", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.shootingIntoMelee.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.shootingIntoMelee.Hint"),
         scope: "world",
         config: true,
         default: false,

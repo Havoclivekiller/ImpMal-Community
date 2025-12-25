@@ -12,7 +12,7 @@ class PromptRollDialog extends WHFormApplication {
             closeOnSubmit: true
         },
         window: {
-            title: "Roll Prompter",
+            title: game.i18n.localize("IMPMAL_COMMUNITY.Prompter.Name"),
             contentClasses: ["standard-form"],
             resizable: true
         },
@@ -36,7 +36,7 @@ class PromptRollDialog extends WHFormApplication {
         if (partId === "footer") {
             partContext.buttons = [{
                 type: "submit",
-                label: "Prompt Players"
+                label: game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptPlayers")
             }];
         }
         return partContext;
@@ -250,12 +250,12 @@ class PromptRollDialog extends WHFormApplication {
     async _onPromptPlayers(formData) {
         const data = this._normalizeFormData(formData);
         if (!data.characteristic && !data.skill) {
-            return ui.notifications.warn("Select a characteristic or skill first.");
+            return ui.notifications.warn(game.i18n.localize("IMPMAL_COMMUNITY.Prompter.NoneSelected"));
         }
 
         const actors = await this._resolveTargetActors(data);
         if (!actors.length) {
-            return ui.notifications.warn("No eligible actors selected.");
+            return ui.notifications.warn(game.i18n.localize("IMPMAL_COMMUNITY.Prompter.NoActors"));
         }
 
         for (const actor of actors) {
@@ -390,7 +390,7 @@ export function registerPromptRoll() {
         }
 
         if (!game.user.isGM) {
-            ui.notifications.warn("Only the GM can use /promptRoll.");
+            ui.notifications.warn(game.i18n.localize("IMPMAL_COMMUNITY.Prompter.OnlyGM"));
             return false;
         }
 

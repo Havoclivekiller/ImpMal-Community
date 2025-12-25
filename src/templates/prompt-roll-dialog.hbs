@@ -2,18 +2,18 @@
     <div class="prompt-roll-body">
         <div class="prompt-roll-sections">
             <fieldset class="prompt-roll-options">
-                <legend>Roll Request</legend>
+                <legend>{{localize 'IMPMAL_COMMUNITY.Prompter.RollRequest'}}</legend>
                 <div class="form-group">
-                    <label>Prompt All</label>
+                    <label>{{localize 'IMPMAL_COMMUNITY.Prompter.PromptAll'}}</label>
                     <div class="form-fields">
                         <input type="checkbox" name="promptAll" {{#if promptAll}} checked{{/if}}>
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Characteristic</label>
+                    <label>{{localize 'IMPMAL.Characteristic'}}</label>
                     <div class="form-fields">
                         <select name="characteristic">
-                            <option value="">(None)</option>
+                            <option value="">({{localize 'IMPMAL.None'}})</option>
                             {{#each characteristics}}
                             <option value="{{this.key}}" {{#if this.selected}} selected{{/if}}>{{this.label}}</option>
                             {{/each}}
@@ -21,7 +21,7 @@
                     </div>
                 </div>
                 <div class="form-group prompt-roll-skill-group">
-                    <label>Skill</label>
+                    <label>{{localize 'IMPMAL.Skill'}}</label>
                     <div class="form-fields">
                         <select name="skill">
                             {{#each skills}}
@@ -31,10 +31,10 @@
                     </div>
                 </div>
                 <div class="form-group prompt-roll-skill-group">
-                    <label>Specialisation</label>
+                    <label>{{localize 'IMPMAL.Specialization'}}</label>
                     <div class="form-fields">
                         <select name="specialisation">
-                            <option value="">(None)</option>
+                            <option value="">({{localize 'IMPMAL.None'}})</option>
                             {{#each specialisations}}
                             <option value="{{this.name}}">{{this.name}}</option>
                             {{/each}}
@@ -42,7 +42,7 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Difficulty</label>
+                    <label>{{localize 'IMPMAL.Difficulty'}}</label>
                     <div class="form-fields">
                         <select name="difficulty">
                             {{#each difficulties}}
@@ -52,19 +52,19 @@
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Modifier</label>
+                    <label>{{localize 'IMPMAL.Modifier'}}</label>
                     <div class="form-fields">
                         <input type="number" name="modifier" value="0">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>SL Modifier</label>
+                    <label>{{localize 'IMPMAL.SL'}} {{localize 'IMPMAL.Modifier'}}</label>
                     <div class="form-fields">
                         <input type="number" name="SL" value="0">
                     </div>
                 </div>
                 <div class="form-group">
-                    <label>Private Roll</label>
+                    <label>{{localize 'IMPMAL_COMMUNITY.Prompter.PrivateRoll'}}</label>
                     <div class="form-fields">
                         <input type="checkbox" name="privateRoll">
                     </div>
@@ -74,15 +74,15 @@
                         <div class="prompt-roll-state">
                             <label class="prompt-roll-state-option">
                                 <input type="radio" name="state" value="advantage">
-                                <span>Advantage</span>
+                                <span>{{localize 'IMPMAL.Advantage'}}</span>
                             </label>
                             <label class="prompt-roll-state-option">
                                 <input type="radio" name="state" value="normal" checked>
-                                <span>Normal</span>
+                                <span>{{localize 'IMPMAL.Normal'}}</span>
                             </label>
                             <label class="prompt-roll-state-option">
                                 <input type="radio" name="state" value="disadvantage">
-                                <span>Disadvantage</span>
+                                <span>{{localize 'IMPMAL.Disadvantage'}}</span>
                             </label>
                         </div>
                     </div>
@@ -90,7 +90,7 @@
             </fieldset>
 
             <fieldset class="prompt-roll-targets {{#if promptAll}}is-disabled{{/if}}">
-                <legend>Targets</legend>
+                <legend>{{localize 'IMPMAL.Targets'}}</legend>
                 <div class="prompt-roll-list">
                     {{#each actors}}
                     <label class="prompt-roll-item">
