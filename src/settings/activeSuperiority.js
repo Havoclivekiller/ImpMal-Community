@@ -11,13 +11,9 @@ export function registerActiveSuperiority() {
 function registerActiveSuperiorityTestDialogContext() {
     const original = TestDialog.prototype._prepareContext;
     TestDialog.prototype._prepareContext = async function (options) {
-        this.advantage = 0;
-        this.disadvantage = 0;
 
         const context = await original.call(this, options);
 
-        context.advantage = this.advantage;
-        context.disadvantage = this.disadvantage;
         this.fields.state = this.computeState();
         // context.showSuperiority = ...
         return context;
