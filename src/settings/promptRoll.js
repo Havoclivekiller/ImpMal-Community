@@ -119,7 +119,7 @@ class PromptRollDialog extends WHFormApplication {
     _getUserCharacters() {
         const entries = new Map();
         game.users
-            .filter(user => !user.isGM && user.character)
+            .filter(user => user.active && !user.isGM && user.character)
             .forEach(user => {
                 const actor = user.character;
                 if (!entries.has(actor.id)) {
