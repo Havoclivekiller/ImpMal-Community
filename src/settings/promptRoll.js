@@ -12,7 +12,7 @@ class PromptRollDialog extends WHFormApplication {
             closeOnSubmit: true
         },
         window: {
-            title: game.i18n.localize("IMPMAL_COMMUNITY.Prompter.Name"),
+            title: "IMPMAL_COMMUNITY.Prompter.Name",
             contentClasses: ["standard-form"],
             resizable: true
         },
