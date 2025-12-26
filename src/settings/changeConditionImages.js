@@ -1,262 +1,116 @@
-export function registerChangeConditionImages() {
-    let imgPath = game.settings.get("impmal-community", "changeConditionImagesPath").replace(/^\/|\/$/g, "");
+export async function registerChangeConditionImages() {
+    const imgPath = game.settings.get("impmal-community", "changeConditionImagesPath").replace(/^\/|\/$/g, "");
+    const buildSrc = (fileName) => `${imgPath}/${fileName}`;
+    const fileExists = async (fileName) => foundry.utils.srcExists(buildSrc(fileName));
 
-    // TODO: Check if file exists
-    // Actions
-    if (true) {
-        game.impmal.config.actions.aim.effect.img = imgPath + "/aim.webp";
-    }
-    if (true) {
-        game.impmal.config.actions.charge.effect.img = imgPath + "/charge.webp";
-    }
-    if (true) {
-        game.impmal.config.actions.defend.effect.img = imgPath + "/defend.webp";
-    }
-    if (true) {
-        game.impmal.config.actions.dodge.effect.img = imgPath + "/dodge.webp";
-    }
-    if (true) {
-        game.impmal.config.actions.help.effect.img = imgPath + "/help.webp";
-    }
+    const setImgIfExists = async (obj, fileName, { includeIcon = false } = {}) => {
+        if (!obj) return;
+        if (!(await fileExists(fileName))) {
+            console.warn(`${CONST.vtt} | Missing condition image: ${buildSrc(fileName)}`);
+            return;
+        }
+        const src = buildSrc(fileName);
+        obj.img = src;
+        if (includeIcon) obj.icon = src;
+    };
 
-    // Status Icons
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionAblaze");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/ablaze.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/ablaze.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionAblaze");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/ablaze.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/ablaze.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionBleeding");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/bleeding.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/bleeding.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionBleeding");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/bleeding.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/bleeding.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionBlinded");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/blinded.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/blinded.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionBlinded");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/blinded.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/blinded.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionDeafened");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/deafened.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/deafened.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionDeafened");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/deafened.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/deafened.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionFatigued");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/fatigued.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/fatigued.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionFatigued");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/fatigued.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/fatigued.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionFrightened");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/frightened.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/frightened.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionFrightened");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/frightened.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/frightened.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionIncapacitated");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/incapacitated.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/incapacitated.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionIncapacitated");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/incapacitated.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/incapacitated.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionOverburdened");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/overburdened.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/overburdened.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionOverburdened");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/overburdened.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/overburdened.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionPoisoned");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/poisoned.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/poisoned.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionPoisoned");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/poisoned.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/poisoned.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionProne");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/prone.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/prone.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionProne");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/prone.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/prone.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionRestrained");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/restrained.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/restrained.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionRestrained");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/restrained.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/restrained.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionStunned");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/stunned.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/stunned.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionStunned");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/stunned.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/stunned.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionUnconscious");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/unconscious.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/unconscious.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.ConditionUnconscious");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/unconscious.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/unconscious.webp";
-    }
-    if (true) {
-        let objIndex = IM_CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.Dead");
-        IM_CONFIG.statusEffects[objIndex].img = imgPath + "/dead.webp";
-        IM_CONFIG.statusEffects[objIndex].icon = imgPath + "/dead.webp";
-        let objIndex2 = CONFIG.statusEffects.findIndex(obj => obj.name == "IMPMAL.Dead");
-        CONFIG.statusEffects[objIndex2].img = imgPath + "/dead.webp";
-        CONFIG.statusEffects[objIndex2].icon = imgPath + "/dead.webp";
+    const isLocalizedMatch = (obj, key) => {
+        if (!obj) return false;
+        const localized = game.i18n?.localize?.(key);
+        return obj.name === key || obj.title === key || obj.name === localized || obj.title === localized;
+    };
+
+    const setStatusEffect = async (effects, id, fileName) => {
+        const objIndex = effects.findIndex((obj) => obj.id === id);
+        if (objIndex === -1) return;
+        await setImgIfExists(effects[objIndex], fileName, { includeIcon: true });
+    };
+
+    const setCondition = async (conditions, name, fileName) => {
+        const objIndex = conditions.findIndex((obj) => isLocalizedMatch(obj, name));
+        if (objIndex === -1) return;
+        await setImgIfExists(conditions[objIndex], fileName);
+    };
+
+    const actionsTable = [
+        { target: game.impmal.config.actions.aim.effect, file: "aim.webp" },
+        { target: game.impmal.config.actions.charge.effect, file: "charge.webp" },
+        { target: game.impmal.config.actions.defend.effect, file: "defend.webp" },
+        { target: game.impmal.config.actions.dodge.effect, file: "dodge.webp" },
+        { target: game.impmal.config.actions.help.effect, file: "help.webp" },
+    ];
+
+    const statusTable = [
+        { id: "ablaze", file: "ablaze.webp" },
+        { id: "bleeding", file: "bleeding.webp" },
+        { id: "blinded", file: "blinded.webp" },
+        { id: "deafened", file: "deafened.webp" },
+        { id: "fatigued", file: "fatigued.webp" },
+        { id: "frightened", file: "frightened.webp" },
+        { id: "incapacitated", file: "incapacitated.webp" },
+        { id: "overburdened", file: "overburdened.webp" },
+        { id: "poisoned", file: "poisoned.webp" },
+        { id: "prone", file: "prone.webp" },
+        { id: "restrained", file: "restrained.webp" },
+        { id: "stunned", file: "stunned.webp" },
+        { id: "unconscious", file: "unconscious.webp" },
+        { id: "dead", file: "dead.webp" },
+    ];
+
+    const conditionsTable = [
+        { name: "IMPMAL.ConditionAblazeMinor", file: "ablaze-minor.webp" },
+        { name: "IMPMAL.ConditionAblazeMajor", file: "ablaze-major.webp" },
+        { name: "IMPMAL.ConditionBleedingMinor", file: "bleeding-minor.webp" },
+        { name: "IMPMAL.ConditionBleedingMajor", file: "bleeding-major.webp" },
+        { name: "IMPMAL.ConditionBlinded", file: "blinded.webp" },
+        { name: "IMPMAL.ConditionDeafened", file: "deafened.webp" },
+        { name: "IMPMAL.ConditionFatiguedMinor", file: "fatigued-minor.webp" },
+        { name: "IMPMAL.ConditionFatiguedMajor", file: "fatigued-major.webp" },
+        { name: "IMPMAL.ConditionFrightenedMinor", file: "frightened-minor.webp" },
+        { name: "IMPMAL.ConditionFrightenedMajor", file: "frightened-major.webp" },
+        { name: "IMPMAL.ConditionOverburdened", file: "overburdened.webp" },
+        { name: "IMPMAL.ConditionPoisonedMinor", file: "poisoned-minor.webp" },
+        { name: "IMPMAL.ConditionPoisonedMajor", file: "poisoned-major.webp" },
+        { name: "IMPMAL.ConditionIncapacitated", file: "incapacitated.webp" },
+        { name: "IMPMAL.ConditionProne", file: "prone.webp" },
+        { name: "IMPMAL.ConditionRestrainedMinor", file: "restrained-minor.webp" },
+        { name: "IMPMAL.ConditionRestrainedMajor", file: "restrained-major.webp" },
+        { name: "IMPMAL.ConditionStunnedMinor", file: "stunned-minor.webp" },
+        { name: "IMPMAL.ConditionStunnedMajor", file: "stunned-major.webp" },
+        { name: "IMPMAL.ConditionUnconscious", file: "unconscious.webp" },
+        { name: "IMPMAL.Dead", file: "dead.webp" },
+    ];
+
+    const zonesTable = [
+        { target: game.impmal.config.zoneEffects.barrier, file: "barrier.webp" },
+        { target: game.impmal.config.zoneEffects.lightCover, file: "lightCover.webp" },
+        { target: game.impmal.config.zoneEffects.mediumCover, file: "mediumCover.webp" },
+        { target: game.impmal.config.zoneEffects.heavyCover, file: "heavyCover.webp" },
+        { target: game.impmal.config.zoneEffects.difficultTerrain, file: "difficultTerrain.webp" },
+        { target: game.impmal.config.zoneEffects.lightlyObscured, file: "lightlyObscured.webp" },
+        { target: game.impmal.config.zoneEffects.heavilyObscured, file: "heavilyObscured.webp" },
+        { target: game.impmal.config.zoneEffects.minorHazard, file: "minorHazard.webp" },
+        { target: game.impmal.config.zoneEffects.majorHazard, file: "majorHazard.webp" },
+        { target: game.impmal.config.zoneEffects.deadlyHazard, file: "deadlyHazard.webp" },
+        { target: game.impmal.config.zoneEffects.poorlyLit, file: "poorlyLit.webp" },
+        { target: game.impmal.config.zoneEffects.dark, file: "dark.webp" },
+        { target: game.impmal.config.zoneEffects.warpTouched, file: "warpTouched.webp" },
+    ];
+
+    for (const { target, file } of actionsTable) {
+        await setImgIfExists(target, file);
     }
 
-    // Conditions
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionAblazeMinor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/ablaze-minor.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionAblazeMajor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/ablaze-major.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionBleedingMinor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/bleeding-minor.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionBleedingMajor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/bleeding-major.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionBlinded");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/blinded.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionDeafened");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/deafened.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionFatiguedMinor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/fatigued-minor.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionFatiguedMajor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/fatigued-major.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionFrightenedMinor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/frightened-minor.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionFrightenedMajor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/frightened-major.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionOverburdened");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/overburdened.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionPoisonedMinor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/poisoned-minor.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionPoisonedMajor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/poisoned-major.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionIncapacitated");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/incapacitated.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionProne");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/prone.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionRestrainedMinor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/restrained-minor.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionRestrainedMajor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/restrained-major.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionStunnedMinor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/stunned-minor.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionStunnedMajor");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/stunned-major.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.ConditionUnconscious");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/unconscious.webp";
-    }
-    if (true) {
-        let objIndex = game.impmal.config.conditions.findIndex(obj => obj.name == "IMPMAL.Dead");
-        game.impmal.config.conditions[objIndex].img = imgPath + "/dead.webp";
+    for (const { id, file } of statusTable) {
+        await setStatusEffect(IM_CONFIG.statusEffects, id, file);
+        await setStatusEffect(CONFIG.statusEffects, id, file);
     }
 
-    // Zone Effects
-    if (true) {
-        game.impmal.config.zoneEffects.barrier.img = imgPath + "/barrier.webp";
+    for (const { name, file } of conditionsTable) {
+        await setCondition(game.impmal.config.conditions, name, file);
     }
-    if (true) {
-        game.impmal.config.zoneEffects.lightCover.img = imgPath + "/lightCover.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.mediumCover.img = imgPath + "/mediumCover.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.heavyCover.img = imgPath + "/heavyCover.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.difficultTerrain.img = imgPath + "/difficultTerrain.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.lightlyObscured.img = imgPath + "/lightlyObscured.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.heavilyObscured.img = imgPath + "/heavilyObscured.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.minorHazard.img = imgPath + "/minorHazard.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.majorHazard.img = imgPath + "/majorHazard.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.deadlyHazard.img = imgPath + "/deadlyHazard.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.poorlyLit.img = imgPath + "/poorlyLit.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.dark.img = imgPath + "/dark.webp";
-    }
-    if (true) {
-        game.impmal.config.zoneEffects.warpTouched.img = imgPath + "/warpTouched.webp";
+
+    for (const { target, file } of zonesTable) {
+        await setImgIfExists(target, file);
     }
 }
