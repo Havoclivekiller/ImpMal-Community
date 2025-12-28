@@ -1,4 +1,10 @@
 {
+  "IMPMAL_COMMUNITY.autoCritKillNpcs.name": "Automatically add crits to NPCs",
+  "IMPMAL_COMMUNITY.autoCritKillNpcs.hint": "Additionally it kills NPCs that are over max critical wounds",
+  "IMPMAL_COMMUNITY.showNpcCrit.name": "Show NPC Critical wounds in chat",
+  "IMPMAL_COMMUNITY.showNpcCrit.hint": "If checked the critical wounds from attacks will be posted to chat and added to the npc. Else it will silently add it to the npc",
+  "IMPMAL_COMMUNITY.deleteIniMessage.name": "Delete Initiative rolls in chat",
+  "IMPMAL_COMMUNITY.deleteIniMessage.hint": "Best used when alternative Initiative is not used.",
 
   "IMPMAL_COMMUNITY.alternativeInitiative.Name": "(House Rule) Alternative Initiative",
   "IMPMAL_COMMUNITY.alternativeInitiative.Hint": "Use alternative initiative from the formula below. Requires restart.",
@@ -61,5 +67,4 @@
   "IMPMAL_COMMUNITY.SuperiorityGain.Outmanoeuvre.Tip": "",
   "IMPMAL_COMMUNITY.SuperiorityGain.WoundedPride.Name": "Wounded Pride [Enemy Only]",
   "IMPMAL_COMMUNITY.SuperiorityGain.WoundedPride.Tip": ""
-
 }

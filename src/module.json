@@ -18,10 +18,8 @@
       }
     ]
   },
-  "esmodules": [ "settings/settings.js" ],
-  "styles": [
-    "assets/impmal-community.css"
-  ],
+  "esmodules": ["settings/settings.js", "scripts/main.js"],
+  "styles": ["assets/impmal-community.css"],
   "socket": true,
   "languages": [
     {
@@ -31,9 +29,7 @@
       "flags": {}
     }
   ],
-  "packFolders": [
-  ],
+  "packFolders": [],
   "packs": [],
   "documentTypes": {}
 }
-
