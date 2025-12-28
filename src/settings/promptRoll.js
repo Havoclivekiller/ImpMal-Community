@@ -122,6 +122,7 @@ class PromptRollDialog extends WHFormApplication {
         const actors = this._getUserCharacters();
         return actors
             .map(({ actor, owners }) => ({
+                uuid: actor.uuid,
                 id: actor.id,
                 name: actor.name,
                 owners: owners.map(user => user.name).join(", "),
@@ -131,32 +132,40 @@ class PromptRollDialog extends WHFormApplication {
     }
 
     _getUserCharacters() {
-        const entries = new Map();
-        game.users
+        return game.users
             .filter(user => user.active && !user.isGM && user.character)
-            .forEach(user => {
-                const actor = user.character;
-                if (!entries.has(actor.id)) {
-                    entries.set(actor.id, { actor, owners: [user] });
-                }
-                else {
-                    entries.get(actor.id).owners.push(user);
-                }
+            .map(user => {
+                return { actor: user.character, owners: [user] };
             });
-        return Array.from(entries.values());
     }
 
     async _getSpecialisations(skillKey) {
+        let systemSpecs = await this._getSystemSpecialisations(skillKey);
+        let actorSpecs = await this._getActorSpecialisations(skillKey);
+
+        let allSpecs = systemSpecs.concat(
+            //filter system specs in actor sheets
+            actorSpecs.filter(spec => !systemSpecs.map(item => item.name).includes(spec.name))
+        );
+        return allSpecs.map(item => ({ id: item.id, name: item.name })).sort((a, b) => a.name.localeCompare(b.name));
+    }
+
+    async _getSystemSpecialisations(skillKey) {
         if (!skillKey) {
             return [];
         }
         if (!this._allSpecialisations) {
             this._allSpecialisations = await game.impmal.utility.getAllItems("specialisation");
         }
-        return this._allSpecialisations
-            .filter(item => item.system.skill === skillKey)
-            .map(item => ({ id: item.id, name: item.name }))
-            .sort((a, b) => a.name.localeCompare(b.name));
+        return this._allSpecialisations.filter(item => item.system.skill === skillKey);
+    }
+
+    async _getActorSpecialisations(skillKey) {
+        return this._getEligibleActors().flatMap(actor =>
+            fromUuidSync(actor.uuid)
+                .items.filter(item => item.type === "specialisation")
+                .filter(item => item.system.skill === skillKey)
+        );
     }
 
     async _onSkillChange(event) {
@@ -276,8 +285,7 @@ class PromptRollDialog extends WHFormApplication {
 
                 if (user.id === game.user.id) {
                     await promptRollOnClient(payload);
-                }
-                else {
+                } else {
                     game.socket.emit(SOCKET_NAME, { type: "promptRoll", payload });
                 }
             }
@@ -300,7 +308,9 @@ class PromptRollDialog extends WHFormApplication {
         const promptAll = Boolean(formData.promptAll);
         const selectedActorIds = Array.isArray(formData.actors)
             ? formData.actors
-            : (formData.actors ? [formData.actors] : []);
+            : formData.actors
+            ? [formData.actors]
+            : [];
 
         const useCharacteristic = Boolean(characteristic);
 
@@ -376,7 +386,7 @@ async function promptRollOnClient(payload) {
 
 export function registerPromptRoll() {
     Hooks.on("ready", () => {
-        game.socket.on(SOCKET_NAME, (data) => {
+        game.socket.on(SOCKET_NAME, data => {
             if (!data || data.type !== "promptRoll") {
                 return;
             }
