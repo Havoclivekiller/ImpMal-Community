@@ -156,7 +156,8 @@ class PromptRollDialog extends WHFormApplication {
         }
         if (!this._allSpecialisations) {
             this._allSpecialisations = await game.impmal.utility.getAllItems("specialisation");
-        } return this._allSpecialisations.filter(item => item.system.skill === skillKey);
+        }
+        return this._allSpecialisations.filter(item => item.system.skill === skillKey);
     }
 
     async _getActorSpecialisations(skillKey) {
@@ -284,8 +285,7 @@ class PromptRollDialog extends WHFormApplication {
 
                 if (user.id === game.user.id) {
                     await promptRollOnClient(payload);
-                }
-                else {
+                } else {
                     game.socket.emit(SOCKET_NAME, { type: "promptRoll", payload });
                 }
             }
@@ -308,7 +308,9 @@ class PromptRollDialog extends WHFormApplication {
         const promptAll = Boolean(formData.promptAll);
         const selectedActorIds = Array.isArray(formData.actors)
             ? formData.actors
-            : (formData.actors ? [formData.actors] : []);
+            : formData.actors
+            ? [formData.actors]
+            : [];
 
         const useCharacteristic = Boolean(characteristic);
 
@@ -384,7 +386,7 @@ async function promptRollOnClient(payload) {
 
 export function registerPromptRoll() {
     Hooks.on("ready", () => {
-        game.socket.on(SOCKET_NAME, (data) => {
+        game.socket.on(SOCKET_NAME, data => {
             if (!data || data.type !== "promptRoll") {
                 return;
             }
