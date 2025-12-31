@@ -102,4 +102,34 @@ function registerSettings() {
         requiresReload: true,
         type: Boolean
     });
+
+    game.settings.register("impmal-community", "autoCritKillNpcs", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.autoCritKillNpcs.name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.autoCritKillNpcs.hint"),
+        scope: "world",
+        config: true,
+        default: false,
+        requiresReload: true,
+        type: Boolean
+    });
+
+    game.settings.register("impmal-community", "showNpcCrit", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.showNpcCrit.name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.showNpcCrit.hint"),
+        scope: "world",
+        config: true,
+        default: false,
+        requiresReload: true,
+        type: Boolean
+    });
+
+    game.settings.register("impmal-community", "deleteIniMessage", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.deleteIniMessage.name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.deleteIniMessage.hint"),
+        scope: "world",
+        config: true,
+        default: false,
+        requiresReload: true,
+        type: Boolean
+    });
 }
