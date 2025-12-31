@@ -189,3 +189,426 @@
         background: rgba(77, 195, 255, 0.2);
         border-color: var(--impmal-lightblue, #4dc3ff)
     }
+
+.party-members {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.party-members__title {
+    margin: 0;
+    font-size: 1em;
+    font-weight: 600
+}
+
+.party-members--allied {
+    margin-top: 12px
+}
+
+.party-member {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.party-member__img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    object-position: 50% 15%;
+    border: 1px solid rgba(0, 0, 0, 0.35)
+}
+
+.party-member__info {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-width: 0
+}
+
+.party-member__details {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px
+}
+
+.party-member__detail {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 4px 6px
+}
+
+.party-member__label {
+    font-size: .75em;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    opacity: .7
+}
+
+.party-member__value {
+    font-weight: 600;
+    font-size: .9em
+}
+
+.party-member__remove {
+    justify-self: end;
+    cursor: pointer
+}
+
+.party-patron {
+    display: grid;
+    grid-template-columns: 64px 1fr auto;
+    gap: 12px;
+    align-items: center;
+    margin-top: 8px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    border-radius: 6px;
+    cursor: pointer
+}
+
+.party-patron__img {
+    width: 64px;
+    height: 64px;
+    object-fit: cover;
+    object-position: 50% 15%;
+    border: 1px solid rgba(0, 0, 0, 0.35)
+}
+
+.party-patron__info {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0
+}
+
+.party-patron__name {
+    font-weight: 600;
+    line-height: 1.2
+}
+
+.party-patron__stats {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px
+}
+
+.party-patron__stat {
+    background: rgba(0, 0, 0, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 4px 6px
+}
+
+.party-patron__label {
+    font-size: .75em;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    opacity: .7
+}
+
+.party-patron__value {
+    font-weight: 600;
+    font-size: .9em
+}
+
+.party-patron__remove {
+    justify-self: end;
+    cursor: pointer
+}
+
+.extended-test-add .form-fields {
+    justify-content: stretch
+}
+
+.extended-test-add button {
+    width: 100%;
+    flex: 1;
+}
+
+.extended-test-row {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.extended-test-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.extended-test-title {
+    font-weight: 600
+}
+
+.extended-test-required {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    justify-content: flex-start
+}
+
+.extended-test-required-option {
+    display: flex;
+    align-items: center;
+    gap: 6px
+}
+
+.extended-test-count-negative .form-fields {
+    justify-content: flex-start
+}
+
+.extended-test-layout {
+    display: grid;
+    grid-template-columns: minmax(280px, 1fr) minmax(360px, 1.4fr);
+    gap: 12px;
+    align-items: start
+}
+
+.extended-test-detail {
+    margin-bottom: 0;
+    position: sticky;
+    top: 0
+}
+
+.extended-tests .list-row.is-selected {
+    border-color: var(--impmal-lightblue, #4dc3ff);
+    box-shadow: 0 0 0 1px var(--impmal-lightblue, #4dc3ff) inset
+}
+
+.extended-tests .list-row {
+    cursor: pointer
+}
+
+.extended-tests-section {
+    margin: 8px 0 6px;
+    font-size: .8em;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    opacity: .75
+}
+
+.extended-test-detail-empty {
+    padding: 12px;
+    border-radius: 6px;
+    border: 1px dashed rgba(255, 255, 255, 0.2);
+    background: rgba(0, 0, 0, 0.15);
+    text-align: center;
+    opacity: .75
+}
+
+.extended-test-assignee {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px
+}
+
+.extended-test-assignee-card,
+.extended-test-assignee-empty {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 4px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2)
+}
+
+    .extended-test-assignee-card img {
+        width: 28px;
+        height: 28px;
+        object-fit: cover;
+        border-radius: 4px
+    }
+
+.extended-test-assign {
+    display: flex;
+    flex-direction: column;
+    gap: 12px
+}
+
+.extended-test-assign-columns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px
+}
+
+.extended-test-assign-column h4 {
+    margin: 0 0 6px;
+    font-size: .9em
+}
+
+.extended-test-assign-option {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 4px 6px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2);
+    margin-bottom: 6px
+}
+
+    .extended-test-assign-option input {
+        position: absolute;
+        opacity: 0;
+        pointer-events: none
+    }
+
+    .extended-test-assign-option img {
+        width: 28px;
+        height: 28px;
+        object-fit: cover;
+        border-radius: 4px
+    }
+
+    .extended-test-assign-option:has(input:checked) {
+        border-color: var(--impmal-lightblue, #4dc3ff);
+        box-shadow: 0 0 0 1px var(--impmal-lightblue, #4dc3ff) inset, 0 0 10px rgba(77, 195, 255, 0.2);
+        background: rgba(77, 195, 255, 0.12)
+    }
+
+.extended-test-assign-none {
+    margin-top: 4px
+}
+
+.extended-test-summary {
+    display: flex;
+    flex-direction: column;
+    gap: 10px
+}
+
+.extended-test-summary-header {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.extended-test-summary-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 8px
+}
+
+.extended-test-summary-name {
+    font-weight: 700;
+    font-size: 1.05em
+}
+
+.extended-test-summary-edit {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2)
+}
+
+.extended-test-summary-metrics {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+    gap: 8px
+}
+
+.extended-test-summary-metric {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 6px 8px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2)
+}
+
+.extended-test-summary-metric-label {
+    font-size: .75em;
+    text-transform: uppercase;
+    letter-spacing: .03em;
+    opacity: .7
+}
+
+.extended-test-summary-metric-value {
+    font-weight: 600
+}
+
+.extended-test-summary-box {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2)
+}
+
+.extended-test-summary-box-title {
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: .75em;
+    letter-spacing: .04em;
+    opacity: .85;
+    margin-bottom: 6px
+}
+
+.extended-test-summary-box-body {
+    display: flex;
+    flex-direction: column;
+    gap: 6px
+}
+
+.extended-test-summary-box .collapsed{
+    display: none;
+}
+
+.extended-test-summary-tests {
+    display: flex;
+    flex-direction: column;
+    gap: 8px
+}
+
+.extended-test-summary-test {
+    padding: 8px 10px;
+    border-radius: 6px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2)
+}
+
+.extended-test-summary-title {
+    font-weight: 600;
+    margin-bottom: 6px
+}
+
+.extended-test-summary-assignee {
+    margin-bottom: 6px
+}
+
+.extended-test-summary-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px
+}
+
+.extended-test-summary-field {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    background: rgba(0, 0, 0, 0.2);
+    font-size: .85em
+}
+
+.extended-test-summary-field-label {
+    font-weight: 600
+}

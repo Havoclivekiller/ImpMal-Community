@@ -1,5 +1,3 @@
-import { IMPMAL_COMMUNITY } from "./constants.js";
-
 const MODULE_ID = "impmal-community";
 const SOCKET_NAME = `module.${MODULE_ID}`;
 const ACTIVE_SUPERIORITY_TEMPLATE = "modules/impmal-community/templates/active-superiority-test-dialog.hbs";
@@ -377,7 +375,7 @@ class SuperioritySpendDialog extends WHFormApplication {
 
     async _prepareContext(options) {
         let context = await super._prepareContext(options);
-        context.spendCosts = IMPMAL_COMMUNITY.SUPERIORITY.SPEND;
+        context.spendCosts = IMPMAL.superiority.spend
         context.pool = this.data.pool || "allied";
         context.makeItCount = Number(this.data.makeItCount ?? 0);
         context.additionalAction = this.data.additionalAction ?? false;
@@ -398,17 +396,19 @@ class SuperioritySpendDialog extends WHFormApplication {
         let makeItCountCost = Number(data.makeItCount || 0);
         let totalCost = makeItCountCost + Number(data.custom || 0);
 
+        let supconfig = IMPMAL.superiority.spend;
+
         if (data.additionalAction) {
-            totalCost += IMPMAL_COMMUNITY.SUPERIORITY.SPEND.additionalAction;
+            totalCost += supconfig.additionalAction;
         }
         if (data.littleBoost) {
-            totalCost += IMPMAL_COMMUNITY.SUPERIORITY.SPEND.littleBoost;
+            totalCost += supconfig.littleBoost;
         }
         if (data.fleeFromHarm) {
-            totalCost += IMPMAL_COMMUNITY.SUPERIORITY.SPEND.fleeFromHarm;
+            totalCost += supconfig.fleeFromHarm;
         }
         if (data.breakDown) {
-            totalCost += IMPMAL_COMMUNITY.SUPERIORITY.SPEND.breakDown;
+            totalCost += supconfig.breakDown;
         }
         if (!totalCost) {
             ui.notifications.warn("No option selected.");
@@ -469,7 +469,7 @@ class SuperiorityGainDialog extends WHFormApplication {
 
     async _prepareContext(options) {
         let context = await super._prepareContext(options);
-        context.gainAmounts = IMPMAL_COMMUNITY.SUPERIORITY.GAIN;
+        context.gainAmounts = IMPMAL.superiority.gain;
         context.pool = this.data.pool || "allied";
         context.surprise = this.data.surprise ?? false;
         context.sizeUp = this.data.sizeUp ?? false;
@@ -488,29 +488,31 @@ class SuperiorityGainDialog extends WHFormApplication {
         let pool = data.pool || "allied";
         let totalGain = Number(data.custom || 0);
 
+        let supconfig = IMPMAL.superiority.gain;
+
         if (data.surprise) {
-            totalGain += IMPMAL_COMMUNITY.SUPERIORITY.GAIN.surprise;
+            totalGain += supconfig.surprise;
         }
         if (data.sizeUp) {
-            totalGain += IMPMAL_COMMUNITY.SUPERIORITY.GAIN.sizeUp;
+            totalGain += supconfig.sizeUp;
         }
         if (data.sizeUpPlus) {
-            totalGain += IMPMAL_COMMUNITY.SUPERIORITY.GAIN.sizeUpPlus;
+            totalGain += supconfig.sizeUpPlus;
         }
         if (data.victory) {
-            totalGain += IMPMAL_COMMUNITY.SUPERIORITY.GAIN.victory;
+            totalGain += supconfig.victory;
         }
         if (data.greaterVictory) {
-            totalGain += IMPMAL_COMMUNITY.SUPERIORITY.GAIN.greaterVictory;
+            totalGain += supconfig.greaterVictory;
         }
         if (data.winning) {
-            totalGain += IMPMAL_COMMUNITY.SUPERIORITY.GAIN.winning;
+            totalGain += supconfig.winning;
         }
         if (data.outmanoeuvre) {
-            totalGain += IMPMAL_COMMUNITY.SUPERIORITY.GAIN.outmanoeuvre;
+            totalGain += supconfig.outmanoeuvre;
         }
         if (data.woundedPride) {
-            totalGain += IMPMAL_COMMUNITY.SUPERIORITY.GAIN.woundedPride;
+            totalGain += supconfig.woundedPride;
         }
 
         if (!totalGain) {

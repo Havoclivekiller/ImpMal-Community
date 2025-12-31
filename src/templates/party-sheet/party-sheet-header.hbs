@@ -1,0 +1,44 @@
+<header class="sheet-header">
+    <img class="profile" data-action="editImage" src="{{actor.img}}" data-edit="img">
+    <div class="header-details">
+        <div class="details-row name">
+            <input type="text" name="name" value="{{actor.name}}" placeholder="{{localize 'Name'}}">
+        </div>
+        {{#if patron}}
+    <div class="party-patron" data-action="openPatron" data-uuid="{{patron.uuid}}">
+        <img class="party-patron__img" src="{{patron.img}}" alt="{{patron.name}}" width="64" height="64">
+        <div class="party-patron__info">
+            <div class="party-patron__name">{{patron.name}}</div>
+            <div class="party-patron__stats">
+                <div class="party-patron__stat">
+                    <div class="party-patron__label">{{localize "IMPMAL.Faction"}}</div>
+                    <div class="party-patron__value">{{patron.faction}}</div>
+                </div>
+                <div class="party-patron__stat">
+                    <div class="party-patron__label">{{localize "IMPMAL.Duty"}}</div>
+                    <div class="party-patron__value">{{patron.duty}}</div>
+                </div>
+                <div class="party-patron__stat">
+                    <div class="party-patron__label">{{localize "IMPMAL.Motivation"}}</div>
+                    <div class="party-patron__value">{{patron.motivation}}</div>
+                </div>
+                <div class="party-patron__stat">
+                    <div class="party-patron__label">{{localize "IMPMAL.Demeanor"}}</div>
+                    <div class="party-patron__value">{{patron.demeanor}}</div>
+                </div>
+            </div>
+        </div>
+        {{#if (or (isGM) (settings "playerExperienceEditing"))}}
+        <div>
+            <button class="party-patron__paygrade" type="button" data-action="postReward" title="{{localize "IMPMAL.PayGrade"}}">
+                <i class="fa-solid fa-money-bill-wave"></i>
+            </button>
+            <button class="party-patron__remove" type="button" data-action="clearPatron" title="{{localize "IMPMAL_COMMUNITY.PartySheet.RemovePatron"}}">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+        </div>
+        {{/if}}
+    </div>
+        {{/if}}
+    </div>
+</header>

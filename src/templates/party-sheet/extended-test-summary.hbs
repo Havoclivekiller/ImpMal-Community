@@ -1,0 +1,120 @@
+<div class="extended-test-summary" data-uuid="{{uuid}}">
+    <div class="extended-test-summary-header">
+        <div class="extended-test-summary-header-row">
+            <div class="extended-test-summary-name">{{name}}</div>
+            <button type="button" class="extended-test-summary-edit" data-action="editEmbedded" data-uuid="{{uuid}}">
+                <i class="fa-solid fa-pen-to-square"></i>
+            </button>
+        </div>
+        <div class="extended-test-summary-metrics">
+            <div class="extended-test-summary-metric">
+                <span class="extended-test-summary-metric-label">{{localize "IMPMAL_COMMUNITY.ExtendedTest.AcquiredSL"}}</span>
+                <span class="extended-test-summary-metric-value">{{acquiredSL}}</span>
+            </div>
+            <div class="extended-test-summary-metric">
+                <span class="extended-test-summary-metric-label">{{localize "IMPMAL_COMMUNITY.ExtendedTest.TotalSL"}}</span>
+                <span class="extended-test-summary-metric-value">{{totalSL}}</span>
+            </div>
+            <div class="extended-test-summary-metric">
+                <span class="extended-test-summary-metric-label">{{localize "IMPMAL_COMMUNITY.ExtendedTest.Timeframe"}}</span>
+                <span class="extended-test-summary-metric-value">{{timeframe}}</span>
+            </div>
+        </div>
+    </div>
+    <div class="extended-test-summary-box list-row">
+        <div class="extended-test-summary-box-title" data-action="expandRow">{{localize "IMPMAL.Notes"}}</div>
+        <div class="extended-test-summary-box-body dropdown-content expanded">
+            {{{notes}}}
+        </div>
+    </div>
+    {{#if (isGM)}}
+    <div class="extended-test-summary-box list-row">
+        <div class="extended-test-summary-box-title" data-action="expandRow">{{localize "IMPMAL.GMNotes"}}</div>
+        <div class="extended-test-summary-box-body dropdown-content expanded">
+            {{{gmnotes}}}
+        </div>
+    </div>
+    {{/if}}
+
+    {{#if tests.length}}
+    <div class="extended-test-summary-box extended-test-summary-tests">
+        <div class="extended-test-summary-box-title">{{localize "IMPMAL_COMMUNITY.ExtendedTest.Tests"}}</div>
+        <div class="extended-test-summary-box-body">
+            {{#each tests}}
+            <div class="extended-test-summary-test">
+                <div class="extended-test-summary-title">{{this.label}}</div>
+                <div class="extended-test-summary-assignee extended-test-assignee">
+                    {{#if this.assignee.uuid}}
+                    <button type="button" class="extended-test-assignee-card" data-action="assignTestActor" data-index="{{this.index}}" data-uuid="{{@root.uuid}}">
+                        <img src="{{this.assignee.img}}" alt="{{this.assignee.name}}">
+                        <span>{{this.assignee.name}}</span>
+                    </button>
+                    {{else}}
+                    <button type="button" class="extended-test-assignee-empty" data-action="assignTestActor" data-index="{{this.index}}" data-uuid="{{@root.uuid}}">
+                        {{localize "IMPMAL_COMMUNITY.ExtendedTest.NoCharacterAssigned"}}
+                    </button>
+                    {{/if}}
+                    <button type="button" data-action="makeTest" data-index="{{this.index}}" data-uuid="{{@root.uuid}}">
+                        {{localize "IMPMAL_COMMUNITY.ExtendedTest.MakeTest"}}
+                    </button>
+                    {{#if this.assignee.uuid}}
+                    <button type="button" class="gm-only" data-action="requestTest" data-index="{{this.index}}" data-uuid="{{@root.uuid}}">
+                        {{localize "IMPMAL_COMMUNITY.ExtendedTest.RequestRoll"}}
+                    </button>
+                    {{/if}}
+                </div>
+                <div class="extended-test-summary-tags">
+                    {{#if this.showModifier}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-label">{{localize "IMPMAL.Modifier"}}</span>
+                        <span class="extended-test-summary-field-value">{{this.modifier}}</span>
+                    </span>
+                    {{/if}}
+                    {{#if this.showSlModifier}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-label">{{localize "IMPMAL.SL"}} {{localize "IMPMAL.Modifier"}}</span>
+                        <span class="extended-test-summary-field-value">{{this.slModifier}}</span>
+                    </span>
+                    {{/if}}
+                    {{#if this.showState}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-value">{{this.stateLabel}}</span>
+                    </span>
+                    {{/if}}
+                    {{#if this.showRequired}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-label">{{localize "IMPMAL_COMMUNITY.ExtendedTest.Required"}}</span>
+                    </span>
+                    {{/if}}
+                    {{#if this.showDone}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-label">{{localize "IMPMAL_COMMUNITY.ExtendedTest.Done"}}</span>
+                    </span>
+                    {{/if}}
+                    {{#if this.showTimeframe}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-value">{{this.timeframe}}</span>
+                    </span>
+                    {{/if}}
+                    {{#if this.showCountNegativeSL}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-label">{{localize "IMPMAL_COMMUNITY.ExtendedTest.CountNegativeSL"}}</span>
+                    </span>
+                    {{/if}}
+                    {{#if this.showCriticalDoubleSL}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-label">{{localize "IMPMAL_COMMUNITY.ExtendedTest.CriticalDoubleSL"}}</span>
+                    </span>
+                    {{/if}}
+                    {{#if this.showFumbleDoubleSL}}
+                    <span class="extended-test-summary-field">
+                        <span class="extended-test-summary-field-label">{{localize "IMPMAL_COMMUNITY.ExtendedTest.FumbleDoubleSL"}}</span>
+                    </span>
+                    {{/if}}
+                </div>
+            </div>
+            {{/each}}
+        </div>
+    </div>
+    {{/if}}
+</div>
