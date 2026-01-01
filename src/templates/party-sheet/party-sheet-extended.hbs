@@ -1,0 +1,54 @@
+<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="{{tab.id}}">
+    <div class="extended-test-layout">
+        <div class="sheet-list extended-tests">
+            <div class="list-header row-content">
+                <div class="list-name"></div>
+                <div>{{localize "IMPMAL_COMMUNITY.ExtendedTest.Timeframe"}}</div>
+                <div>{{localize "IMPMAL.SL"}}</div>
+                <div class="list-controls">
+                    <a class="list-control" data-action="createItem" data-type="impmal-community.extendedTest"><i class="fa-solid fa-plus"></i></a>
+                </div>
+            </div>
+            <div class="list-content">
+                <div class="extended-tests-section">{{localize "IMPMAL_COMMUNITY.ExtendedTest.Current"}}</div>
+                {{#each currentExtendedTests}}
+                <div class="list-row {{#if (eq this.uuid @root.selectedExtendedTestUuid)}}is-selected{{/if}}" data-action="selectExtendedTest" data-uuid="{{this.uuid}}">
+                    <div class="row-content">
+                        <div class="list-name">
+                            <a class="label">{{this.name}}</a>
+                        </div>
+                        <div>{{this.system.timeframe}}</div>
+                        <div>{{this.system.acquiredSL}} / {{this.system.totalSL}}</div>
+                        <div class="list-controls">
+                            <a class="list-control context-menu"><i class="fa-regular fa-ellipsis-vertical"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+
+                <div class="extended-tests-section">{{localize "IMPMAL_COMMUNITY.ExtendedTest.Completed"}}</div>
+                {{#each completedExtendedTests}}
+                <div class="list-row {{#if (eq this.uuid @root.selectedExtendedTestUuid)}}is-selected{{/if}}" data-action="selectExtendedTest" data-uuid="{{this.uuid}}">
+                    <div class="row-content">
+                        <div class="list-name">
+                            <a class="label">{{this.name}}</a>
+                        </div>
+                        <div>{{this.system.timeframe}}</div>
+                        <div>{{this.system.acquiredSL}} / {{this.system.totalSL}}</div>
+                        <div class="list-controls">
+                            <a class="list-control context-menu"><i class="fa-regular fa-ellipsis-vertical"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+            </div>
+        </div>
+        <div class="extended-test-detail">
+            {{#if selectedExtendedTestHtml}}
+            {{{selectedExtendedTestHtml}}}
+            {{else}}
+            <div class="extended-test-detail-empty">{{localize "IMPMAL_COMMUNITY.ExtendedTest.NoSelection"}}</div>
+            {{/if}}
+        </div>
+    </div>
+</section>

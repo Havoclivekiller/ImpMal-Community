@@ -1,5 +1,3 @@
-import { IMPMAL_COMMUNITY } from "./constants.js";
-
 export function registerTokenRuler() {
     CONFIG.Token.rulerClass = ImpMalTokenRuler;
 }
@@ -20,7 +18,7 @@ class ImpMalTokenRuler extends foundry.canvas.placeables.tokens.TokenRuler {
         const speedValue = this.#getTokenSpeedValue();
         if (!speedValue) return style;
 
-        const { normal, double, triple, quadruple, beyond } = IMPMAL_COMMUNITY.tokenRulerColors ?? {};
+        const { normal, double, triple, quadruple, beyond } = IMPMAL.tokenRulerColors ?? {};
         const increment = (waypoint.measurement?.cost ?? 0) / speedValue;
         if (increment <= 1) style.color = normal ?? style.color;
         else if (increment <= 2) style.color = double ?? style.color;
@@ -33,7 +31,7 @@ class ImpMalTokenRuler extends foundry.canvas.placeables.tokens.TokenRuler {
     #getTokenSpeedValue() {
         const speedKey = this.token.actor?.system?.combat?.speed?.land?.value;
         if (!speedKey || speedKey === "none") return 0;
-        const speedValues = IMPMAL_COMMUNITY.speedValues ?? {};
+        const speedValues = IMPMAL.speedValues ?? {};
         return speedValues[speedKey] ?? 0;
     }
 }
