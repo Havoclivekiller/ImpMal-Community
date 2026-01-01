@@ -30,7 +30,8 @@
     .combat-sidebar .resources.superiority-resources .superiority-resource {
         flex: 0 1 auto;
         flex-direction: column;
-        gap: .25rem
+        gap: .25rem; 
+        width: 100%;
     }
 
     .combat-sidebar .resources.superiority-resources .superiority-controls {
