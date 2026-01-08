@@ -1,0 +1,11 @@
+
+<div class="attack-fields">
+    {{#if (or data.item.system.isRanged data.weapon.system.isRanged)}}
+    <div class="form-group">
+        <label>{{localize 'IMPMAL_COMMUNITY.ShootingMelee.Targets'}}</label>
+        <div class="form-fields">
+            <input type="number" name="shootingIntoMeleeTargets" value="{{fields.shootingIntoMeleeTargets}}" min="0">
+        </div>
+    </div>
+    {{/if}}
+</div>

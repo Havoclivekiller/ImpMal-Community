@@ -1,4 +1,4 @@
-export const IMPMAL_COMMUNITY = {
+const IMPMAL_COMMUNITY = {
     speedValues: {
         slow: 4,
         normal: 8,
@@ -16,9 +16,9 @@ export const IMPMAL_COMMUNITY = {
 
     rendDivider: 2, //Rend will be divided, rounded down, by this number
 
-    SUPERIORITY:
+    superiority:
     {
-        SPEND: {
+        spend: {
             additionalAction: 4,
             littleBoost: 1,
             fleeFromHarm: 2,
@@ -30,7 +30,7 @@ export const IMPMAL_COMMUNITY = {
                 adv3: 5
             }
         },
-        GAIN: {
+        gain: {
             surprise: 2,
             sizeUp: 2,
             sizeUpPlus: 3,
@@ -42,3 +42,7 @@ export const IMPMAL_COMMUNITY = {
         },
     }
 };
+
+export function registerConstants() {
+    foundry.utils.mergeObject(IMPMAL, IMPMAL_COMMUNITY, { overwrite: false });
+}

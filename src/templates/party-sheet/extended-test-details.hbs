@@ -1,0 +1,138 @@
+<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="{{tab.id}}">
+    <fieldset>
+        <legend>{{localize "IMPMAL_COMMUNITY.ExtendedTest.Progress"}}</legend>
+        <div class="form-group">
+            <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.AcquiredSL"}}</label>
+            <div class="form-fields">
+                <input type="number" name="system.acquiredSL" value="{{system.acquiredSL}}" step="1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.TotalSL"}}</label>
+            <div class="form-fields">
+                <input type="number" name="system.totalSL" value="{{system.totalSL}}" step="1">
+            </div>
+        </div>
+        <div class="form-group">
+            <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.Timeframe"}}</label>
+            <div class="form-fields">
+                <input type="text" name="system.timeframe" value="{{system.timeframe}}">
+            </div>
+        </div>
+    </fieldset>
+
+    <fieldset class="extended-test-list">
+        <legend>{{localize "IMPMAL_COMMUNITY.ExtendedTest.Tests"}}</legend>
+        <div class="form-group extended-test-add">
+            <div class="form-fields">
+                <button type="button" data-action="addExtendedTest">
+                    <i class="fa-solid fa-plus"></i> {{localize "IMPMAL_COMMUNITY.ExtendedTest.AddTest"}}
+                </button>
+            </div>
+        </div>
+
+        {{#each extendedTests}}
+        <div class="extended-test-row" data-test-index="{{@index}}">
+            <input type="hidden" name="system.tests.{{@index}}.assignee.uuid" value="{{this.assignee.uuid}}">
+            <input type="hidden" name="system.tests.{{@index}}.assignee.name" value="{{this.assignee.name}}">
+            <input type="hidden" name="system.tests.{{@index}}.assignee.img" value="{{this.assignee.img}}">
+            <div class="extended-test-header">
+                <span class="extended-test-title">{{this.displayLabel}}</span>
+                <button type="button" data-action="removeExtendedTest" data-index="{{@index}}">
+                    <i class="fa-solid fa-xmark"></i>
+                </button>
+            </div>
+            <div class="form-group">
+                <label>{{localize "IMPMAL.Characteristic"}}</label>
+                <div class="form-fields">
+                    <select name="system.tests.{{@index}}.characteristic" data-action="extendedTestCharacteristic">
+                        {{selectOptions (config "characteristics") selected=this.characteristic blank=""}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group" data-extended-test-skill-row>
+                <label>{{localize "IMPMAL.Skill"}}</label>
+                <div class="form-fields">
+                    <select name="system.tests.{{@index}}.skill.key" data-action="extendedTestSkill">
+                        {{selectOptions (config "skills") selected=this.skill.key blank=""}}
+                    </select>
+                    <input type="text" name="system.tests.{{@index}}.skill.specialisation" value="{{this.skill.specialisation}}" placeholder="{{localize 'IMPMAL.Specialisation'}}" data-action="extendedTestSpecialisation">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "IMPMAL.Difficulty"}}</label>
+                <div class="form-fields">
+                    <select name="system.tests.{{@index}}.difficulty">
+                        {{#select this.difficulty}}
+                        {{#each (config "difficulties")}}
+                        <option value="{{@key}}">{{this.name}} ({{numberFormat this.modifier sign=true}})</option>
+                        {{/each}}
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "IMPMAL.Modifier"}}</label>
+                <div class="form-fields">
+                    <input type="number" name="system.tests.{{@index}}.modifier" value="{{this.modifier}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "IMPMAL.SL"}} {{localize "IMPMAL.Modifier"}}</label>
+                <div class="form-fields">
+                    <input type="number" name="system.tests.{{@index}}.slModifier" value="{{this.slModifier}}">
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.State"}}</label>
+                <div class="form-fields">
+                    <select name="system.tests.{{@index}}.state">
+                        {{#select this.state}}
+                        <option value="normal">{{localize "IMPMAL.Normal"}}</option>
+                        <option value="advantage">{{localize "IMPMAL.Advantage"}}</option>
+                        <option value="disadvantage">{{localize "IMPMAL.Disadvantage"}}</option>
+                        {{/select}}
+                    </select>
+                </div>
+            </div>
+            <div class="form-group extended-test-count-negative">
+                <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.CriticalDoubleSL"}}</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="system.tests.{{@index}}.criticalDoubleSL" {{checked this.criticalDoubleSL}}>
+                </div>
+            </div>
+            <div class="form-group extended-test-count-negative">
+                <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.FumbleDoubleSL"}}</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="system.tests.{{@index}}.fumbleDoubleSL" {{checked this.fumbleDoubleSL}}>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.Required"}}</label>
+                <div class="form-fields extended-test-required">
+                    <label class="extended-test-required-option">
+                        <input type="checkbox" name="system.tests.{{@index}}.required" {{checked this.required}}>
+                        <span>{{localize "IMPMAL_COMMUNITY.ExtendedTest.Required"}}</span>
+                    </label>
+                    <label class="extended-test-required-option">
+                        <input type="checkbox" name="system.tests.{{@index}}.done" {{checked this.done}}>
+                        <span>{{localize "IMPMAL_COMMUNITY.ExtendedTest.Done"}}</span>
+                    </label>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.Timeframe"}}</label>
+                <div class="form-fields">
+                    <input type="text" name="system.tests.{{@index}}.timeframe" value="{{this.timeframe}}">
+                </div>
+            </div>
+            <div class="form-group extended-test-count-negative">
+                <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.CountNegativeSL"}}</label>
+                <div class="form-fields">
+                    <input type="checkbox" name="system.tests.{{@index}}.countNegativeSL" {{checked this.countNegativeSL}}>
+                </div>
+            </div>
+        </div>
+        {{/each}}
+    </fieldset>
+</section>

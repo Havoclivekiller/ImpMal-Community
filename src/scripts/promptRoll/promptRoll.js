@@ -12,7 +12,7 @@ class PromptRollDialog extends WHFormApplication {
             closeOnSubmit: true
         },
         window: {
-            title: "Roll Prompter",
+            title: "IMPMAL_COMMUNITY.Prompter.Name",
             contentClasses: ["standard-form"],
             resizable: true
         },
@@ -34,24 +34,25 @@ class PromptRollDialog extends WHFormApplication {
     async _preparePartContext(partId, context) {
         const partContext = await super._preparePartContext(partId, context);
         if (partId === "footer") {
-            partContext.buttons = [
-                {
-                    type: "submit",
-                    label: "Prompt Players"
-                }
-            ];
+            partContext.buttons = [{
+                type: "submit",
+                label: game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptPlayers")
+            }];
         }
         return partContext;
     }
 
     async _prepareContext(options) {
         const context = await super._prepareContext(options);
+        const selectedCharacteristic = this.selectedCharacteristic || "";
         const selectedSkill = this.selectedSkill || Object.keys(game.impmal.config.skills || {})[0] || "";
         const selectedDifficulty = this.selectedDifficulty || "challenging";
+        const characteristics = this._getCharacteristics(selectedCharacteristic);
         const skills = this._getSkills(selectedSkill);
         const difficulties = this._getDifficulties(selectedDifficulty);
         const specialisations = await this._getSpecialisations(selectedSkill);
 
+        context.characteristics = characteristics;
         context.skills = skills;
         context.difficulties = difficulties;
         context.specialisations = specialisations;
@@ -84,6 +85,17 @@ class PromptRollDialog extends WHFormApplication {
         if (difficulty) {
             difficulty.onchange = this._onDifficultyChange.bind(this);
         }
+        const characteristic = root.querySelector("[name='characteristic']");
+        if (characteristic) {
+            characteristic.onchange = this._onCharacteristicChange.bind(this);
+        }
+        this._syncCharacteristicState();
+    }
+
+    _getCharacteristics(selectedCharacteristic) {
+        return Object.entries(game.impmal.config.characteristics || {})
+            .map(([key, label]) => ({ key, label, selected: key === selectedCharacteristic }))
+            .sort((a, b) => a.label.localeCompare(b.label));
     }
 
     _getSkills(selectedSkill) {
@@ -121,7 +133,7 @@ class PromptRollDialog extends WHFormApplication {
 
     _getUserCharacters() {
         return game.users
-            .filter(user => !user.isGM && user.character)
+            .filter(user => user.active && !user.isGM && user.character)
             .map(user => {
                 return { actor: user.character, owners: [user] };
             });
@@ -158,11 +170,24 @@ class PromptRollDialog extends WHFormApplication {
 
     async _onSkillChange(event) {
         this.selectedSkill = event.target.value;
+        if (this.selectedCharacteristic) {
+            this.selectedCharacteristic = "";
+            this._updateCharacteristicSelect("");
+            this._syncCharacteristicState();
+        }
         await this._updateSpecialisations();
     }
 
     _onDifficultyChange(event) {
         this.selectedDifficulty = event.target.value;
+    }
+
+    async _onCharacteristicChange(event) {
+        this.selectedCharacteristic = event.target.value;
+        this._syncCharacteristicState();
+        if (!this.selectedCharacteristic) {
+            await this._updateSpecialisations();
+        }
     }
 
     _onPromptAllChange(event) {
@@ -196,6 +221,27 @@ class PromptRollDialog extends WHFormApplication {
         select.value = "";
     }
 
+    _syncCharacteristicState() {
+        const root = this._getRoot();
+        if (!root) {
+            return;
+        }
+
+        const skillGroups = root.querySelectorAll(".prompt-roll-skill-group");
+        const hasCharacteristic = Boolean(this.selectedCharacteristic);
+
+        skillGroups.forEach((group) => {
+            group.style.display = hasCharacteristic ? "none" : "";
+        });
+    }
+
+    _updateCharacteristicSelect(value) {
+        const select = this._getRoot()?.querySelector("[name='characteristic']");
+        if (select) {
+            select.value = value;
+        }
+    }
+
     _getRoot() {
         if (this.element instanceof HTMLElement) {
             return this.element;
@@ -212,13 +258,13 @@ class PromptRollDialog extends WHFormApplication {
 
     async _onPromptPlayers(formData) {
         const data = this._normalizeFormData(formData);
-        if (!data.skill) {
-            return ui.notifications.warn("Select a skill first.");
+        if (!data.characteristic && !data.skill) {
+            return ui.notifications.warn(game.i18n.localize("IMPMAL_COMMUNITY.Prompter.NoneSelected"));
         }
 
         const actors = await this._resolveTargetActors(data);
         if (!actors.length) {
-            return ui.notifications.warn("No eligible actors selected.");
+            return ui.notifications.warn(game.i18n.localize("IMPMAL_COMMUNITY.Prompter.NoActors"));
         }
 
         for (const actor of actors) {
@@ -227,11 +273,13 @@ class PromptRollDialog extends WHFormApplication {
                 const payload = {
                     actorId: actor.id,
                     userId: user.id,
+                    characteristic: data.characteristic,
                     skill: data.skill,
                     specialisation: data.specialisation,
                     difficulty: data.difficulty,
                     modifier: data.modifier,
                     isPrivate: data.isPrivate,
+                    state: data.state,
                     sl: data.sl
                 };
 
@@ -249,12 +297,14 @@ class PromptRollDialog extends WHFormApplication {
     }
 
     _normalizeFormData(formData) {
+        const characteristic = formData.characteristic || "";
         const skill = formData.skill || "";
         const specialisation = formData.specialisation || "";
         const difficulty = formData.difficulty || "challenging";
         const modifier = Number(formData.modifier || 0);
         const sl = Number(formData.SL || 0);
         const isPrivate = Boolean(formData.privateRoll);
+        const state = formData.state || "normal";
         const promptAll = Boolean(formData.promptAll);
         const selectedActorIds = Array.isArray(formData.actors)
             ? formData.actors
@@ -262,13 +312,17 @@ class PromptRollDialog extends WHFormApplication {
             ? [formData.actors]
             : [];
 
+        const useCharacteristic = Boolean(characteristic);
+
         return {
-            skill,
-            specialisation,
+            characteristic: useCharacteristic ? characteristic : "",
+            skill: useCharacteristic ? "" : skill,
+            specialisation: useCharacteristic ? "" : specialisation,
             difficulty,
             modifier,
             sl,
             isPrivate,
+            state,
             promptAll,
             selectedActorIds
         };
@@ -306,6 +360,19 @@ async function promptRollOnClient(payload) {
     if (payload.isPrivate) {
         fields.rollMode = "gmroll";
     }
+    if (payload.state === "advantage") {
+        fields.advantage = 1;
+    }
+    else if (payload.state === "disadvantage") {
+        fields.disadvantage = 1;
+    }
+
+    if (payload.characteristic) {
+        actor.setupCharacteristicTest(payload.characteristic, {
+            fields, appendTitle: ` ${game.i18n.localize("IMPMAL_COMMUNITY.ExtendedTest.Extended")} (${payload.testname})` 
+        });
+        return;
+    }
 
     const testData = { key: payload.skill };
     if (payload.specialisation) {
@@ -313,7 +380,7 @@ async function promptRollOnClient(payload) {
     }
 
     actor.setupSkillTest(testData, {
-        fields
+        fields, appendTitle: ` ${game.i18n.localize("IMPMAL_COMMUNITY.ExtendedTest.Extended")} (${payload.testname})` 
     });
 }
 
@@ -333,7 +400,7 @@ export function registerPromptRoll() {
         }
 
         if (!game.user.isGM) {
-            ui.notifications.warn("Only the GM can use /promptRoll.");
+            ui.notifications.warn(game.i18n.localize("IMPMAL_COMMUNITY.Prompter.OnlyGM"));
             return false;
         }
 
