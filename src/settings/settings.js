@@ -132,4 +132,14 @@ function registerSettings() {
         requiresReload: true,
         type: Boolean
     });
+
+    game.settings.register("impmal-community", "notedRange", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.notedRange.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.notedRange.Hint"),
+        scope: "world",
+        config: true,
+        default: false,
+        requiresReload: true,
+        type: Boolean
+    });
 }

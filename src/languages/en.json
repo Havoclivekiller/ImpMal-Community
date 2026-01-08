@@ -38,6 +38,8 @@
   "IMPMAL_COMMUNITY.showNpcCrit.hint": "Usable with automatically added crits to NPCs. If checked the critical wounds from attacks will be posted to chat and added to the npc. Otherwise, it will silently add it to the npc. Requires restart.",
   "IMPMAL_COMMUNITY.deleteIniMessage.name": "Delete Initiative rolls in chat",
   "IMPMAL_COMMUNITY.deleteIniMessage.hint": "Best used when alternative Initiative is not used. Requires restart.",
+  "IMPMAL_COMMUNITY.notedRange.Name": "Shorten Range Names and Add Meters",
+  "IMPMAL_COMMUNITY.notedRange.Hint": "Shortens the names to letters - Medium to M, and adds range - M (24m). Info only. Requires restart.",
 
   "IMPMAL_COMMUNITY.ShootingMelee.Name": "Shooting Into Melee",
   "IMPMAL_COMMUNITY.ShootingMelee.Targets": "Shooting Into Melee (Targets)",
@@ -192,6 +194,14 @@
   "IMPMAL_COMMUNITY.DowntimeAction.TypeOptions.Group": "Group",
   "IMPMAL_COMMUNITY.DowntimeAction.TypeOptions.LongTerm": "Long-Term",
   "IMPMAL_COMMUNITY.DowntimeAction.TypeOptions.Individual": "Individual",
-  "IMPMAL_COMMUNITY.DowntimeAction.TypeOptions.Custom": "Custom"
+  "IMPMAL_COMMUNITY.DowntimeAction.TypeOptions.Custom": "Custom",
+
+  "IMPMAL_COMMUNITY.notedRange.Ranges": {
+    "immediate": "I (2m)",
+    "short": "S (12m)",
+    "medium": "M (24m)",
+    "long": "L (36m)",
+    "extreme": "Ex (72m)"
+  }
 
 }

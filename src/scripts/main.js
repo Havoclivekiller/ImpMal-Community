@@ -8,6 +8,7 @@ import { registerAutoCritKillHandling } from "./autoCritHandling/autoCritHandlin
 import { registerChangeConditionImages } from "./changeConditionImages/changeConditionImages.js";
 import { registerDeleteIniMessage } from "./deleteIni/deleteIni.js";
 import { registerDoublesEveryTest } from "./doublesEveryTest/doublesEveryTest.js";
+import { registerNotedRange } from "./notedRange/notedRange.js";
 import { registerPartySheet } from "./party-sheet/party-sheet.js";
 import { registerPromptRoll } from "./promptRoll/promptRoll.js";
 import { registerShootingMelee } from "./shootingMelee/shootingMelee.js";
@@ -55,6 +56,10 @@ Hooks.on('init', () => {
 
     if (game.settings.get("impmal-community", "deleteIniMessage") === true) {
         registerDeleteIniMessage();
+    }
+
+    if (game.settings.get("impmal-community", "notedRange") === true) {
+        registerNotedRange();
     }
 
     registerPartySheet();
