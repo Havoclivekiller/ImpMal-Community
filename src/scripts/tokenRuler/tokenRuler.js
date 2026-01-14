@@ -30,6 +30,7 @@ class ImpMalTokenRuler extends foundry.canvas.placeables.tokens.TokenRuler {
 
     #getTokenSpeedValue() {
         const speedKey = this.token.actor?.system?.combat?.speed?.land?.value;
+        if (Number.isNumeric(speedKey)) return speedKey;
         if (!speedKey || speedKey === "none") return 0;
         const speedValues = IMPMAL.speedValues ?? {};
         return speedValues[speedKey] ?? 0;
