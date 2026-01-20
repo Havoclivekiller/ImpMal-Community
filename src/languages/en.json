@@ -53,6 +53,7 @@
   "IMPMAL_COMMUNITY.Prompter.NoneSelected": "Select a characteristic or skill first.",
   "IMPMAL_COMMUNITY.Prompter.NoActors": "No eligible actors selected.",
   "IMPMAL_COMMUNITY.Prompter.PromptPlayers": "Prompt Players",
+  "IMPMAL_COMMUNITY.Prompter.PromptRoll": "Prompt Roll",
 
   "IMPMAL_COMMUNITY.ActiveSuperiority.Label": "Active Superiority",
   "IMPMAL_COMMUNITY.ActiveSuperiority.0": "None",

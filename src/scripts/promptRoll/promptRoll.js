@@ -369,7 +369,7 @@ async function promptRollOnClient(payload) {
 
     if (payload.characteristic) {
         actor.setupCharacteristicTest(payload.characteristic, {
-            fields, appendTitle: ` ${game.i18n.localize("IMPMAL_COMMUNITY.ExtendedTest.Extended")} (${payload.testname})` 
+            fields, appendTitle: ` (${game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptRoll")})` 
         });
         return;
     }
@@ -380,7 +380,7 @@ async function promptRollOnClient(payload) {
     }
 
     actor.setupSkillTest(testData, {
-        fields, appendTitle: ` ${game.i18n.localize("IMPMAL_COMMUNITY.ExtendedTest.Extended")} (${payload.testname})` 
+        fields, appendTitle: ` (${game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptRoll")})` 
     });
 }
 
