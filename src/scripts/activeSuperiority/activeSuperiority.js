@@ -39,8 +39,7 @@ function registerActiveSuperiorityTestDialogContext() {
     TestDialog.prototype._prepareContext = async function (options) {
 
         const context = await original.call(this, options);
-
-        this.fields.state = this.computeState();
+        
         context.showSuperiority = false;
         context.showActiveSuperiority = isActorInCombat(this.actor);
         context.activeSuperiorityLabel = getActiveSuperiorityLabel(this.actor);
