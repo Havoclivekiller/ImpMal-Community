@@ -3,6 +3,7 @@
     "./assets/**",
     "./languages/**",
     "./settings/**",
+    "./scripts/**",
     "./templates/**",
     "./styles/**",
     "./module.json",
