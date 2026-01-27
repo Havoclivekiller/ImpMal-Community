@@ -9,10 +9,17 @@ Check out the [Wiki](https://github.com/Havoclivekiller/ImpMal-Community/wiki) f
 
 ## Features
 - Roll Prompter - A dialog to prompt your players to make a specific test. Just use `/promptRoll`
+- Party Sheet - A fully fledged Party Sheet with Downtime Actions and Extended Tests! Just create a new actor.
+- Automated Criticals on NPCs - Automate combat a little more to automatically add criticals to NPCs. (by Stexinator)
 
 ## Changes
 - Change Condition/Zone Images - Allow to replace images of conditions/status/zoneEffects (*.webp files). 
 - Token Movement Measurement - When you drag a token, the ruler will change color based on speed.
+- Delete Initiative Messages - A cleanup when Alternative Initiative isn't used. (by Stexinator)
+- Shorten Ranges - You can now see ranges on weapons with numbers that correspond to the range.
+
+## Optional Rules
+- Shooting into Melee - An input in Ranged attacks to add -SL for optional rules for Shooting into Melee, even added a tag if shot a friend.
 
 ## House Rules
 - Alternative Initiative - Custom field to specify a custom initiative. Default is adding d10 to the initiative to make it more random.
