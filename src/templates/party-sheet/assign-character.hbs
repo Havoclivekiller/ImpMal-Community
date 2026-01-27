@@ -1,0 +1,28 @@
+<form class="extended-test-assign">
+    <div class="extended-test-assign-columns">
+        <div class="extended-test-assign-column">
+            <h4>{{localize headerPlayer}}</h4>
+            {{#each playerCharacters}}
+            <label class="extended-test-assign-option">
+                <input type="radio" name="assignee" value="{{this.uuid}}">
+                <img src="{{this.img}}" alt="{{this.name}}">
+                <span>{{this.name}}</span>
+            </label>
+            {{/each}}
+        </div>
+        <div class="extended-test-assign-column">
+            <h4>{{localize headerAllied}}</h4>
+            {{#each alliedCharacters}}
+            <label class="extended-test-assign-option">
+                <input type="radio" name="assignee" value="{{this.uuid}}">
+                <img src="{{this.img}}" alt="{{this.name}}">
+                <span>{{this.name}}</span>
+            </label>
+            {{/each}}
+        </div>
+    </div>
+    <label class="extended-test-assign-option extended-test-assign-none">
+        <input type="radio" name="assignee" value="">
+        <span>{{localize labelUnassigned}}</span>
+    </label>
+</form>

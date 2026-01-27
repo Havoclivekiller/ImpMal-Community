@@ -1,0 +1,62 @@
+<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="{{tab.id}}">
+    <div class="party-members">
+        <h3 class="party-members__title">{{localize "IMPMAL_COMMUNITY.PartySheet.PlayerCharacters"}}</h3>
+        {{#each playerCharacters}}
+        <div class="party-member" data-action="openPartyMember" data-uuid="{{uuid}}">
+            <img class="party-member__img" src="{{img}}" alt="{{name}}" width="64" height="64">
+            <div class="party-member__info">
+                <div class="party-member__name">{{name}}</div>
+                <div class="party-member__details">
+                    <div class="party-member__detail">
+                        <div class="party-member__label">{{localize "IMPMAL.Origin"}}</div>
+                        <div class="party-member__value">{{origin}}</div>
+                    </div>
+                    <div class="party-member__detail">
+                        <div class="party-member__label">{{localize "IMPMAL.Faction"}}</div>
+                        <div class="party-member__value">{{faction}}</div>
+                    </div>
+                    <div class="party-member__detail">
+                        <div class="party-member__label">{{localize "IMPMAL.Role"}}</div>
+                        <div class="party-member__value">{{role}}</div>
+                    </div>
+                    <div class="party-member__detail">
+                        <div class="party-member__label">{{localize "IMPMAL.Species"}}</div>
+                        <div class="party-member__value">{{species}}</div>
+                    </div>
+                </div>
+            </div>
+            {{#if (or (isGM) (settings "playerExperienceEditing"))}}
+            <button class="party-member__remove" type="button" data-action="removePartyMember" data-uuid="{{uuid}}" title="{{localize "IMPMAL_COMMUNITY.PartySheet.RemoveCharacter"}}">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+    <div class="party-members party-members--allied">
+        <h3 class="party-members__title">{{localize "IMPMAL_COMMUNITY.PartySheet.AlliedCharacters"}}</h3>
+        {{#each alliedCharacters}}
+        <div class="party-member" data-action="openPartyMember" data-uuid="{{uuid}}">
+            <img class="party-member__img" src="{{img}}" alt="{{name}}" width="64" height="64">
+            <div class="party-member__info">
+                <div class="party-member__name">{{name}}</div>
+                <div class="party-member__details">
+                    <div class="party-member__detail">
+                        <div class="party-member__label">{{localize "IMPMAL.Faction"}}</div>
+                        <div class="party-member__value">{{faction}}</div>
+                    </div>
+                    <div class="party-member__detail">
+                        <div class="party-member__label">{{localize "IMPMAL.Species"}}</div>
+                        <div class="party-member__value">{{species}}</div>
+                    </div>
+                </div>
+            </div>
+            {{#if (or (isGM) (settings "playerExperienceEditing"))}}
+            <button class="party-member__remove" type="button" data-action="removePartyMember" data-uuid="{{uuid}}" title="{{localize "IMPMAL_COMMUNITY.PartySheet.RemoveCharacter"}}">
+                <i class="fa-solid fa-xmark"></i>
+            </button>
+            {{/if}}
+        </div>
+        {{/each}}
+    </div>
+</section>

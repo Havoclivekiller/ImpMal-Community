@@ -1,0 +1,38 @@
+<section class="tab {{tab.cssClass}}" data-group="primary" data-tab="{{tab.id}}">
+    <div class="extended-test-layout">
+        <div class="sheet-list extended-tests">
+            <div class="list-header row-content">
+                <div class="list-name"></div>
+                <div>{{localize "IMPMAL_COMMUNITY.DowntimeAction.TypeLabel"}}</div>
+                <div class="list-controls">
+                    <a class="list-control" data-action="createItem" data-type="impmal-community.downtimeAction"><i class="fa-solid fa-plus"></i></a>
+                </div>
+            </div>
+            <div class="list-content">
+                {{#each downtimeActionGroups}}
+                <div class="extended-tests-section">{{this.label}}</div>
+                {{#each this.items}}
+                <div class="list-row {{#if (eq this.uuid @root.selectedDowntimeActionUuid)}}is-selected{{/if}}" data-action="selectDowntimeAction" data-uuid="{{this.uuid}}">
+                    <div class="row-content">
+                        <div class="list-name">
+                            <a class="label">{{this.name}}</a>
+                        </div>
+                        <div>{{this.system.downtimeType}}</div>
+                        <div class="list-controls">
+                            <a class="list-control context-menu"><i class="fa-regular fa-ellipsis-vertical"></i></a>
+                        </div>
+                    </div>
+                </div>
+                {{/each}}
+                {{/each}}
+            </div>
+        </div>
+        <div class="extended-test-detail">
+            {{#if selectedDowntimeActionHtml}}
+            {{{selectedDowntimeActionHtml}}}
+            {{else}}
+            <div class="extended-test-detail-empty">{{localize "IMPMAL_COMMUNITY.DowntimeAction.NoSelection"}}</div>
+            {{/if}}
+        </div>
+    </div>
+</section>
