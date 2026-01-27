@@ -20,7 +20,7 @@
   },
   "esmodules": [ "settings/settings.js", "scripts/main.js" ],
   "styles": [
-    "assets/impmal-community.css"
+    "styles/impmal-community.css"
   ],
   "socket": true,
   "languages": [
