@@ -6,6 +6,7 @@ import { registerAlternativeMasterCrafted } from "./alternativeMasterCrafted/alt
 import { registerAlternativeRend } from "./alternativeRend/alternativeRend.js";
 import { registerAutoCritKillHandling } from "./autoCritHandling/autoCritHandling.js";
 import { registerChangeConditionImages } from "./changeConditionImages/changeConditionImages.js";
+import { registerCounterAttack } from "./counterAttack/counterAttack.js";
 import { registerDeleteIniMessage } from "./deleteIni/deleteIni.js";
 import { registerDoublesEveryTest } from "./doublesEveryTest/doublesEveryTest.js";
 import { registerNotedRange } from "./notedRange/notedRange.js";
@@ -60,6 +61,10 @@ Hooks.on('init', () => {
 
     if (game.settings.get("impmal-community", "notedRange") === true) {
         registerNotedRange();
+    }
+
+    if (game.settings.get("impmal-community", "counterAttack") !== "disabled") {
+        registerCounterAttack();
     }
 
     registerPartySheet();

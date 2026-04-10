@@ -2,6 +2,7 @@ Hooks.on('init', () => {
     registerSettings();
 });
 
+
 function registerSettings() {
     game.settings.register("impmal-community", "alternativeInitiative", {
         name: game.i18n.localize("IMPMAL_COMMUNITY.alternativeInitiative.Name"),
@@ -141,5 +142,20 @@ function registerSettings() {
         default: false,
         requiresReload: true,
         type: Boolean
+    });
+
+    game.settings.register("impmal-community", "counterAttack", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.counterAttack.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.counterAttack.Hint"),
+        scope: "world",
+        config: true,
+        default: "disabled",
+        requiresReload: true,
+        type: String,
+        choices: {
+            disabled: game.i18n.localize("IMPMAL_COMMUNITY.counterAttack.Disabled"),
+            enabled: game.i18n.localize("IMPMAL_COMMUNITY.counterAttack.Enabled"),
+            enabledEnforced: game.i18n.localize("IMPMAL_COMMUNITY.counterAttack.EnabledEnforced")
+        }
     });
 }
