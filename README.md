@@ -11,6 +11,7 @@ Check out the [Wiki](https://github.com/Havoclivekiller/ImpMal-Community/wiki) f
 - Roll Prompter - A dialog to prompt your players to make a specific test. Just use `/promptRoll`
 - Party Sheet - A fully fledged Party Sheet with Downtime Actions and Extended Tests! Just create a new actor.
 - Automated Criticals on NPCs - Automate combat a little more to automatically add criticals to NPCs. (by Stexinator)
+- Counter Attack Talent - Adds a button to Opposed chat message if defender wins and has the Counter Attack talent. (by @Causodes)
 
 ## Changes
 - Change Condition/Zone Images - Allow to replace images of conditions/status/zoneEffects (*.webp files). 
