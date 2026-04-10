@@ -203,6 +203,18 @@
     "medium": "M (24m)",
     "long": "L (36m)",
     "extreme": "Ex (72m)"
-  }
+  },
+
+  "IMPMAL_COMMUNITY.counterAttack.Name": "Counter Attack Talent Support",
+  "IMPMAL_COMMUNITY.counterAttack.Hint": "When the defender wins an opposed melee test and has the Counter Attack talent, a button appears on the chat card to initiate a counterattack. Uses are tracked per combat round per purchased rank of the talent. Requires restart.",
+  "IMPMAL_COMMUNITY.counterAttack.Disabled": "Disabled",
+  "IMPMAL_COMMUNITY.counterAttack.Enabled": "Enabled",
+  "IMPMAL_COMMUNITY.counterAttack.EnabledEnforced": "Enabled with enforced use limit",
+
+  "IMPMAL_COMMUNITY.CounterAttack.Button": "Counter Attack",
+  "IMPMAL_COMMUNITY.CounterAttack.Flavor": "Counter Attack",
+  "IMPMAL_COMMUNITY.CounterAttack.AlreadyApplied": "Counter Attack has already been applied for this attack.",
+  "IMPMAL_COMMUNITY.CounterAttack.Exhausted": "No Counter Attack uses remaining this round.",
+  "IMPMAL_COMMUNITY.CounterAttack.NoAttacker": "Could not find the attacking actor to apply Counter Attack damage."
 
 }
