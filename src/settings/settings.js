@@ -158,4 +158,14 @@ function registerSettings() {
             enabledEnforced: game.i18n.localize("IMPMAL_COMMUNITY.counterAttack.EnabledEnforced")
         }
     });
+
+    Object.defineProperty(IMPMAL, 'testState', {
+        get() {
+            return {
+                normal: "IMPMAL.Normal",
+                advantage: "IMPMAL.Advantage",
+                disadvantage: "IMPMAL.Disadvantage",
+            };
+        }
+    });
 }

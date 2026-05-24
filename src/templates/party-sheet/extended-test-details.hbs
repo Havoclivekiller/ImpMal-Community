@@ -63,11 +63,7 @@
                 <label>{{localize "IMPMAL.Difficulty"}}</label>
                 <div class="form-fields">
                     <select name="system.tests.{{@index}}.difficulty">
-                        {{#select this.difficulty}}
-                        {{#each (config "difficulties")}}
-                        <option value="{{@key}}">{{this.name}} ({{numberFormat this.modifier sign=true}})</option>
-                        {{/each}}
-                        {{/select}}
+                        {{selectOptions (config "difficultyChoices") selected=this.difficulty}}
                     </select>
                 </div>
             </div>
@@ -87,11 +83,7 @@
                 <label>{{localize "IMPMAL_COMMUNITY.ExtendedTest.State"}}</label>
                 <div class="form-fields">
                     <select name="system.tests.{{@index}}.state">
-                        {{#select this.state}}
-                        <option value="normal">{{localize "IMPMAL.Normal"}}</option>
-                        <option value="advantage">{{localize "IMPMAL.Advantage"}}</option>
-                        <option value="disadvantage">{{localize "IMPMAL.Disadvantage"}}</option>
-                        {{/select}}
+                        {{selectOptions (config "testState") selected=this.state localize=true}}
                     </select>
                 </div>
             </div>
