@@ -395,7 +395,7 @@ export function registerPromptRoll() {
     });
 
     Hooks.on("chatMessage", (chatLog, messageText) => {
-        if (!messageText?.startsWith("/promptRoll")) {
+        if (!messageText?.includes("/promptRoll")) {
             return;
         }
 
