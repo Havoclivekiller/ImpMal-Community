@@ -14,6 +14,7 @@ import { registerPartySheet } from "./party-sheet/party-sheet.js";
 import { registerPromptRoll } from "./promptRoll/promptRoll.js";
 import { registerShootingMelee } from "./shootingMelee/shootingMelee.js";
 import { registerTokenRuler } from "./tokenRuler/tokenRuler.js";
+import { registerForceNerf } from "./forceNerf/forceNerf.js";
 
 Hooks.on('init', () => {
     registerConstants();
@@ -65,6 +66,10 @@ Hooks.on('init', () => {
 
     if (game.settings.get("impmal-community", "counterAttack") !== "disabled") {
         registerCounterAttack();
+    }
+
+    if (game.settings.get("impmal-community", "forceNerf") === true) {
+        registerForceNerf();
     }
 
     registerPartySheet();

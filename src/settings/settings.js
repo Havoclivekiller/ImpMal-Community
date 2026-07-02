@@ -159,6 +159,16 @@ function registerSettings() {
         }
     });
 
+    game.settings.register("impmal-community", "forceNerf", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.forceNerf.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.forceNerf.Hint"),
+        scope: "world",
+        config: true,
+        default: false,
+        requiresReload: true,
+        type: Boolean
+    });
+
     Object.defineProperty(IMPMAL, 'testState', {
         get() {
             return {
