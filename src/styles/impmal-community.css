@@ -613,3 +613,52 @@
 .extended-test-summary-field-label {
     font-weight: 600
 }
+.impmal-community-zone-tooltip {
+    position: fixed;
+    z-index: 10000;
+    pointer-events: none;
+    width: max-content;
+    max-width: min(360px, calc(100vw - 16px));
+    max-height: calc(100vh - 16px);
+    overflow: hidden;
+    padding: 12px 16px;
+    border: 1px solid #657a89;
+    border-radius: 6px;
+    background: rgba(18, 26, 34, 0.97);
+    color: #eee;
+    box-shadow: 0 4px 16px #0008;
+    font-size: 14px;
+    line-height: 1.4;
+    overflow-wrap: anywhere;
+}
+
+.impmal-community-zone-tooltip section + section {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #657a89;
+}
+
+.impmal-community-zone-tooltip h3,
+.impmal-community-zone-tooltip h4 {
+    margin: 0 0 6px;
+    color: #eee;
+    font-family: inherit;
+    text-shadow: none;
+}
+
+.impmal-community-zone-tooltip h4 { margin-top: 8px; font-size: 14px; }
+.impmal-community-zone-tooltip ul { margin: 0; padding-left: 18px; }
+.impmal-community-zone-tooltip p { margin: 3px 0; }
+.impmal-community-zone-tooltip .zone-effect-heading {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.impmal-community-zone-tooltip .zone-effect-heading img {
+    width: 20px;
+    height: 20px;
+    flex: 0 0 20px;
+    object-fit: contain;
+    border: none;
+}

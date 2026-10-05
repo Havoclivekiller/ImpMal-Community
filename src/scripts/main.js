@@ -1,4 +1,5 @@
 import { registerConstants } from "./constants.js";
+import { registerZoneTooltip } from "./zoneTooltip/zoneTooltip.js";
 
 import { registerActiveSuperiority } from "./activeSuperiority/activeSuperiority.js";
 import { registerAlternativeInitiative } from "./alternativeInitiative/alternativeInitiative.js";
@@ -70,6 +71,10 @@ Hooks.on('init', () => {
 
     if (game.settings.get("impmal-community", "forceNerf") === true) {
         registerForceNerf();
+    }
+
+    if (game.settings.get("impmal-community", "zoneTooltip") === true) {
+        registerZoneTooltip();
     }
 
     registerPartySheet();
