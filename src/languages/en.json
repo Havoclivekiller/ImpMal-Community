@@ -1,4 +1,12 @@
 {
+  "IMPMAL_COMMUNITY.zoneTooltip.Name": "Zone hover information",
+  "IMPMAL_COMMUNITY.zoneTooltip.Hint": "Show traits and effects when hovering over visible Regions while holding the zone information key (Left Alt by default). Requires reload.",
+  "IMPMAL_COMMUNITY.zoneTooltip.KeybindingName": "Hold to show zone information",
+  "IMPMAL_COMMUNITY.zoneTooltip.KeybindingHint": "Hold while hovering over a visible Region to show its traits and effects.",
+  "IMPMAL_COMMUNITY.zoneTooltip.Traits": "Traits",
+  "IMPMAL_COMMUNITY.zoneTooltip.Effects": "Effects",
+  "IMPMAL_COMMUNITY.zoneTooltip.Empty": "No traits or effects",
+  "IMPMAL_COMMUNITY.zoneTooltip.Disabled": "Disabled",
   "TYPES": {
     "Actor": {
       "impmal-community": {

@@ -169,6 +169,16 @@ function registerSettings() {
         type: Boolean
     });
 
+    game.settings.register("impmal-community", "zoneTooltip", {
+        name: "IMPMAL_COMMUNITY.zoneTooltip.Name",
+        hint: "IMPMAL_COMMUNITY.zoneTooltip.Hint",
+        scope: "client",
+        config: true,
+        default: true,
+        requiresReload: true,
+        type: Boolean
+    });
+
     Object.defineProperty(IMPMAL, 'testState', {
         get() {
             return {
