@@ -34,10 +34,12 @@ class PromptRollDialog extends WHFormApplication {
     async _preparePartContext(partId, context) {
         const partContext = await super._preparePartContext(partId, context);
         if (partId === "footer") {
-            partContext.buttons = [{
-                type: "submit",
-                label: game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptPlayers")
-            }];
+            partContext.buttons = [
+                {
+                    type: "submit",
+                    label: game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptPlayers")
+                }
+            ];
         }
         return partContext;
     }
@@ -230,7 +232,7 @@ class PromptRollDialog extends WHFormApplication {
         const skillGroups = root.querySelectorAll(".prompt-roll-skill-group");
         const hasCharacteristic = Boolean(this.selectedCharacteristic);
 
-        skillGroups.forEach((group) => {
+        skillGroups.forEach(group => {
             group.style.display = hasCharacteristic ? "none" : "";
         });
     }
@@ -283,6 +285,13 @@ class PromptRollDialog extends WHFormApplication {
                     sl: data.sl
                 };
 
+                if (formData.restricted) {
+                    let specs = actor.items
+                        .filter(item => item.type === "specialisation")
+                        .filter(spec => (spec.name === data.specialisation));
+                    if (specs.length == 0) continue;
+                }
+
                 if (user.id === game.user.id) {
                     await promptRollOnClient(payload);
                 } else {
@@ -309,8 +318,8 @@ class PromptRollDialog extends WHFormApplication {
         const selectedActorIds = Array.isArray(formData.actors)
             ? formData.actors
             : formData.actors
-            ? [formData.actors]
-            : [];
+              ? [formData.actors]
+              : [];
 
         const useCharacteristic = Boolean(characteristic);
 
@@ -362,14 +371,14 @@ async function promptRollOnClient(payload) {
     }
     if (payload.state === "advantage") {
         fields.advantage = 1;
-    }
-    else if (payload.state === "disadvantage") {
+    } else if (payload.state === "disadvantage") {
         fields.disadvantage = 1;
     }
 
     if (payload.characteristic) {
         actor.setupCharacteristicTest(payload.characteristic, {
-            fields, appendTitle: ` (${game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptRoll")})` 
+            fields,
+            appendTitle: ` (${game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptRoll")})`
         });
         return;
     }
@@ -380,7 +389,8 @@ async function promptRollOnClient(payload) {
     }
 
     actor.setupSkillTest(testData, {
-        fields, appendTitle: ` (${game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptRoll")})` 
+        fields,
+        appendTitle: ` (${game.i18n.localize("IMPMAL_COMMUNITY.Prompter.PromptRoll")})`
     });
 }
 
