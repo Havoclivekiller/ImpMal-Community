@@ -22,6 +22,8 @@ Check out the [Wiki](https://github.com/Havoclivekiller/ImpMal-Community/wiki) f
 
 ## Optional Rules
 - Shooting into Melee - An input in Ranged attacks to add -SL for optional rules for Shooting into Melee, even added a tag if shot a friend.
+- Automated Inflict - Inflict Trait can be automated.
+- Automated Spread - Spread Trait can be automated.
 
 ## House Rules
 - Alternative Initiative - Custom field to specify a custom initiative. Default is adding d10 to the initiative to make it more random.
@@ -29,6 +31,7 @@ Check out the [Wiki](https://github.com/Havoclivekiller/ImpMal-Community/wiki) f
 - Alternative Master Crafted - Allows you to reduce bonus to Armour from Master Crafted from +2 to +1, except for Power armour.
 - Boosted Rend - The Rend trait gains Penetrating equal to 1/2 of Rend, rounded down.
 - Limit Force Damage - Force Weapon bonus damage limited to Willpower Bonus.
+- Additional Ranges - You can now specify more range bands.
 - Active Superiority - Split Superiority between Allied and Enemy, uses different rules. WIP.
 
 # Authors of Module
