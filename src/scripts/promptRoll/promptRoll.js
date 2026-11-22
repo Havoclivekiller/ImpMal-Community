@@ -283,6 +283,13 @@ class PromptRollDialog extends WHFormApplication {
                     sl: data.sl
                 };
 
+                if (formData.restricted) {
+                    let specs = actor.items
+                        .filter(item => item.type === "specialisation")
+                        .filter(spec => (spec.name === data.specialisation));
+                    if (specs.length == 0) continue;
+                }
+
                 if (user.id === game.user.id) {
                     await promptRollOnClient(payload);
                 } else {
