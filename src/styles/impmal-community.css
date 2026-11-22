@@ -662,3 +662,46 @@
     object-fit: contain;
     border: none;
 }
+
+.impmal-community-spread .spread-targets {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    max-height: 60vh;
+}
+
+.impmal-community-spread .spread-target {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 0;
+    border-bottom: 1px solid var(--color-border-light-primary);
+}
+
+.impmal-community-spread .spread-target > img {
+    flex: 0 0 36px;
+    object-fit: contain;
+    border: none;
+}
+
+.impmal-community-spread .spread-target-name {
+    flex: 1;
+    min-width: 0;
+    overflow-wrap: anywhere;
+}
+
+.impmal-community-spread .spread-target-name span {
+    display: block;
+    font-size: 0.85em;
+}
+
+.impmal-community-spread .spread-target-actions {
+    display: flex;
+    gap: 6px;
+}
+
+.impmal-community-spread .spread-target-actions button {
+    width: auto;
+    white-space: nowrap;
+}
+

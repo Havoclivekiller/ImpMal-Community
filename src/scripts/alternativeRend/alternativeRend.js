@@ -4,11 +4,11 @@ export function registerAlternativeRend() {
             name: "IMPMAL.Rend",
             system: {
                 transferData: {
-                    documentType: "Actor"
+                    documentType: "Item"
                 },
                 scriptData: [{
                     label: "Boosted Rend (Pen)",
-                    trigger: "preTakeDamage",
+                    trigger: "preApplyDamage",
                     script: `
                     if (args?.traits) {
                         let rend = args.traits.has("rend");

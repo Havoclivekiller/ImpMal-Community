@@ -62,6 +62,7 @@
   "IMPMAL_COMMUNITY.Prompter.NoActors": "No eligible actors selected.",
   "IMPMAL_COMMUNITY.Prompter.PromptPlayers": "Prompt Players",
   "IMPMAL_COMMUNITY.Prompter.PromptRoll": "Prompt Roll",
+  "IMPMAL_COMMUNITY.Prompter.Restricted": "Restricted/Forbidden (Only roll when present)",
 
   "IMPMAL_COMMUNITY.ActiveSuperiority.Label": "Active Superiority",
   "IMPMAL_COMMUNITY.ActiveSuperiority.0": "None",
@@ -210,7 +211,8 @@
     "short": "S (12m)",
     "medium": "M (24m)",
     "long": "L (36m)",
-    "extreme": "Ex (72m)"
+    "extreme": "Ex (72m)",
+    "beyondTemplate": "By{number} ({distance}m)"
   },
 
   "IMPMAL_COMMUNITY.counterAttack.Name": "Counter Attack Talent Support",
@@ -225,6 +227,53 @@
   "IMPMAL_COMMUNITY.CounterAttack.Exhausted": "No Counter Attack uses remaining this round.",
   "IMPMAL_COMMUNITY.CounterAttack.NoAttacker": "Could not find the attacking actor to apply Counter Attack damage.",
   "IMPMAL_COMMUNITY.forceNerf.Name": "Limit Force Weapon Damage",
-  "IMPMAL_COMMUNITY.forceNerf.Hint": "Limits Force weapon bonus damage from Warp Charge to Willpower Bonus, still doubled against creatures with Daemon species. Requires restart."
+  "IMPMAL_COMMUNITY.forceNerf.Hint": "Limits Force weapon bonus damage from Warp Charge to Willpower Bonus, still doubled against creatures with Daemon species. Requires restart.",
+
+  "IMPMAL_COMMUNITY.SpreadSettings.Name": "Spread Trait Automation",
+  "IMPMAL_COMMUNITY.SpreadSettings.Configure": "Configure Spread",
+  "IMPMAL_COMMUNITY.SpreadSettings.Hint": "Configure Spread automation, damage calculation, and affected creatures. Requires restart.",
+  "IMPMAL_COMMUNITY.SpreadSettings.Reset": "Reset to Defaults",
+  "IMPMAL_COMMUNITY.SpreadSettings.Enabled.Name": "Enabled",
+  "IMPMAL_COMMUNITY.SpreadSettings.Enabled.Hint": "Enable Spread automation. When disabled, no Spread automation functions are registered. Changing this setting requires a reload.",
+  "IMPMAL_COMMUNITY.SpreadSettings.OnlyNeedsToHit.Name": "Only needs to hit",
+  "IMPMAL_COMMUNITY.SpreadSettings.OnlyNeedsToHit.Hint": "Trigger Spread on any hit, ignoring whether the weapon has damage or the original target suffered Wounds.",
+  "IMPMAL_COMMUNITY.SpreadSettings.RoundDown.Name": "Round down",
+  "IMPMAL_COMMUNITY.SpreadSettings.RoundDown.Hint": "Round half damage down. When disabled, round half damage up.",
+  "IMPMAL_COMMUNITY.SpreadSettings.UseTraits.Name": "Use traits",
+  "IMPMAL_COMMUNITY.SpreadSettings.UseTraits.Hint": "Apply the attack's traits when resolving Spread damage against each affected creature. When disabled, use raw damage without traits. Always ignore Spread itself when applying this damage.",
+  "IMPMAL_COMMUNITY.SpreadSettings.UseWeaponDamage.Name": "Use weapon damage",
+  "IMPMAL_COMMUNITY.SpreadSettings.UseWeaponDamage.Hint": "Calculate Spread damage using only the weapon's raw damage, without SL or additional damage. When disabled, use the attack's damage.",
+  "IMPMAL_COMMUNITY.SpreadSettings.MeleeStartingPointAttacker.Name": "Melee starting point: attacker",
+  "IMPMAL_COMMUNITY.SpreadSettings.MeleeStartingPointAttacker.Hint": "For melee attacks, find creatures within Immediate Range of the attacker instead of the target, excluding the target that was hit.",
+  "IMPMAL_COMMUNITY.SpreadSettings.AttackerImmuneToSpread.Name": "Attacker immune to Spread",
+  "IMPMAL_COMMUNITY.SpreadSettings.AttackerImmuneToSpread.Hint": "Exclude the attacker from Spread. When disabled, the attacker can be affected if within Immediate Range of the starting point.",
+
+  "IMPMAL_COMMUNITY.Spread.Title": "Apply Spread Damage",
+  "IMPMAL_COMMUNITY.Spread.Attack": "{weapon} hit {target}.",
+  "IMPMAL_COMMUNITY.Spread.Instructions": "Resolve Challenging (+0) Reflexes (Dodge) Tests as needed, then choose half or full damage for each affected creature. Amounts shown are before that creature's protection. Close this window to skip remaining creatures.",
+  "IMPMAL_COMMUNITY.Spread.Dodge": "Reflexes (Dodge)",
+  "IMPMAL_COMMUNITY.Spread.Half": "Apply Damage (Half)",
+  "IMPMAL_COMMUNITY.Spread.Full": "Apply Damage (Full)",
+  "IMPMAL_COMMUNITY.Spread.Applied": "{wounds} Wounds applied",
+  "IMPMAL_COMMUNITY.Spread.DamageApplied": "{damage} Damage applied",
+  "IMPMAL_COMMUNITY.Spread.NoGM": "An active GM is required to resolve Spread damage.",
+  "IMPMAL_COMMUNITY.Spread.NoTarget": "Could not identify the token hit by this attack for Spread.",
+  "IMPMAL_COMMUNITY.Spread.NoAttacker": "Could not identify the attacking token for Spread.",
+  "IMPMAL_COMMUNITY.Spread.MissingAttack": "The attack or its original target is no longer available for Spread.",
+  "IMPMAL_COMMUNITY.Spread.MissingToken": "This Spread target is no longer available.",
+  "IMPMAL_COMMUNITY.Spread.Error": "Spread damage could not finish applying. Check the console for details.",
+  "IMPMAL_COMMUNITY.Spread.TestError": "The Spread Reflexes (Dodge) Test could not be completed. Check the console for details.",
+
+  "IMPMAL_COMMUNITY.automateInflict.Name": "Automate Inflict on Weapons",
+  "IMPMAL_COMMUNITY.automateInflict.Hint": "Adds a script to every weapon (ApplyDamage) that will automate adding conditions to targets that get Wounds. Requires restart.",
+  "IMPMAL_COMMUNITY.automateInflict.Disabled": "Disabled",
+  "IMPMAL_COMMUNITY.automateInflict.Enabled": "Enabled",
+  "IMPMAL_COMMUNITY.automateInflict.EnabledTestAll": "Enabled (All make Tests)",
+  "IMPMAL_COMMUNITY.automateInflict.EnabledTestNonTroop": "Enabled (NonTroops make Tests)",
+
+  "IMPMAL_COMMUNITY.additionalRange.Name": "Add More Ranges",
+  "IMPMAL_COMMUNITY.additionalRange.Hint": "Adds more ranges after Extreme, if number higher than 0 (maximum 20). Can be used with Shorten Range Names (adds 36 meters per Beyond range). Requires restart.",
+
+  "IMPMAL_COMMUNITY.additionalRange.beyondplus": "Beyond ({number})"
 
 }
