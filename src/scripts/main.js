@@ -16,6 +16,9 @@ import { registerPromptRoll } from "./promptRoll/promptRoll.js";
 import { registerShootingMelee } from "./shootingMelee/shootingMelee.js";
 import { registerTokenRuler } from "./tokenRuler/tokenRuler.js";
 import { registerForceNerf } from "./forceNerf/forceNerf.js";
+import { registerAutomateInflict } from "./automateInflict/automateInflict.js";
+import { registerAutomateSpread } from "./automateSpread/automateSpread.js";
+import { registerAdditionalRange } from "./additionalRange/additionalRange.js";
 
 Hooks.on('init', () => {
     registerConstants();
@@ -75,6 +78,18 @@ Hooks.on('init', () => {
 
     if (game.settings.get("impmal-community", "zoneTooltip") === true) {
         registerZoneTooltip();
+    }
+
+    if (game.settings.get("impmal-community", "automateInflict") !== "disabled") {
+        registerAutomateInflict();
+    }
+
+    if (game.settings.get("impmal-community", "spreadSettings").enabled) {
+        registerAutomateSpread();
+    }
+
+    if (game.settings.get("impmal-community", "additionalRange") > 0) {
+        registerAdditionalRange();
     }
 
     registerPartySheet();

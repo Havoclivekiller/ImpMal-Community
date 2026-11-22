@@ -1,9 +1,28 @@
+import { SpreadSettings } from "./spread-settings.js";
+
 Hooks.on('init', () => {
     registerSettings();
 });
 
 
 function registerSettings() {
+    game.settings.registerMenu("impmal-community", "spreadSettingsMenu", {
+        name: "IMPMAL_COMMUNITY.SpreadSettings.Name",
+        label: "IMPMAL_COMMUNITY.SpreadSettings.Configure",
+        hint: "IMPMAL_COMMUNITY.SpreadSettings.Hint",
+        icon: "fa-solid fa-burst",
+        type: SpreadSettings,
+        restricted: true
+    });
+
+    game.settings.register("impmal-community", "spreadSettings", {
+        name: "IMPMAL_COMMUNITY.SpreadSettings.Name",
+        scope: "world",
+        config: false,
+        type: SpreadSettings.schema,
+        requiresReload: true
+    });
+
     game.settings.register("impmal-community", "alternativeInitiative", {
         name: game.i18n.localize("IMPMAL_COMMUNITY.alternativeInitiative.Name"),
         hint: game.i18n.localize("IMPMAL_COMMUNITY.alternativeInitiative.Hint"),
@@ -177,6 +196,32 @@ function registerSettings() {
         default: true,
         requiresReload: true,
         type: Boolean
+    });
+
+    game.settings.register("impmal-community", "automateInflict", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.automateInflict.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.automateInflict.Hint"),
+        scope: "world",
+        config: true,
+        default: "disabled",
+        requiresReload: true,
+        type: String,
+        choices: {
+            disabled: game.i18n.localize("IMPMAL_COMMUNITY.automateInflict.Disabled"),
+            enabled: game.i18n.localize("IMPMAL_COMMUNITY.automateInflict.Enabled"),
+            enabledTestAll: game.i18n.localize("IMPMAL_COMMUNITY.automateInflict.EnabledTestAll"),
+            enabledTestNonTroop: game.i18n.localize("IMPMAL_COMMUNITY.automateInflict.EnabledTestNonTroop")
+        }
+    });
+
+    game.settings.register("impmal-community", "additionalRange", {
+        name: game.i18n.localize("IMPMAL_COMMUNITY.additionalRange.Name"),
+        hint: game.i18n.localize("IMPMAL_COMMUNITY.additionalRange.Hint"),
+        scope: "world",
+        config: true,
+        default: 0,
+        requiresReload: true,
+        type: Number
     });
 
     Object.defineProperty(IMPMAL, 'testState', {
